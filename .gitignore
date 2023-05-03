@@ -106,3 +106,4 @@ build
 
 # IDE configuration files
 .idea/
+.vscode/settings.json
