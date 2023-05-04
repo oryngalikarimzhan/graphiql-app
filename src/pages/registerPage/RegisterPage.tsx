@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import './RegisterPage.module.scss';
 
-import './NotFound.module.scss';
-
-const NotFound: FC = () => {
+const RegisterPage: FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -15,4 +14,4 @@ const NotFound: FC = () => {
   );
 };
 
-export default NotFound;
+export default RegisterPage;
