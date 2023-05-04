@@ -1,6 +1,6 @@
-import { props } from './props';
+import { ILogoutIconProps } from './types';
 
-export default function LogoutIcon({ sticky }: props) {
+export default function LogoutIcon({ sticky }: ILogoutIconProps) {
   return (
     <svg
       fill={sticky ? '#000' : '#fff'}
