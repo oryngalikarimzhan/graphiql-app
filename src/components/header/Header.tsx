@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Header.module.scss';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+
+import styles from './Header.module.scss';
+import LogoutIcon from '../logoutIcon/LogoutIcon';
 
 export default function Header() {
   const [sticky, setSticky] = useState(false);
@@ -16,7 +18,12 @@ export default function Header() {
   return (
     <>
       <header className={classNames(styles.header, { [styles.sticky]: sticky })}>
-        <div className={styles.container}>Header</div>
+        <div className={styles.container}>
+          <nav></nav>
+          <div className={styles.logout}>
+            <LogoutIcon sticky={sticky} />
+          </div>
+        </div>
       </header>
     </>
   );
