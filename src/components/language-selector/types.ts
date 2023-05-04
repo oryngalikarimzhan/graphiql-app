@@ -1,4 +1,4 @@
-export interface LanguageSelectorProps {
+export interface ILanguageSelectorProps {
   className?: string;
   languages: string[];
 }

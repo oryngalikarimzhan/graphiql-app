@@ -1,20 +1,22 @@
 import { FC, ReactElement } from 'react';
-import cn from 'classnames';
+import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import cookies from 'js-cookie';
 
+import { Language, LOCALIZATION_COOKIE_KEY } from '../../config/constants';
+import { supportedLngs as languages } from '../../config/i18n';
 import styles from './languageSelector.module.scss';
 import { DropdownSelector } from '../dropdown-selector/DropdownSelector';
-import { LanguageSelectorProps } from './types';
+import { ILanguageSelectorProps } from './types';
 
-const LanguageSelector: FC<LanguageSelectorProps> = ({ className, languages }): ReactElement => {
-  const currentLanguage = cookies.get('i18next') || 'ru';
+const LanguageSelector: FC<ILanguageSelectorProps> = ({ className }): ReactElement => {
+  const currentLanguage = cookies.get(LOCALIZATION_COOKIE_KEY) || Language.RU;
 
   const { i18n } = useTranslation();
 
   return (
     <DropdownSelector
-      className={cn(styles.languageSelector, className)}
+      className={classnames(styles.languageSelector, className)}
       options={languages}
       defaultOption={currentLanguage}
       onChange={(language: string) => i18n.changeLanguage(language)}

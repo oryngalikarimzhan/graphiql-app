@@ -1,4 +1,4 @@
-export interface DropdownSelectorProps {
+export interface IDropdownSelectorProps {
   options: string[];
   onChange: (selectedOption: string) => void;
   defaultOption: string;

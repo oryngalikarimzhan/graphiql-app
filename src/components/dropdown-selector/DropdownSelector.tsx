@@ -1,11 +1,11 @@
 import { ChangeEvent, FC, ReactElement, useState } from 'react';
-import cn from 'classnames';
+import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import styles from './DropdownSelector.module.scss';
-import { DropdownSelectorProps } from './types';
+import { IDropdownSelectorProps } from './types';
 
-const DropdownSelector: FC<DropdownSelectorProps> = ({
+const DropdownSelector: FC<IDropdownSelectorProps> = ({
   options,
   onChange,
   defaultOption,
@@ -23,7 +23,7 @@ const DropdownSelector: FC<DropdownSelectorProps> = ({
 
   return (
     <select
-      className={cn(styles.selector, className)}
+      className={classnames(styles.selector, className)}
       value={selectedOption}
       onChange={handleOptionChange}
     >
