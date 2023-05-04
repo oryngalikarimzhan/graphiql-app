@@ -17,8 +17,7 @@
     "coverage": "vitest run --coverage",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "prepare": "husky install .husky",
-    "commit": "git add . && read -p '> To AMEND the previous commit press \"a\", otherwise just skip this part and press \"Enter\"\n> => ' choice && if [[ $choice == 'a' ]]; then git commit --amend --no-edit; else git commit; fi"
+    "prepare": "husky install .husky"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
