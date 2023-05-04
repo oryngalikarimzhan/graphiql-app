@@ -2,7 +2,7 @@ import styles from './Footer.module.scss';
 import logoRss from '../../assets/img/logo-rs.svg';
 import iconGithub from '../../assets/img/github-icon.png';
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -24,4 +24,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

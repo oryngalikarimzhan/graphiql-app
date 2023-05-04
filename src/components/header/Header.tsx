@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import classNames from 'classnames';
 
 import styles from './Header.module.scss';
 import LogoutIcon from '../logoutIcon/LogoutIcon';
 
-export default function Header() {
+const Header: FC = () => {
   const [sticky, setSticky] = useState(false);
 
   const handleScroll = () => {
@@ -16,15 +16,15 @@ export default function Header() {
   });
 
   return (
-    <>
-      <header className={classNames(styles.header, { [styles.sticky]: sticky })}>
-        <div className={styles.container}>
-          <nav></nav>
-          <div className={styles.logout}>
-            <LogoutIcon sticky={sticky} />
-          </div>
+    <header className={classNames(styles.header, { [styles.sticky]: sticky })}>
+      <div className={styles.container}>
+        <nav></nav>
+        <div className={styles.logout}>
+          <LogoutIcon sticky={sticky} />
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
-}
+};
+
+export default Header;
