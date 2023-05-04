@@ -1,0 +1,20 @@
+{
+  "username": "Username",
+  "email": "Email",
+  "pass": "Password",
+  "confirm-pass": "Confirm Password",
+  "sign-in": "Sign-in",
+  "sign-up": "Sign-up",
+  "home": "Home",
+  "not-found": "Page Not Found",
+  "redirect": "Go back to main page",
+  "q-var": "Query variables",
+  "http-head": "HTTP Headers",
+  "schema": "Schema",
+  "result": "Result",
+  "queries": "Queries",
+  "language": "Language",
+  "ru": "Russian",
+  "en": "English",
+  "error-msg": "Error happened"
+}
