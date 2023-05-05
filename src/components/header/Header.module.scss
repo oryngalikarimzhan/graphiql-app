@@ -1,26 +1,66 @@
 .header {
-  height: 65px;
-  background-color: #000;
+  height: $header-height;
+  background-color: $color-header-background;
   transition: all 0.5s;
   color: #fff;
+}
+
+.navLink {
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .sticky {
   top: 0px;
   position: sticky;
   background-color: rgb(176, 176, 176);
+  height: $header-sticky-height;
+}
+
+.stickyText {
   color: #000;
-  height: 50px;
 }
 
 .container {
-  margin: 0 20px;
+  margin: 0 auto;
+  padding: 0 30px;
+  max-width: $content-width;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.logout {
+.auth {
+  background-color: #fff;
+  border-radius: 3px;
+  border: none;
   cursor: pointer;
+  transition: all 0.3s;
+  height: 30px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth:hover {
+  transform: scale(1.05);
+  text-decoration: solid;
+}
+
+.btns {
+  display: flex;
+  gap: 20px;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
 }
