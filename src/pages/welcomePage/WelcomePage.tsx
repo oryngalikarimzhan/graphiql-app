@@ -8,7 +8,7 @@ const WelcomePage: FC = () => {
 
   return (
     <div className="wrapper">
-      <h1>{t('not-found')}</h1>
+      <h1>{t('welcome-msg')}</h1>
       <Link to="/main">{t('redirect')}</Link>
     </div>
   );
