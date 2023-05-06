@@ -30,3 +30,13 @@
   display: flex;
   gap: 7px;
 }
+
+@media (max-width: $custom-mobile-big-width) {
+  .logoRss {
+    height: 35px;
+  }
+
+  .github {
+    height: 35px;
+  }
+}
