@@ -20,22 +20,25 @@
     "prepare": "husky install .husky"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.5.1",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/js-cookie": "^3.0.3",
     "axios": "^1.3.5",
     "classnames": "^2.3.2",
-    "normalize.css": "^8.0.1",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.0",
     "js-cookie": "^3.0.5",
+    "monaco-editor": "^0.38.0",
+    "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-i18next": "^12.2.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.13.8",
+    "vite-plugin-svgr": "^3.2.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^9.2.0",

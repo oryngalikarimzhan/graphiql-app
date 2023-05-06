@@ -1,0 +1,63 @@
+.playground {
+  background-color: $color-primary;
+  height: 100vh;
+  width: 100vw;
+
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.schema {
+  display: flex;
+  gap: 5px;
+}
+
+.schema-panel {
+  padding-right: 10px;
+  border-right: 1px solid $color-secondary;
+}
+
+.schema-button {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 5px;
+  background-color: transparent;
+  color: $color-additional-1;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+}
+
+.schema-button-active {
+  border: 2px solid $color-additional-1;
+}
+
+.schema-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+
+  width: 400px;
+  // display: none;
+
+  .schema-title {
+    margin: 0;
+    font-size: 30px;
+    color: $color-additional-1;
+  }
+}
+
+.query-box {
+  height: 100vh;
+  width: 50vw;
+}
+
+.result-box {
+  height: 100vh;
+  width: 50vw;
+}
