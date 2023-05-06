@@ -5,9 +5,8 @@ import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Navbar.module.scss';
-import { navProps } from './types';
 
-const Navbar: FC<navProps> = ({ sticky }) => {
+const Navbar: FC = () => {
   const [navBurger, setNavBurger] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
@@ -37,14 +36,11 @@ const Navbar: FC<navProps> = ({ sticky }) => {
         size={'25'}
         onClick={() => setNavBurger(false)}
       />
-      <nav
-        className={classNames(styles.nav, { [styles.active]: navBurger, [styles.sticky]: sticky })}
-        ref={menuRef}
-      >
-        <NavLink className={classNames(styles.navLink, { [styles.stickyText]: sticky })} to={''}>
+      <nav className={classNames(styles.nav, { [styles.active]: navBurger })} ref={menuRef}>
+        <NavLink className={styles.navLink} to={''}>
           {`${t('welcome-page')}`}
         </NavLink>
-        <NavLink className={classNames(styles.navLink, { [styles.stickyText]: sticky })} to={''}>
+        <NavLink className={styles.navLink} to={''}>
           {`${t('main-page')}`}
         </NavLink>
       </nav>

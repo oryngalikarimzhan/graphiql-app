@@ -27,22 +27,16 @@
     display: flex;
     flex-direction: column;
     border-radius: 3px;
-    top: 75px;
+    top: 70px;
     left: -20px;
     padding: 20px;
     position: absolute;
     opacity: 0;
     background-color: $color-header-background;
   }
-  .nav.sticky {
-    background-color: $color-header-background-sticky;
-  }
   .nav.active {
     transition: all 0.3s;
     opacity: 1;
     left: 20px;
-  }
-  .stickyText {
-    color: #000;
   }
 }

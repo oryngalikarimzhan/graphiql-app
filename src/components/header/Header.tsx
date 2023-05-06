@@ -11,7 +11,7 @@ const Header: FC = () => {
   const { t } = useTranslation();
 
   const handleScroll = () => {
-    window.pageYOffset > 0 ? setSticky(true) : setSticky(false);
+    window.pageYOffset > 60 ? setSticky(true) : setSticky(false);
   };
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Header: FC = () => {
   return (
     <header className={classNames(styles.header, { [styles.sticky]: sticky })}>
       <div className={styles.container}>
-        <Navbar sticky={sticky} />
+        <Navbar />
         <div className={styles.btns}>
           <LanguageSelector />
           <div className={styles.logout}>
