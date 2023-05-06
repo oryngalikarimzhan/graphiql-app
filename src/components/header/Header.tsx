@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './Header.module.scss';
 import { LanguageSelector } from '../language-selector/LanguageSelector';
-import { NavLink } from 'react-router-dom';
+import Navbar from '../navbar/Navbar';
 
 const Header: FC = () => {
   const [sticky, setSticky] = useState(false);
@@ -21,14 +21,7 @@ const Header: FC = () => {
   return (
     <header className={classNames(styles.header, { [styles.sticky]: sticky })}>
       <div className={styles.container}>
-        <nav className={styles.nav}>
-          <NavLink className={classNames(styles.navLink, { [styles.stickyText]: sticky })} to={''}>
-            Main Page
-          </NavLink>
-          <NavLink className={classNames(styles.navLink, { [styles.stickyText]: sticky })} to={''}>
-            Welcome Page
-          </NavLink>
-        </nav>
+        <Navbar sticky={sticky} />
         <div className={styles.btns}>
           <LanguageSelector />
           <div className={styles.logout}>
