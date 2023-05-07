@@ -1,6 +1,8 @@
 export interface IAuthProps {
-  addUser: (user: IAuthFormInputs) => void;
+  handleClick: (user: IAuthFormInputs) => void;
   buttonName: string;
+  errorMessage?: string;
+  disabled?: boolean;
 }
 
 export interface IAuthFormInputs {

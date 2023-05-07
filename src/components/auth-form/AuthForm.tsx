@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next';
 import styles from './AuthForm.module.scss';
 import { IAuthFormInputs, IAuthProps } from './types';
 import TextInput from '../text-input/TextInput';
+import Message from '../message/Message';
 
-const AuthForm: FC<IAuthProps> = ({ addUser, buttonName }) => {
+const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disabled }) => {
   const { t } = useTranslation();
   const {
     register,
@@ -22,19 +23,19 @@ const AuthForm: FC<IAuthProps> = ({ addUser, buttonName }) => {
   const onSubmit: SubmitHandler<IAuthFormInputs> = (data, e) => {
     e?.preventDefault();
 
-    if (addUser) {
-      addUser({
+    if (handleClick) {
+      handleClick({
         email: data.email || '',
         password: data.password || '',
       });
-      reset();
+      // reset();
     }
   };
 
   return (
     <form className={classnames(styles.authForm)} onSubmit={handleSubmit(onSubmit)} noValidate>
       <TextInput
-        label="Email:"
+        label={t('email')}
         id="email"
         type="email"
         aria-label="email"
@@ -56,7 +57,7 @@ const AuthForm: FC<IAuthProps> = ({ addUser, buttonName }) => {
         error={errors.email}
       ></TextInput>
       <TextInput
-        label="Password:"
+        label={t('pass')}
         id="password"
         type="password"
         aria-label="password"
@@ -76,7 +77,13 @@ const AuthForm: FC<IAuthProps> = ({ addUser, buttonName }) => {
         })}
         error={errors.password}
       ></TextInput>
-      <button type="submit" className={classnames(styles.authFormBtn)} role="submit-btn">
+      {errorMessage && <Message isError>{errorMessage}</Message>}
+      <button
+        disabled={disabled}
+        type="submit"
+        className={classnames(styles.authFormBtn)}
+        role="submit-btn"
+      >
         {buttonName}
       </button>
     </form>
