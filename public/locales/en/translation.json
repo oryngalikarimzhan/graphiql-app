@@ -16,5 +16,7 @@
   "language": "Language",
   "ru": "Russian",
   "en": "English",
-  "error-msg": "Error happened"
+  "error-msg": "Error happened",
+  "main-page": "Main",
+  "welcome-page": "Home"
 }
