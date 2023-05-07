@@ -10,11 +10,10 @@ const Header: FC = () => {
   const [sticky, setSticky] = useState(false);
   const { t } = useTranslation();
 
-  const handleScroll = () => {
-    window.pageYOffset > 60 ? setSticky(true) : setSticky(false);
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      window.pageYOffset > 60 ? setSticky(true) : setSticky(false);
+    };
     window.addEventListener('scroll', handleScroll);
     return window.removeEventListener('scroll', handleScroll);
   }, []);

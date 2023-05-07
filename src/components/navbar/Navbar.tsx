@@ -12,15 +12,14 @@ const Navbar: FC = () => {
   const { t } = useTranslation();
 
   const setActive = ({ isActive }: { isActive: boolean }) =>
-    isActive ? classNames(styles.navLink, styles.active) : styles.navLink;
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as HTMLElement)) {
-      setNavBurger(false);
-    }
-  };
+    classNames(styles.navLink, { [styles.active]: isActive });
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as HTMLElement)) {
+        setNavBurger(false);
+      }
+    };
     document.addEventListener('click', handleClickOutside, true);
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
