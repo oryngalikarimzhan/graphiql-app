@@ -1,6 +1,15 @@
 .selector {
   display: block;
-  height: 35px;
+  height: 30px;
   padding: 0 10px;
   border: none;
+  outline: none;
+  border-radius: 3px;
+  appearance: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.selector:hover {
+  transform: scale(1.05);
 }
