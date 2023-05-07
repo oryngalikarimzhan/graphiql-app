@@ -1,19 +1,17 @@
 .playground {
   background-color: $color-primary;
   height: 100vh;
-  width: 100vw;
-
+  width: 100%;
   padding: 10px;
   display: flex;
-  gap: 5px;
+  gap: 10px;
+  overflow-x: hidden;
 }
 
-.schema {
+.side-bar {
   display: flex;
-  gap: 5px;
-}
-
-.schema-panel {
+  gap: 10px;
+  flex-direction: column;
   padding-right: 10px;
   border-right: 1px solid $color-secondary;
 }
@@ -21,12 +19,11 @@
 .schema-button {
   width: 40px;
   height: 40px;
-
-  border-radius: 5px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
   background-color: transparent;
-  color: $color-additional-1;
-  user-select: none;
-  cursor: pointer;
+  color: $color-main;
 
   &:hover {
     background-color: $color-secondary;
@@ -34,30 +31,90 @@
 }
 
 .schema-button-active {
-  border: 2px solid $color-additional-1;
+  outline: 2px solid $color-main;
 }
 
-.schema-content {
+.editor-container {
+  position: relative;
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  padding: 0 10px;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  background-color: $color-secondary;
+  border-radius: 20px;
+  overflow: hidden;
 
-  width: 400px;
-  // display: none;
+  .schema-content {
+    flex: 1 1 0%;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
 
-  .schema-title {
-    margin: 0;
-    font-size: 30px;
-    color: $color-additional-1;
+    .schema-title {
+      margin: 0;
+      font-size: 30px;
+      color: $color-main;
+    }
+  }
+
+  .schema-content-hidden {
+    position: absolute;
+    left: -1000px;
+  }
+
+  .query-container {
+    flex: 1 1 0%;
+    max-width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .query-box {
+      width: 100%;
+      height: 80%;
+    }
+
+    .query-variables-box {
+      width: 100%;
+      height: 20%;
+    }
+  }
+
+  .response-container {
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .api-url {
+      display: flex;
+      padding: 15px;
+      border-radius: 15px;
+      background-color: $color-primary;
+      color: $color-main;
+      overflow: hidden;
+    }
+
+    .response-box {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
-.query-box {
-  height: 100vh;
-  width: 50vw;
-}
+.executor-button {
+  width: 40px;
+  height: 40px;
+  color: $color-main;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: $color-positive;
 
-.result-box {
-  height: 100vh;
-  width: 50vw;
+  &:hover {
+    background-color: rgba($color-positive, 0.9);
+  }
 }

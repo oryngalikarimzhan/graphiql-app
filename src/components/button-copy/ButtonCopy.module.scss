@@ -1,0 +1,17 @@
+.copy-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: $color-main;
+  border: none;
+  outline: none;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+
+  &:active {
+    outline: 2px solid $color-main;
+  }
+}

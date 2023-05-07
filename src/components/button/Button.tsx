@@ -5,9 +5,14 @@ import styles from './Button.module.scss';
 
 interface IButtonProps {
   children: ReactNode;
-  className: string;
+  className?: string;
+  onClick?: () => void;
 }
 
-export const Button: FC<IButtonProps> = ({ children, className }) => {
-  return <button className={classnames(styles.button, className)}>{children}</button>;
+export const Button: FC<IButtonProps> = ({ children, className, onClick }) => {
+  return (
+    <button className={classnames(styles.button, className)} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
