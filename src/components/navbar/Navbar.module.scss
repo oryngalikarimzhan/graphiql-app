@@ -9,6 +9,12 @@
   color: #fff;
 }
 
+.navLink.active {
+  text-decoration: underline;
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
 .navLink:hover {
   text-decoration: underline;
   text-underline-offset: 3px;

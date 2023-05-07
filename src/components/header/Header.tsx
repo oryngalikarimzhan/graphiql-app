@@ -16,7 +16,8 @@ const Header: FC = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-  });
+    return window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <header className={classNames(styles.header, { [styles.sticky]: sticky })}>
@@ -25,7 +26,7 @@ const Header: FC = () => {
         <div className={styles.btns}>
           <LanguageSelector />
           <div className={styles.logout}>
-            <button className={styles.auth}>{`${t('sign-in')}`}</button>
+            <button className={styles.auth}>{t('sign-in')}</button>
           </div>
         </div>
       </div>

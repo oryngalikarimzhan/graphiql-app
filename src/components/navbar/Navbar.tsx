@@ -11,6 +11,9 @@ const Navbar: FC = () => {
   const menuRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
 
+  const setActive = ({ isActive }: { isActive: boolean }) =>
+    isActive ? classNames(styles.navLink, styles.active) : styles.navLink;
+
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as HTMLElement)) {
       setNavBurger(false);
@@ -37,11 +40,11 @@ const Navbar: FC = () => {
         onClick={() => setNavBurger(false)}
       />
       <nav className={classNames(styles.nav, { [styles.active]: navBurger })} ref={menuRef}>
-        <NavLink className={styles.navLink} to={''}>
-          {`${t('welcome-page')}`}
+        <NavLink className={setActive} to={''}>
+          {t('welcome-page')}
         </NavLink>
-        <NavLink className={styles.navLink} to={''}>
-          {`${t('main-page')}`}
+        <NavLink className={setActive} to={'/main'}>
+          {t('main-page')}
         </NavLink>
       </nav>
     </>
