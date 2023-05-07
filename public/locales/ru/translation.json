@@ -17,5 +17,10 @@
   "ru": "Русский",
   "en": "Английский",
   "error-msg": "Произошла ошибка",
-  "welcome-msg": "Приветствунная страница"
+  "welcome-msg": "Приветствунная страница",
+  "validate-msg-enter-email": "Пожалуйста, введите email",
+  "validate-msg-enter-password": "Пожалуйста, введите password",
+  "validate-msg-email-not-valid": "Введен не корректный email",
+  "validate-msg-8-chars": "Должно быть не менее 8 символов",
+  "validate-msg-password-should-contain-letter-number-special": "Пароль должен содержать как минимум 1 букву, одно число и один специальный символ"
 }

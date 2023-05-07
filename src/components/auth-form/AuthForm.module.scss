@@ -1,0 +1,26 @@
+.auth-form {
+  background: white;
+  position: relative;
+  margin: auto;
+  width: 50%;
+  min-width: 400px;
+  padding: 2rem;
+  box-shadow: 0px 1px 2px rgba(58, 58, 68, 0.24), 0px 2px 4px rgba(90, 91, 106, 0.24);
+}
+
+.auth-form-btn {
+  min-width: 131px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 12px auto;
+  border: 0;
+  height: 2rem;
+  transition: all 0.3s;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 165, 91, 0.7725490196);
+  cursor: pointer;
+  &:hover:not([disabled]) {
+    background-color: #03c86f;
+  }
+}
