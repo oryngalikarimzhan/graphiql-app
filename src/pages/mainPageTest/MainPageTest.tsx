@@ -1,24 +1,29 @@
-import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
+
 import './MainPageTest.module.scss';
-import { useAuth } from '../../hooks/useAuth';
-import { useActions } from '../../store/hooks';
+import { auth } from '../../config/FirebaseConfig';
 
 const MainPageTest: FC = () => {
-  const { t } = useTranslation();
-  const { removeUser } = useActions();
+  const navigate = useNavigate();
 
-  const { isAuth } = useAuth();
+  const [user, loading] = useAuthState(auth);
 
-  if (!isAuth) {
-    return <Navigate to="/login" />;
-  }
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    if (!user) {
+      return navigate('/login');
+    }
+  }, [user, loading, navigate]);
 
   return (
     <div className="wrapper">
       <h1>maintest</h1>
-      <button onClick={() => removeUser()}>Log out</button>
+      <button onClick={() => signOut(auth)}>Log out</button>
     </div>
   );
 };
