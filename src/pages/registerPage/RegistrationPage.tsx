@@ -24,11 +24,7 @@ const RegistrationPage: FC = () => {
 
   return (
     <div className="wrapper">
-      <h1>{t('sign-up')}</h1>
       <SignUp></SignUp>
-      <p>
-        <Link to="/login">{t('sign-in')}</Link>
-      </p>
     </div>
   );
 };

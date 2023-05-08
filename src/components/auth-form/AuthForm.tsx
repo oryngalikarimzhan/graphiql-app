@@ -31,7 +31,7 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disab
   };
 
   return (
-    <form className={classnames(styles.authForm)} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <TextInput
         label={t('email')}
         id="email"
@@ -42,10 +42,10 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disab
             value: true,
             message: t('validate-msg-enter-email'),
           },
-          // minLength: {
-          //   value: 8,
-          //   message: t('validate-msg-8-chars'),
-          // },
+          minLength: {
+            value: 8,
+            message: t('validate-msg-8-chars'),
+          },
           pattern: {
             value:
               /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
@@ -64,14 +64,14 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disab
             value: true,
             message: t('validate-msg-enter-password'),
           },
-          // minLength: {
-          //   value: 8,
-          //   message: t('validate-msg-8-chars'),
-          // },
-          // pattern: {
-          //   value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i,
-          //   message: t('validate-msg-password-should-contain-letter-number-special'),
-          // },
+          minLength: {
+            value: 8,
+            message: t('validate-msg-8-chars'),
+          },
+          pattern: {
+            value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i,
+            message: t('validate-msg-password-should-contain-letter-number-special'),
+          },
         })}
         error={errors.password}
       ></TextInput>
