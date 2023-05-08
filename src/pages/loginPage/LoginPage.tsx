@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import './LoginPage.module.scss';
 import Login from '../../components/login/Login';
+import { getAuth } from 'firebase/auth';
 
 const LoginPage: FC = () => {
   const { t } = useTranslation();

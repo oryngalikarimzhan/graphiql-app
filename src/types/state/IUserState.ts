@@ -1,7 +1,7 @@
 export interface IUserState {
-  email: string;
-  token: string;
-  id: string;
+  email: string | null;
+  token: string | null;
+  id: string | null;
 }
 
 export interface IAuthUserState extends IUserState {
