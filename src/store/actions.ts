@@ -1,5 +1,5 @@
-import { usersActions } from './users/usersSlice';
+import { userActions } from './users/userSlice';
 
 export const actions = {
-  ...usersActions,
+  ...userActions,
 };

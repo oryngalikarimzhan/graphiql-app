@@ -14,6 +14,9 @@ export const isErrorWithMessage = (error: unknown): error is { message: string }
 };
 
 export const getErrorMessage = (error: unknown): string => {
+  if (!error) {
+    return '';
+  }
   if (isFetchBaseQueryError(error)) {
     return 'error' in error
       ? error.error
