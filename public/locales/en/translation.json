@@ -5,6 +5,7 @@
   "confirm-pass": "Confirm Password",
   "sign-in": "Sign-in",
   "sign-up": "Sign-up",
+  "sign-up-btn": "Sign-up",
   "home": "Home",
   "not-found": "Page Not Found",
   "redirect": "Go back to main page",
@@ -17,6 +18,16 @@
   "ru": "Russian",
   "en": "English",
   "error-msg": "Error happened",
+  "welcome-msg": "Welcome page",
+  "do-not-have-acc": "Don't have an account?",
+  "have-acc": "Already have an account?",
+  "form-validation": {
+    "enter-email": "Please enter your email",
+    "enter-password": "Please enter your password",
+    "email-not-valid": "Email is not valid",
+    "8-chars": "At least 8 chars",
+    "password-should-contain-letter-number-special": "Password should contain at least 1 letter, 1 number and 1 special character"
+  },
   "main-page": "Main",
   "welcome-page": "Home"
 }
