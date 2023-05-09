@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { signOut } from 'firebase/auth';
 
 import './MainPage.module.scss';
 import { auth } from '../../config/FirebaseConfig';
@@ -21,12 +20,7 @@ const MainPage: FC = () => {
     }
   }, [user, loading, navigate]);
 
-  return (
-    <>
-      <Playground />
-      <button onClick={() => signOut(auth)}>Log out</button>
-    </>
-  );
+  return <Playground />;
 };
 
 export default MainPage;
