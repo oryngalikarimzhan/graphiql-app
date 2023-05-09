@@ -12,12 +12,12 @@ import '../src/config/FirebaseConfig';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Suspense fallback={<HashLoader color="#a836d6" />}>
-    {/* <React.StrictMode> */}
-    <Provider store={store}>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </Provider>
-    {/* </React.StrictMode> */}
+    <React.StrictMode>
+      <Provider store={store}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </Provider>
+    </React.StrictMode>
   </Suspense>
 );
