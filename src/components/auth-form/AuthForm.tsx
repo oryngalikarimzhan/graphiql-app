@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import styles from './AuthForm.module.scss';
@@ -24,8 +23,8 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disab
 
     if (handleClick) {
       handleClick({
-        email: data.email || '',
-        password: data.password || '',
+        email: data.email,
+        password: data.password,
       });
     }
   };
@@ -76,12 +75,7 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disab
         error={errors.password}
       ></TextInput>
       {errorMessage && <Message isError>{errorMessage}</Message>}
-      <button
-        disabled={disabled}
-        type="submit"
-        className={classnames(styles.authFormBtn)}
-        role="submit-btn"
-      >
+      <button disabled={disabled} type="submit" className={styles.authFormBtn} role="submit-btn">
         {buttonName}
       </button>
     </form>

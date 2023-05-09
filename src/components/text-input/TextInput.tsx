@@ -6,7 +6,7 @@ import { ITextInputProps } from './types';
 
 const TextInput: FC<ITextInputProps> = ({ id, label, formRegister, error, ...props }) => {
   return (
-    <div className={classnames(styles.inputWrapper)}>
+    <div className={styles.inputWrapper}>
       <label htmlFor={id}>{label}</label>
       <input
         className={classnames(styles.textInput, { [styles.inputError]: !!error })}
@@ -15,7 +15,7 @@ const TextInput: FC<ITextInputProps> = ({ id, label, formRegister, error, ...pro
         data-testid="text-input-element"
         role="text-input"
       />
-      <div className={classnames(styles.inputErrorMessage)}>{error ? error.message : ' '}</div>
+      <div className={styles.inputErrorMessage}>{error?.message}</div>
     </div>
   );
 };
