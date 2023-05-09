@@ -21,11 +21,13 @@
   "welcome-msg": "Welcome page",
   "do-not-have-acc": "Don't have an account?",
   "have-acc": "Already have an account?",
-  "validate-msg-enter-email": "Please enter your email",
-  "validate-msg-enter-password": "Please enter your password",
-  "validate-msg-email-not-valid": "Email is not valid",
-  "validate-msg-8-chars": "At least 8 chars",
-  "validate-msg-password-should-contain-letter-number-special": "Password should contain at least one letter, one number and one special character"
+  "form-validation": {
+    "enter-email": "Please enter your email",
+    "enter-password": "Please enter your password",
+    "email-not-valid": "Email is not valid",
+    "8-chars": "At least 8 chars",
+    "password-should-contain-letter-number-special": "Password should contain at least one letter, one number and one special character"
+  },
   "main-page": "Main",
   "welcome-page": "Home"
 }

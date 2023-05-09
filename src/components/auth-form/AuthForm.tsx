@@ -40,16 +40,16 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disab
         formRegister={register('email', {
           required: {
             value: true,
-            message: t('validate-msg-enter-email'),
+            message: t('form-validation.enter-email'),
           },
           minLength: {
             value: 8,
-            message: t('validate-msg-8-chars'),
+            message: t('form-validation.8-chars'),
           },
           pattern: {
             value:
               /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-            message: t('validate-msg-email-not-valid'),
+            message: t('form-validation.email-not-valid'),
           },
         })}
         error={errors.email}
@@ -62,15 +62,15 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, disab
         formRegister={register('password', {
           required: {
             value: true,
-            message: t('validate-msg-enter-password'),
+            message: t('form-validation.enter-password'),
           },
           minLength: {
             value: 8,
-            message: t('validate-msg-8-chars'),
+            message: t('form-validation.8-chars'),
           },
           pattern: {
             value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i,
-            message: t('validate-msg-password-should-contain-letter-number-special'),
+            message: t('form-validation.password-should-contain-letter-number-special'),
           },
         })}
         error={errors.password}
