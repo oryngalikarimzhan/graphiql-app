@@ -1,197 +1,169 @@
 import { FC, useState } from 'react';
-import { Editor } from '@monaco-editor/react';
 import { useTranslation } from 'react-i18next';
-import HashLoader from 'react-spinners/HashLoader';
 import classnames from 'classnames';
-import { editor } from 'monaco-editor';
-import ReactResizeDetector from 'react-resize-detector';
 
 import styles from './Playground.module.scss';
-import { customTheme, customOptions } from './editorConfigs';
-import { EditorControl } from '../editor-control/EditorControl';
-import { Button } from '../button/Button';
-import { ButtonCopy } from '../button-copy/ButtonCopy';
+import { CustomEditor } from '../custom-editor/CustomEditor';
+import { SquareButton } from '../buttons/square-button/SquareButton';
 import { ReactComponent as DocsIcon } from '../../assets/icons/docs-icon.svg';
 import { ReactComponent as ExecutorIcon } from '../../assets/icons/executor-icon.svg';
 import { ReactComponent as FilledDocsIcon } from '../../assets/icons/filled-docs-icon.svg';
+import { ReactComponent as ArrowUpIcon } from '../../assets/icons/arrow-up-icon.svg';
+import { ReactComponent as ArrowDownIcon } from '../../assets/icons/arrow-down-icon.svg';
+import { StatusMarker } from '../status-marker/StatusMarker';
 
 const {
   playground,
   sideBar,
-  schemaButton,
-  schemaButtonActive,
-  schemaContent,
-  schemaContentHidden,
+  schemaContainer,
+  schemaContainerHidden,
   schemaTitle,
-  editorContainer,
+  schemaContent,
+  editorTitle,
+  editorTitleActive,
+  editorBox,
+  editorHeading,
+  playgroundContainer,
+  playgroundSection,
   queryContainer,
   queryBox,
-  queryVariablesBox,
+  paramsBox,
+  paramsHidden,
+  arrowButton,
   executorButton,
   responseContainer,
-  apiUrl,
+  apiBox,
+  apiContainer,
+  apiTitle,
   responseBox,
 } = styles;
 
 export const Playground: FC = () => {
   const [queryEditorValue, setQueryEditorValue] = useState<string>('');
-  const [queryVariablesEditorValue, setQueryVariablesEditorValue] = useState<string>('');
+  const [variablesEditorValue, setVariablesEditorValue] = useState<string>('');
+  const [headersEditorValue, setHeadersEditorValue] = useState<string>('');
   const [responseEditorValue, setResponseEditorValue] = useState<string>('');
-  const [schemaIsOpen, setSchemaIsOpen] = useState(false);
+  const [schemaIsOpen, setSchemaIsOpen] = useState(true);
 
-  const [queryEditor, setQueryEditor] = useState<editor.IStandaloneCodeEditor>();
-  const [queryVariablesEditor, setQueryVariablesEditor] = useState<editor.IStandaloneCodeEditor>();
-  const [responseEditor, setResponseEditor] = useState<editor.IStandaloneCodeEditor>();
+  const [isParamsOpen, setIsParamsOpen] = useState(false);
+  const [paramsEditor, setParamsEditor] = useState<'variables' | 'headers'>('variables');
   const { t } = useTranslation();
+
+  const openParams = (paramName: 'variables' | 'headers') => {
+    setParamsEditor(paramName);
+    setIsParamsOpen(true);
+  };
+
+  const isActiveParam = (paramName: 'variables' | 'headers') =>
+    isParamsOpen && paramsEditor === paramName;
 
   return (
     <div className={playground}>
       <div className={sideBar}>
-        <Button
-          className={classnames(schemaButton, { [schemaButtonActive]: schemaIsOpen })}
-          onClick={() => setSchemaIsOpen((prev) => !prev)}
-        >
+        <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaIsOpen((prev) => !prev)}>
           {schemaIsOpen ? (
             <FilledDocsIcon height={22} width={18} />
           ) : (
             <DocsIcon height={22} width={18} />
           )}
-        </Button>
+        </SquareButton>
+        <SquareButton
+          className={executorButton}
+          onClick={() => setResponseEditorValue(queryEditorValue)}
+        >
+          <ExecutorIcon />
+        </SquareButton>
       </div>
 
-      <div className={editorContainer}>
+      <article className={playgroundContainer}>
         <div
-          className={classnames(schemaContent, {
-            [schemaContentHidden]: !schemaIsOpen,
+          className={classnames(playgroundSection, schemaContainer, {
+            [schemaContainerHidden]: !schemaIsOpen,
           })}
         >
           <h2 className={schemaTitle}>{t('schema')}</h2>
-        </div>
-        <div className={queryContainer}>
-          {/* <EditorControl
-            className={queryBox}
-            title={t('query')}
-            // editor={queryEditor}
-            buttons={
-              <>
-                <Button
-                  onClick={() => setResponseEditorValue(queryEditorValue)}
-                  className={executorButton}
-                >
-                  <ExecutorIcon />
-                </Button>
-                <ButtonCopy text={queryEditorValue} />
-              </>
-            }
-          >
-            <ReactResizeDetector
-              handleWidth
-              handleHeight
-              onResize={() => {
-                if (queryEditor) {
-                  queryEditor.layout();
-                }
-              }}
-            >
-              {({ width, height }) => (
-                <Editor
-                  width={width}
-                  height={height}
-                  defaultLanguage="graphql"
-                  onMount={(editor, monaco) => {
-                    monaco.editor.defineTheme('customTheme', customTheme);
-                    monaco.editor.setTheme('customTheme');
-                    setQueryEditor(editor);
-                  }}
-                  onChange={(value) => setQueryEditorValue(value || '')}
-                  options={customOptions}
-                  loading={<HashLoader color="#a836d6" />}
-                />
-              )}
-            </ReactResizeDetector>
-          </EditorControl> */}
-
-          <Editor
-            defaultLanguage="graphql"
-            onMount={(editor, monaco) => {
-              monaco.editor.defineTheme('customTheme', customTheme);
-              monaco.editor.setTheme('customTheme');
-              // editor.onDidContentSizeChange(() => {
-              //   setHeight(Math.min(1000, editor.getContentHeight()));
-              //   editor.layout();
-              // });
-            }}
-            onChange={(value) => setQueryEditorValue(value || '')}
-            options={customOptions}
-            loading={<HashLoader color="#a836d6" />}
-          />
-          {/* <EditorControl
-            className={queryVariablesBox}
-            // editor={queryVariablesEditor}
-            buttons={<ButtonCopy text={queryVariablesEditorValue} />}
-          >
-            <ReactResizeDetector
-              handleWidth
-              handleHeight
-              onResize={() => {
-                if (queryVariablesEditor) {
-                  queryVariablesEditor.layout();
-                }
-              }}
-            >
-              {({ width, height }) => (
-                <Editor
-                  width={width}
-                  height={height}
-                  onMount={(editor) => {
-                    setQueryVariablesEditor(editor);
-                  }}
-                  defaultLanguage="json"
-                  onChange={(value) => setQueryVariablesEditorValue(value || '')}
-                  options={customOptions}
-                  loading={<HashLoader color="#a836d6" />}
-                />
-              )}
-            </ReactResizeDetector>
-          </EditorControl> */}
+          <div className={schemaContent}>SCHEME CONTENT HERE</div>
         </div>
 
-        <div className={responseContainer}>
-          <div className={apiUrl}>API_URL_HERE</div>
+        <section className={classnames(playgroundSection, queryContainer)}>
+          <div className={classnames(editorBox, queryBox)}>
+            <div className={editorHeading}>
+              <h3 className={classnames(editorTitle, editorTitleActive)}>{t('query')}</h3>
+            </div>
+            <CustomEditor
+              language="graphql"
+              value={queryEditorValue}
+              setValue={(value) => setQueryEditorValue(value || '')}
+            />
+          </div>
 
-          {/* <EditorControl
-            className={responseBox}
-            title={t('result')}
-            // editor={responseEditor}
-            buttons={<ButtonCopy text={responseEditorValue} />}
-          >
-            <ReactResizeDetector
-              handleWidth
-              handleHeight
-              onResize={() => {
-                if (responseEditor) {
-                  responseEditor.layout();
-                }
-              }}
-            >
-              {({ width, height }) => (
-                <Editor
-                  width={width}
-                  height={height}
-                  onMount={(editor) => {
-                    setResponseEditor(editor);
-                  }}
-                  defaultLanguage="json"
-                  value={responseEditorValue}
-                  onChange={(value) => setResponseEditorValue(value || '')}
-                  options={{ ...customOptions, readOnly: true }}
-                  loading={<HashLoader color="#a836d6" />}
-                />
-              )}
-            </ReactResizeDetector>
-          </EditorControl> */}
-        </div>
-      </div>
+          <div className={classnames(editorBox, paramsBox)}>
+            <div className={editorHeading}>
+              <h3
+                onClick={() => openParams('variables')}
+                className={classnames(editorTitle, {
+                  [editorTitleActive]: isActiveParam('variables'),
+                })}
+              >
+                {t('q-var')}
+              </h3>
+              <h3
+                onClick={() => openParams('headers')}
+                className={classnames(editorTitle, {
+                  [editorTitleActive]: isActiveParam('headers'),
+                })}
+              >
+                {t('http-head')}
+              </h3>
+              <SquareButton
+                className={arrowButton}
+                onClick={() => setIsParamsOpen((prev) => !prev)}
+              >
+                {isParamsOpen ? (
+                  <ArrowUpIcon height={9} width={14} />
+                ) : (
+                  <ArrowDownIcon height={9} width={14} />
+                )}
+              </SquareButton>
+            </div>
+            <CustomEditor
+              className={classnames({
+                [paramsHidden]: !isActiveParam('variables'),
+              })}
+              language="json"
+              value={variablesEditorValue}
+              setValue={(value) => setVariablesEditorValue(value || '')}
+            />
+            <CustomEditor
+              className={classnames({
+                [paramsHidden]: !isActiveParam('headers'),
+              })}
+              language="json"
+              value={headersEditorValue}
+              setValue={(value) => setHeadersEditorValue(value || '')}
+            />
+          </div>
+        </section>
+
+        <section className={classnames(playgroundSection, responseContainer)}>
+          <div className={classnames(apiBox, apiContainer)}>
+            <h2 className={apiTitle}>API_URL_HERE</h2>
+            <StatusMarker isOk={false} statusCode={500} />
+          </div>
+
+          <div className={classnames(editorBox, responseBox)}>
+            <div className={editorHeading}>
+              <h3 className={classnames(editorTitle, editorTitleActive)}>{t('response')}</h3>
+            </div>
+            <CustomEditor
+              options={{ readOnly: true }}
+              language="json"
+              value={responseEditorValue}
+              setValue={(value) => setResponseEditorValue(value || '')}
+            />
+          </div>
+        </section>
+      </article>
     </div>
   );
 };

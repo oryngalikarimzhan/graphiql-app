@@ -1,0 +1,25 @@
+.status-marker {
+  display: flex;
+  gap: 10px;
+}
+
+.status-pin {
+  position: relative;
+  top: 2px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: $color-positive;
+}
+
+.error-pin {
+  background-color: $color-negative;
+}
+
+.status {
+  color: rgba($color-positive, 0.5);
+}
+
+.error-status {
+  color: rgba($color-negative, 0.5);
+}

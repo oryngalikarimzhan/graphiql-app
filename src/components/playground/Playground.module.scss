@@ -1,6 +1,6 @@
 .playground {
   background-color: $color-primary;
-  height: 100vh;
+  height: calc(100vh - $header-height);
   width: 100%;
   padding: 10px;
   display: flex;
@@ -14,27 +14,17 @@
   flex-direction: column;
   padding-right: 10px;
   border-right: 1px solid $color-secondary;
-}
 
-.schema-button {
-  width: 40px;
-  height: 40px;
-  border: none;
-  outline: none;
-  border-radius: 8px;
-  background-color: transparent;
-  color: $color-main;
+  .executor-button {
+    background-color: $color-positive;
 
-  &:hover {
-    background-color: $color-secondary;
+    &:hover {
+      background-color: rgba($color-positive, 0.9);
+    }
   }
 }
 
-.schema-button-active {
-  outline: 2px solid $color-main;
-}
-
-.editor-container {
+.playground-container {
   position: relative;
   flex: 1;
   display: flex;
@@ -45,76 +35,105 @@
   border-radius: 20px;
   overflow: hidden;
 
-  .schema-content {
-    flex: 1 1 0%;
-    min-width: 400px;
+  .playground-section {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+  }
+
+  .schema-container {
     padding: 0 10px;
 
     .schema-title {
       margin: 0;
-      font-size: 30px;
+      font-size: 24px;
       color: $color-main;
+    }
+
+    .schema-content {
+      color: $color-main;
+      flex: 1;
     }
   }
 
-  .schema-content-hidden {
-    position: absolute;
-    left: -1000px;
+  .schema-container-hidden {
+    display: none;
   }
 
-  .query-container {
-    flex: 1 1 0%;
-    max-width: 45%;
-    height: 100%;
+  .editor-box,
+  .api-box {
+    background-color: $color-primary;
+    border-radius: 15px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
 
+  .editor-heading {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .editor-title,
+  .api-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: normal;
+    color: $color-main;
+    margin: 0;
+
+    &:hover {
+      text-shadow: 0 0 1px $color-main;
+    }
+  }
+
+  .editor-title-active,
+  .api-title {
+    background-color: $color-secondary;
+  }
+
+  .query-container {
     .query-box {
       width: 100%;
-      height: 80%;
+      flex: 1;
     }
 
-    .query-variables-box {
+    .params-box {
       width: 100%;
-      height: 20%;
+      max-height: 30%;
+    }
+
+    .arrow-button {
+      margin-left: auto;
+    }
+
+    .params-hidden {
+      display: none;
     }
   }
 
   .response-container {
-    flex: 1 1 0%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    .api-url {
-      display: flex;
-      padding: 15px;
-      border-radius: 15px;
-      background-color: $color-primary;
+    .api-container {
       color: $color-main;
-      overflow: hidden;
+      padding: 10px;
+      justify-content: space-evenly;
     }
 
     .response-box {
       width: 100%;
-      height: 100%;
+      flex: 1;
     }
-  }
-}
-
-.executor-button {
-  width: 40px;
-  height: 40px;
-  color: $color-main;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  background-color: $color-positive;
-
-  &:hover {
-    background-color: rgba($color-positive, 0.9);
   }
 }

@@ -1,7 +1,13 @@
-.copy-button {
+.square-button {
   width: 40px;
   height: 40px;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
   color: $color-main;
   border: none;
   outline: none;
@@ -14,4 +20,8 @@
   &:active {
     outline: 2px solid $color-main;
   }
+}
+
+.square-button-active {
+  outline: 2px solid $color-main;
 }
