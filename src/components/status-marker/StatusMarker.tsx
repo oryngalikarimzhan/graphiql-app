@@ -2,11 +2,7 @@ import { FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './StatusMarker.module.scss';
-
-interface IStatusMarkerProps {
-  isOk: boolean;
-  statusCode: number | string;
-}
+import { IStatusMarkerProps } from './types';
 
 export const StatusMarker: FC<IStatusMarkerProps> = ({ isOk, statusCode }) => {
   return (
