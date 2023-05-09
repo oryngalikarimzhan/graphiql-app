@@ -12,32 +12,6 @@ import { ReactComponent as ArrowUpIcon } from '../../assets/icons/arrow-up-icon.
 import { ReactComponent as ArrowDownIcon } from '../../assets/icons/arrow-down-icon.svg';
 import { StatusMarker } from '../status-marker/StatusMarker';
 
-const {
-  playground,
-  sideBar,
-  schemaContainer,
-  schemaContainerHidden,
-  schemaTitle,
-  schemaContent,
-  editorTitle,
-  editorTitleActive,
-  editorBox,
-  editorHeading,
-  playgroundContainer,
-  playgroundSection,
-  queryContainer,
-  queryBox,
-  paramsBox,
-  paramsHidden,
-  arrowButton,
-  executorButton,
-  responseContainer,
-  apiBox,
-  apiContainer,
-  apiTitle,
-  responseBox,
-} = styles;
-
 export const Playground: FC = () => {
   const [queryEditorValue, setQueryEditorValue] = useState<string>('');
   const [variablesEditorValue, setVariablesEditorValue] = useState<string>('');
@@ -58,8 +32,8 @@ export const Playground: FC = () => {
     isParamsOpen && paramsEditor === paramName;
 
   return (
-    <div className={playground}>
-      <div className={sideBar}>
+    <div className={styles.playground}>
+      <div className={styles.sideBar}>
         <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaIsOpen((prev) => !prev)}>
           {schemaIsOpen ? (
             <FilledDocsIcon height={22} width={18} />
@@ -68,27 +42,29 @@ export const Playground: FC = () => {
           )}
         </SquareButton>
         <SquareButton
-          className={executorButton}
+          className={styles.executorButton}
           onClick={() => setResponseEditorValue(queryEditorValue)}
         >
           <ExecutorIcon />
         </SquareButton>
       </div>
 
-      <article className={playgroundContainer}>
+      <article className={styles.playgroundContainer}>
         <div
-          className={classnames(playgroundSection, schemaContainer, {
-            [schemaContainerHidden]: !schemaIsOpen,
+          className={classnames(styles.playgroundSection, styles.schemaContainer, {
+            [styles.schemaContainerHidden]: !schemaIsOpen,
           })}
         >
-          <h2 className={schemaTitle}>{t('schema')}</h2>
-          <div className={schemaContent}>SCHEME CONTENT HERE</div>
+          <h2 className={styles.schemaTitle}>{t('schema')}</h2>
+          <div className={styles.schemaContent}>SCHEME CONTENT HERE</div>
         </div>
 
-        <section className={classnames(playgroundSection, queryContainer)}>
-          <div className={classnames(editorBox, queryBox)}>
-            <div className={editorHeading}>
-              <h3 className={classnames(editorTitle, editorTitleActive)}>{t('query')}</h3>
+        <section className={classnames(styles.playgroundSection, styles.queryContainer)}>
+          <div className={classnames(styles.editorBox, styles.queryBox)}>
+            <div className={styles.editorHeading}>
+              <h3 className={classnames(styles.editorTitle, styles.editorTitleActive)}>
+                {t('query')}
+              </h3>
             </div>
             <CustomEditor
               language="graphql"
@@ -97,26 +73,26 @@ export const Playground: FC = () => {
             />
           </div>
 
-          <div className={classnames(editorBox, paramsBox)}>
-            <div className={editorHeading}>
+          <div className={classnames(styles.editorBox, styles.paramsBox)}>
+            <div className={styles.editorHeading}>
               <h3
                 onClick={() => openParams('variables')}
-                className={classnames(editorTitle, {
-                  [editorTitleActive]: isActiveParam('variables'),
+                className={classnames(styles.editorTitle, {
+                  [styles.editorTitleActive]: isActiveParam('variables'),
                 })}
               >
                 {t('q-var')}
               </h3>
               <h3
                 onClick={() => openParams('headers')}
-                className={classnames(editorTitle, {
-                  [editorTitleActive]: isActiveParam('headers'),
+                className={classnames(styles.editorTitle, {
+                  [styles.editorTitleActive]: isActiveParam('headers'),
                 })}
               >
                 {t('http-head')}
               </h3>
               <SquareButton
-                className={arrowButton}
+                className={styles.arrowButton}
                 onClick={() => setIsParamsOpen((prev) => !prev)}
               >
                 {isParamsOpen ? (
@@ -128,7 +104,7 @@ export const Playground: FC = () => {
             </div>
             <CustomEditor
               className={classnames({
-                [paramsHidden]: !isActiveParam('variables'),
+                [styles.paramsHidden]: !isActiveParam('variables'),
               })}
               language="json"
               value={variablesEditorValue}
@@ -136,7 +112,7 @@ export const Playground: FC = () => {
             />
             <CustomEditor
               className={classnames({
-                [paramsHidden]: !isActiveParam('headers'),
+                [styles.paramsHidden]: !isActiveParam('headers'),
               })}
               language="json"
               value={headersEditorValue}
@@ -145,15 +121,17 @@ export const Playground: FC = () => {
           </div>
         </section>
 
-        <section className={classnames(playgroundSection, responseContainer)}>
-          <div className={classnames(apiBox, apiContainer)}>
-            <h2 className={apiTitle}>API_URL_HERE</h2>
+        <section className={classnames(styles.playgroundSection, styles.responseContainer)}>
+          <div className={classnames(styles.apiBox, styles.apiContainer)}>
+            <h2 className={styles.apiTitle}>API_URL_HERE</h2>
             <StatusMarker isOk={false} statusCode={500} />
           </div>
 
-          <div className={classnames(editorBox, responseBox)}>
-            <div className={editorHeading}>
-              <h3 className={classnames(editorTitle, editorTitleActive)}>{t('response')}</h3>
+          <div className={classnames(styles.editorBox, styles.responseBox)}>
+            <div className={styles.editorHeading}>
+              <h3 className={classnames(styles.editorTitle, styles.editorTitleActive)}>
+                {t('response')}
+              </h3>
             </div>
             <CustomEditor
               options={{ readOnly: true }}

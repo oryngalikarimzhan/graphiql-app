@@ -8,8 +8,6 @@ import { customTheme, customOptions } from './editorConfigs';
 import { CopyButton } from '../buttons/copy-button/CopyButton';
 import { ICustomEditorProps } from './types';
 
-const { editorContainer, editorContent, controlPanel, languageTitle } = styles;
-
 export const CustomEditor: FC<ICustomEditorProps> = ({
   language,
   value,
@@ -18,8 +16,8 @@ export const CustomEditor: FC<ICustomEditorProps> = ({
   options,
 }) => {
   return (
-    <div className={classnames(editorContainer, className)}>
-      <div className={editorContent}>
+    <div className={classnames(styles.editorContainer, className)}>
+      <div className={styles.editorContent}>
         <Editor
           value={value}
           defaultLanguage={language}
@@ -33,8 +31,8 @@ export const CustomEditor: FC<ICustomEditorProps> = ({
         />
       </div>
 
-      <div className={controlPanel}>
-        <div className={languageTitle}>{language}</div>
+      <div className={styles.controlPanel}>
+        <div className={styles.languageTitle}>{language}</div>
         <CopyButton text={value} />
       </div>
     </div>

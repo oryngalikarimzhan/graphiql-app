@@ -3,8 +3,6 @@ import classnames from 'classnames';
 
 import styles from './StatusMarker.module.scss';
 
-const { statusMarker, statusPin, errorPin, status, errorStatus } = styles;
-
 interface IStatusMarkerProps {
   isOk: boolean;
   statusCode: number | string;
@@ -12,10 +10,12 @@ interface IStatusMarkerProps {
 
 export const StatusMarker: FC<IStatusMarkerProps> = ({ isOk, statusCode }) => {
   return (
-    <div className={statusMarker}>
-      <span className={classnames(statusPin, { [errorPin]: !isOk })} />
+    <div className={styles.statusMarker}>
+      <span className={classnames(styles.statusPin, { [styles.errorPin]: !isOk })} />
       <span>Status</span>
-      <span className={classnames(status, { [errorStatus]: !isOk })}>{statusCode}</span>
+      <span className={classnames(styles.statusCode, { [styles.errorStatusCode]: !isOk })}>
+        {statusCode}
+      </span>
     </div>
   );
 };
