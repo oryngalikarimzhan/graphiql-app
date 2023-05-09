@@ -2,7 +2,8 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import 'normalize.css';
 
-import { LanguageSelector } from './components/language-selector/LanguageSelector';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import NotFound from './pages/notFound/NotFound';
 import LoginPage from './pages/loginPage/LoginPage';
 import WelcomePage from './pages/welcomePage/WelcomePage';
@@ -12,7 +13,7 @@ import RegistrationPage from './pages/registerPage/RegistrationPage';
 const App = () => {
   return (
     <>
-      <LanguageSelector />
+      <Header />
       <Routes>
         <Route path="/" element={<Navigate to="/main" replace />} />
         <Route index path="/main" element={<MainPageTest />} />
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 };

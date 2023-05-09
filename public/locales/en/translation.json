@@ -26,4 +26,6 @@
   "validate-msg-email-not-valid": "Email is not valid",
   "validate-msg-8-chars": "At least 8 chars",
   "validate-msg-password-should-contain-letter-number-special": "Password should contain at least one letter, one number and one special character"
+  "main-page": "Main",
+  "welcome-page": "Home"
 }

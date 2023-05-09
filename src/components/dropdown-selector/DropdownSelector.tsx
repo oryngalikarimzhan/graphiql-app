@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, ReactElement, useState } from 'react';
 import classnames from 'classnames';
-import { useTranslation } from 'react-i18next';
 
 import styles from './DropdownSelector.module.scss';
 import { IDropdownSelectorProps } from './types';
@@ -11,8 +10,6 @@ const DropdownSelector: FC<IDropdownSelectorProps> = ({
   defaultOption,
   className,
 }): ReactElement => {
-  const { t } = useTranslation();
-
   const [selectedOption, setSelectedOption] = useState<string>(defaultOption);
 
   const handleOptionChange = (event: ChangeEvent<HTMLSelectElement>): void => {
@@ -29,7 +26,7 @@ const DropdownSelector: FC<IDropdownSelectorProps> = ({
     >
       {options.map((option) => (
         <option key={option} value={option}>
-          {`${t(option)}`}
+          {option}
         </option>
       ))}
     </select>

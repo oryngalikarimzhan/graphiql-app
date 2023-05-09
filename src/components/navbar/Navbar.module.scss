@@ -1,0 +1,48 @@
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.navLink {
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navLink.active {
+  text-decoration: underline;
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.menuIcon {
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: $custom-mobile-big-width) {
+  .menuIcon.active {
+    display: block;
+  }
+  .nav {
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    top: 70px;
+    left: -20px;
+    padding: 20px;
+    position: absolute;
+    opacity: 0;
+    background-color: $color-header-background;
+  }
+  .nav.active {
+    transition: all 0.3s;
+    opacity: 1;
+    left: 20px;
+  }
+}
