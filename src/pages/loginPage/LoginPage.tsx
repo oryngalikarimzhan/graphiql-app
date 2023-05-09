@@ -22,7 +22,7 @@ const LoginPage: FC = () => {
 
   return (
     <div className="wrapper">
-      <Login></Login>
+      <Login />
     </div>
   );
 };

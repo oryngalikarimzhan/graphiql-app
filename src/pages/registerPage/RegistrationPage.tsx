@@ -22,7 +22,7 @@ const RegistrationPage: FC = () => {
 
   return (
     <div className="wrapper">
-      <SignUp></SignUp>
+      <SignUp />
     </div>
   );
 };
