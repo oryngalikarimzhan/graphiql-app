@@ -5,6 +5,7 @@
   "confirm-pass": "Повторите пароль",
   "sign-in": "Войти",
   "sign-up": "Регистрация",
+  "sign-out": "Выйти",
   "sign-up-btn": "Зарегистрироваться",
   "home": "Главная",
   "not-found": "Страница не найдена",
@@ -29,5 +30,5 @@
     "password-should-contain-letter-number-special": "Пароль должен содержать как минимум 1 букву, 1 число и 1 специальный символ"
   },
   "main-page": "Главная",
-  "welcome-page": "Начальная"
+  "welcome-page": "Приветствие"
 }

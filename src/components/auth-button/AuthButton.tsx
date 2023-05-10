@@ -11,7 +11,11 @@ import classNames from 'classnames';
 
 const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
   const { t } = useTranslation();
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div>
