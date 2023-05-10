@@ -20,7 +20,7 @@ const AuthWelcomeController: FC<IAuthWelcomeController> = ({ className }) => {
     <div>
       {user ? (
         <Link to="/main" className={styles.loginLink}>
-          <button className={classNames(className)}>{t('home')}</button>
+          <button className={classNames(className)}>{t('main-page')}</button>
         </Link>
       ) : (
         <div className={styles.container}>
