@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { signOut } from 'firebase/auth';
 
-import './MainPageTest.module.scss';
+import './MainPage.module.scss';
 import { auth } from '../../config/FirebaseConfig';
+import { Playground } from '../../components/playground/Playground';
 
-const MainPageTest: FC = () => {
+const MainPage: FC = () => {
   const navigate = useNavigate();
 
   const [user, loading] = useAuthState(auth);
@@ -20,12 +20,7 @@ const MainPageTest: FC = () => {
     }
   }, [user, loading, navigate]);
 
-  return (
-    <div className="wrapper">
-      <h1>maintest</h1>
-      <button onClick={() => signOut(auth)}>Log out</button>
-    </div>
-  );
+  return <Playground />;
 };
 
-export default MainPageTest;
+export default MainPage;
