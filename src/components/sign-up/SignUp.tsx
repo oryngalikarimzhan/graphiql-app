@@ -25,7 +25,7 @@ const SignUp: FC = () => {
       <AuthForm
         buttonName={t('sign-up')}
         handleClick={handleSignUp}
-        disabled={loading}
+        isloading={loading}
         errorMessage={error && getErrorMessage(error)}
       ></AuthForm>
       <div className={styles.authFormInfo}>
