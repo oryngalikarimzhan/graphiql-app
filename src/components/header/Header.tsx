@@ -1,14 +1,13 @@
 import { useEffect, useState, FC } from 'react';
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
 
 import styles from './Header.module.scss';
 import { LanguageSelector } from '../language-selector/LanguageSelector';
 import Navbar from '../navbar/Navbar';
+import AuthButton from '../auth-button/AuthButton';
 
 const Header: FC = () => {
   const [sticky, setSticky] = useState(false);
-  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +23,7 @@ const Header: FC = () => {
         <Navbar />
         <div className={styles.btns}>
           <LanguageSelector />
-          <div className={styles.logout}>
-            <button className={styles.auth}>{t('sign-in')}</button>
-          </div>
+          <AuthButton className={styles.auth} />
         </div>
       </div>
     </header>

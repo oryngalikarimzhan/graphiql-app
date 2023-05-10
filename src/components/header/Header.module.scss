@@ -32,11 +32,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.auth:hover {
-  transform: scale(1.05);
-  text-decoration: solid;
+  &:hover {
+    transform: scale(1.05);
+    text-decoration: solid;
+  }
 }
 
 .btns {
