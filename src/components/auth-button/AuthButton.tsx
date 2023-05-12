@@ -11,14 +11,14 @@ import classNames from 'classnames';
 
 const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
   const { t } = useTranslation();
-  const [user, loading] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
-  if (loading) {
+  if (isLoading) {
     return null;
   }
 
   return (
-    <div>
+    <>
       {user ? (
         <button className={classNames(className)} onClick={() => signOut(auth)}>
           {t('sign-out')}
@@ -28,7 +28,7 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
           <button className={classNames(className)}>{t('sign-in')}</button>
         </Link>
       )}
-    </div>
+    </>
   );
 };
 

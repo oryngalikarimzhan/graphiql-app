@@ -10,9 +10,9 @@ import { IAuthWelcomeController } from './types';
 
 const AuthWelcomeController: FC<IAuthWelcomeController> = ({ className }) => {
   const { t } = useTranslation();
-  const [user, loading] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
-  if (loading) {
+  if (isLoading) {
     return null;
   }
 

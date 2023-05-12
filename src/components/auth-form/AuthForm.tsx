@@ -8,7 +8,7 @@ import TextInput from '../text-input/TextInput';
 import Message from '../message/Message';
 import { PulseLoader } from 'react-spinners';
 
-const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, isloading }) => {
+const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, isLoading }) => {
   const { t } = useTranslation();
   const {
     register,
@@ -76,12 +76,10 @@ const AuthForm: FC<IAuthProps> = ({ handleClick, buttonName, errorMessage, isloa
         error={errors.password}
       ></TextInput>
       {errorMessage && <Message isError>{errorMessage}</Message>}
-      <button disabled={isloading} type="submit" className={styles.authFormBtn} role="submit-btn">
-        <span className={styles.progressSpan}>
-          <PulseLoader loading={isloading} color="#a836d6" size={10} />
-          {buttonName}
-          <PulseLoader loading={isloading} color="#a836d6" size={10} />
-        </span>
+      <button disabled={isLoading} type="submit" className={styles.authFormBtn} role="submit-btn">
+        <PulseLoader loading={isLoading} color="#a836d6" size={10} />
+        {buttonName}
+        <PulseLoader loading={isLoading} color="#a836d6" size={10} />
       </button>
     </form>
   );
