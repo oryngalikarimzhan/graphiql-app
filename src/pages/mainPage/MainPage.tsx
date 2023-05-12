@@ -9,16 +9,16 @@ import { Playground } from '../../components/playground/Playground';
 const MainPage: FC = () => {
   const navigate = useNavigate();
 
-  const [user, loading] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
   useEffect(() => {
-    if (loading) {
+    if (isLoading) {
       return;
     }
     if (!user) {
       return navigate('/login');
     }
-  }, [user, loading, navigate]);
+  }, [user, isLoading, navigate]);
 
   return <Playground />;
 };

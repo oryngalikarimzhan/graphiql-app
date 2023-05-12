@@ -5,6 +5,7 @@
   "confirm-pass": "Confirm Password",
   "sign-in": "Sign-in",
   "sign-up": "Sign-up",
+  "sign-out": "Sign-out",
   "sign-up-btn": "Sign-up",
   "home": "Home",
   "not-found": "Page Not Found",
@@ -29,5 +30,5 @@
     "password-should-contain-letter-number-special": "Password should contain at least 1 letter, 1 number and 1 special character"
   },
   "main-page": "Main",
-  "welcome-page": "Home"
+  "welcome-page": "Welcome"
 }

@@ -39,7 +39,7 @@ const Navbar: FC = () => {
         onClick={() => setNavBurger(false)}
       />
       <nav className={classNames(styles.nav, { [styles.active]: navBurger })} ref={menuRef}>
-        <NavLink className={setActive} to={''}>
+        <NavLink className={setActive} to={'/welcome'}>
           {t('welcome-page')}
         </NavLink>
         <NavLink className={setActive} to={'/main'}>

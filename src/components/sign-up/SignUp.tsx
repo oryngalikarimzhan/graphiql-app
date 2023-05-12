@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const SignUp: FC = () => {
   const { t } = useTranslation();
 
-  const [сreateUserWithEmailAndPassword, , loading, error] =
+  const [сreateUserWithEmailAndPassword, , isLoading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
   const handleSignUp = (userData: IAuthFormInputs) => {
@@ -25,7 +25,7 @@ const SignUp: FC = () => {
       <AuthForm
         buttonName={t('sign-up')}
         handleClick={handleSignUp}
-        disabled={loading}
+        isLoading={isLoading}
         errorMessage={error && getErrorMessage(error)}
       ></AuthForm>
       <div className={styles.authFormInfo}>

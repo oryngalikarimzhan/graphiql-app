@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import './WelcomePage.module.scss';
+import styles from './WelcomePage.module.scss';
+import AuthWelcomeController from '../../components/auth-welcome-controller/AuthWelcomeController';
 
 const WelcomePage: FC = () => {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ const WelcomePage: FC = () => {
   return (
     <div className="wrapper">
       <h1>{t('welcome-msg')}</h1>
-      <Link to="/main">{t('redirect')}</Link>
+      <AuthWelcomeController className={styles.authWelcome} />
     </div>
   );
 };

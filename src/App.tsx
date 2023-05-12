@@ -15,7 +15,7 @@ const App = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Navigate to="/main" replace />} />
+        <Route path="/" element={<Navigate to="/welcome" replace />} />
         <Route index path="/main" element={<MainPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/login" element={<LoginPage />} />
