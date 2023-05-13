@@ -9,6 +9,7 @@ import LoginPage from './pages/loginPage/LoginPage';
 import WelcomePage from './pages/welcomePage/WelcomePage';
 import MainPage from './pages/mainPage/MainPage';
 import RegistrationPage from './pages/registerPage/RegistrationPage';
+import { Schema } from './components/schema/Schema';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Schema />
       <Footer />
     </>
   );
