@@ -10,6 +10,7 @@ const TextInput: FC<ITextInputProps> = ({ id, label, formRegister, error, ...pro
       <label htmlFor={id}>{label}</label>
       <input
         className={classnames(styles.textInput, { [styles.inputError]: !!error })}
+        id={id}
         {...props}
         {...formRegister}
         data-testid="text-input-element"
