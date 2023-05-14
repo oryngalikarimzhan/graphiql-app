@@ -1,0 +1,50 @@
+.avatar-container {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0px;
+  margin: 0px;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  min-width: 64px;
+  color: rgb(25, 118, 210);
+  border: 0px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
+  border-radius: 100vmax;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 2px;
+  background: white;
+  cursor: pointer;
+  transition: none 0s ease 0s;
+  &:hover {
+    background: linear-gradient(270deg, rgb(201, 113, 255) 24.97%, rgb(92, 121, 252) 100%);
+  }
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 100vmax;
+  background-color: rgba(252, 250, 249, 0);
+  object-fit: cover;
+}
+
+.avatar-shadow {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px inset;
+  position: absolute;
+  top: 2px;
+  pointer-events: none;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 100vmax;
+}
