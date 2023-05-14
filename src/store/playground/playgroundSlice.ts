@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+import { IPlaygroundState } from '../../types/state/IPlaygroundState';
+
+const initialState: IPlaygroundState = {
   queryEditorValue: '',
   variablesEditorValue: '',
   headersEditorValue: '',
   schemaIsOpen: true,
-  IsParamsOpen: false,
+  isParamsOpen: false,
   responseEditorValue: '',
-  paramsEditor: <'variables' | 'headers'>'variables',
+  paramsEditor: 'variables',
 };
 
 const playgroundSlice = createSlice({
@@ -27,7 +29,7 @@ const playgroundSlice = createSlice({
       state.schemaIsOpen = action.payload;
     },
     setIsParamsOpen: (state, action) => {
-      state.IsParamsOpen = action.payload;
+      state.isParamsOpen = action.payload;
     },
     setResponseEditorValue: (state, action) => {
       state.responseEditorValue = action.payload;

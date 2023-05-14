@@ -11,17 +11,18 @@ import { ReactComponent as FilledDocsIcon } from '../../assets/icons/filled-docs
 import { ReactComponent as ArrowUpIcon } from '../../assets/icons/arrow-up-icon.svg';
 import { ReactComponent as ArrowDownIcon } from '../../assets/icons/arrow-down-icon.svg';
 import { StatusMarker } from '../status-marker/StatusMarker';
-import { useAppSelector } from '../../store/hooks';
-import { useActions } from '../../store/hooks';
+import { useAppSelector, useActions } from '../../store/hooks';
 
 export const Playground: FC = () => {
-  const queryEditorValue = useAppSelector((state) => state.playground.queryEditorValue);
-  const variablesEditorValue = useAppSelector((state) => state.playground.variablesEditorValue);
-  const headersEditorValue = useAppSelector((state) => state.playground.headersEditorValue);
-  const schemaIsOpen = useAppSelector((state) => state.playground.schemaIsOpen);
-  const isParamsOpen = useAppSelector((state) => state.playground.IsParamsOpen);
-  const responseEditorValue = useAppSelector((state) => state.playground.responseEditorValue);
-  const paramsEditor = useAppSelector((state) => state.playground.paramsEditor);
+  const {
+    queryEditorValue,
+    variablesEditorValue,
+    headersEditorValue,
+    schemaIsOpen,
+    isParamsOpen,
+    responseEditorValue,
+    paramsEditor,
+  } = useAppSelector((state) => state.playground);
 
   const {
     setHeadersEditorValue,
