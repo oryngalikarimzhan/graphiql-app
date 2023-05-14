@@ -19,14 +19,14 @@ export const Playground: FC = () => {
   const variablesEditorValue = useAppSelector((state) => state.playground.variablesEditorValue);
   const headersEditorValue = useAppSelector((state) => state.playground.headersEditorValue);
   const schemaIsOpen = useAppSelector((state) => state.playground.schemaIsOpen);
-  const isParamsOpen = useAppSelector((state) => state.playground.isParamsIsOpen);
+  const isParamsOpen = useAppSelector((state) => state.playground.IsParamsOpen);
   const responseEditorValue = useAppSelector((state) => state.playground.responseEditorValue);
   const paramsEditor = useAppSelector((state) => state.playground.paramsEditor);
 
   const {
     setHeadersEditorValue,
     setParamsEditor,
-    setParamsIsOpen,
+    setIsParamsOpen,
     setQueryEditorValue,
     setResponseEditorValue,
     setSchemaIsOpen,
@@ -37,7 +37,7 @@ export const Playground: FC = () => {
 
   const openParams = (paramName: 'variables' | 'headers') => {
     setParamsEditor(paramName);
-    setParamsIsOpen(true);
+    setIsParamsOpen(true);
   };
 
   const isActiveParam = (paramName: 'variables' | 'headers') =>
@@ -105,7 +105,7 @@ export const Playground: FC = () => {
               </h3>
               <SquareButton
                 className={styles.arrowButton}
-                onClick={() => setParamsIsOpen(!isParamsOpen)}
+                onClick={() => setIsParamsOpen(!isParamsOpen)}
               >
                 {isParamsOpen ? (
                   <ArrowUpIcon height={9} width={14} />

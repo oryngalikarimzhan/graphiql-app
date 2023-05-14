@@ -5,7 +5,7 @@ const initialState = {
   variablesEditorValue: '',
   headersEditorValue: '',
   schemaIsOpen: true,
-  isParamsIsOpen: false,
+  IsParamsOpen: false,
   responseEditorValue: '',
   paramsEditor: <'variables' | 'headers'>'variables',
 };
@@ -26,8 +26,8 @@ const playgroundSlice = createSlice({
     setSchemaIsOpen: (state, action) => {
       state.schemaIsOpen = action.payload;
     },
-    setParamsIsOpen: (state, action) => {
-      state.isParamsIsOpen = action.payload;
+    setIsParamsOpen: (state, action) => {
+      state.IsParamsOpen = action.payload;
     },
     setResponseEditorValue: (state, action) => {
       state.responseEditorValue = action.payload;
