@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
 
@@ -11,21 +11,33 @@ import { ReactComponent as FilledDocsIcon } from '../../assets/icons/filled-docs
 import { ReactComponent as ArrowUpIcon } from '../../assets/icons/arrow-up-icon.svg';
 import { ReactComponent as ArrowDownIcon } from '../../assets/icons/arrow-down-icon.svg';
 import { StatusMarker } from '../status-marker/StatusMarker';
+import { useAppSelector } from '../../store/hooks';
+import { useActions } from '../../store/hooks';
 
 export const Playground: FC = () => {
-  const [queryEditorValue, setQueryEditorValue] = useState<string>('');
-  const [variablesEditorValue, setVariablesEditorValue] = useState<string>('');
-  const [headersEditorValue, setHeadersEditorValue] = useState<string>('');
-  const [responseEditorValue, setResponseEditorValue] = useState<string>('');
-  const [schemaIsOpen, setSchemaIsOpen] = useState(true);
+  const queryEditorValue = useAppSelector((state) => state.playground.queryEditorValue);
+  const variablesEditorValue = useAppSelector((state) => state.playground.variablesEditorValue);
+  const headersEditorValue = useAppSelector((state) => state.playground.headersEditorValue);
+  const schemaIsOpen = useAppSelector((state) => state.playground.schemaIsOpen);
+  const isParamsOpen = useAppSelector((state) => state.playground.isParamsOpen);
+  const responseEditorValue = useAppSelector((state) => state.playground.responseEditorValue);
+  const paramsEditor = useAppSelector((state) => state.playground.paramsEditor);
 
-  const [isParamsOpen, setIsParamsOpen] = useState(false);
-  const [paramsEditor, setParamsEditor] = useState<'variables' | 'headers'>('variables');
+  const {
+    setHeadersEditorValue,
+    setParamsEditor,
+    setParamsOpen,
+    setQueryEditorValue,
+    setResponseEditorValue,
+    setSchemaOpen,
+    setVariablesEditorValue,
+  } = useActions();
+
   const { t } = useTranslation();
 
   const openParams = (paramName: 'variables' | 'headers') => {
     setParamsEditor(paramName);
-    setIsParamsOpen(true);
+    setParamsOpen(true);
   };
 
   const isActiveParam = (paramName: 'variables' | 'headers') =>
@@ -34,7 +46,7 @@ export const Playground: FC = () => {
   return (
     <div className={styles.playground}>
       <div className={styles.sideBar}>
-        <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaIsOpen((prev) => !prev)}>
+        <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaOpen(!schemaIsOpen)}>
           {schemaIsOpen ? (
             <FilledDocsIcon height={22} width={18} />
           ) : (
@@ -93,7 +105,7 @@ export const Playground: FC = () => {
               </h3>
               <SquareButton
                 className={styles.arrowButton}
-                onClick={() => setIsParamsOpen((prev) => !prev)}
+                onClick={() => setParamsOpen(!isParamsOpen)}
               >
                 {isParamsOpen ? (
                   <ArrowUpIcon height={9} width={14} />
