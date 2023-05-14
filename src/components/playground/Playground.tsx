@@ -19,17 +19,17 @@ export const Playground: FC = () => {
   const variablesEditorValue = useAppSelector((state) => state.playground.variablesEditorValue);
   const headersEditorValue = useAppSelector((state) => state.playground.headersEditorValue);
   const schemaIsOpen = useAppSelector((state) => state.playground.schemaIsOpen);
-  const isParamsOpen = useAppSelector((state) => state.playground.isParamsOpen);
+  const isParamsOpen = useAppSelector((state) => state.playground.isParamsIsOpen);
   const responseEditorValue = useAppSelector((state) => state.playground.responseEditorValue);
   const paramsEditor = useAppSelector((state) => state.playground.paramsEditor);
 
   const {
     setHeadersEditorValue,
     setParamsEditor,
-    setParamsOpen,
+    setParamsIsOpen,
     setQueryEditorValue,
     setResponseEditorValue,
-    setSchemaOpen,
+    setSchemaIsOpen,
     setVariablesEditorValue,
   } = useActions();
 
@@ -37,7 +37,7 @@ export const Playground: FC = () => {
 
   const openParams = (paramName: 'variables' | 'headers') => {
     setParamsEditor(paramName);
-    setParamsOpen(true);
+    setParamsIsOpen(true);
   };
 
   const isActiveParam = (paramName: 'variables' | 'headers') =>
@@ -46,7 +46,7 @@ export const Playground: FC = () => {
   return (
     <div className={styles.playground}>
       <div className={styles.sideBar}>
-        <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaOpen(!schemaIsOpen)}>
+        <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaIsOpen(!schemaIsOpen)}>
           {schemaIsOpen ? (
             <FilledDocsIcon height={22} width={18} />
           ) : (
@@ -105,7 +105,7 @@ export const Playground: FC = () => {
               </h3>
               <SquareButton
                 className={styles.arrowButton}
-                onClick={() => setParamsOpen(!isParamsOpen)}
+                onClick={() => setParamsIsOpen(!isParamsOpen)}
               >
                 {isParamsOpen ? (
                   <ArrowUpIcon height={9} width={14} />
