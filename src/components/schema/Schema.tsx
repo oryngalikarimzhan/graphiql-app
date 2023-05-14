@@ -6,54 +6,133 @@ import {
   GraphQLList,
   GraphQLInputType,
   GraphQLOutputType,
+  GraphQLObjectType,
+  GraphQLInputObjectType,
+  GraphQLScalarType,
   GraphQLField /* getIntrospectionQuery */,
+  GraphQLInputField,
 } from 'graphql';
+
+import styles from './Schema.module.scss';
 import schemaData from './schemaData.json';
 
 const data = JSON.parse(JSON.stringify(schemaData)).data;
 const schema = buildClientSchema(data);
-const fields = schema.getQueryType()?.getFields();
+// const fields = schema.getQueryType()?.getFields();
 
 export const Schema: FC = () => {
   const [contentType, setContentType] = useState<string>('Query');
   // const [prevContentType, setPrevContentType] = useState<ReactNode>(null);
 
   // console.log(getIntrospectionQuery());
-  // console.log(schema.getQueryType()?.getFields().location);
-
   // console.log(contentType);
-  return (
-    <>
-      {contentType === 'Query' &&
-        fields &&
-        Object.keys(fields as object).map((key) => (
-          <div key={key}>
-            <Field field={fields[key]} changeContent={setContentType} />
+
+  const type = schema.getType(contentType);
+
+  console.log(type);
+
+  if (!type) {
+    const queryTypeFields = schema.getQueryType()?.getFields();
+    if (queryTypeFields && contentType in queryTypeFields) {
+      const field = queryTypeFields?.[contentType];
+
+      return (
+        <div
+          /** CHANGE TO FRAGMENT AT THE END */ style={{
+            width: '33%',
+            marginLeft: '70px',
+            padding: '20px',
+            backgroundColor: '#202a3b',
+          }}
+        >
+          <div className={styles.field}>
+            <div>Type</div>
+            <div>{field.name}</div>
+            <div>Arguments</div>
+            <div>
+              <Arguments args={field.args} changeContent={setContentType} />
+            </div>
           </div>
-        ))}
-      {}
-    </>
-  );
+        </div>
+      );
+    }
+  }
+
+  if (type instanceof GraphQLObjectType || type instanceof GraphQLInputObjectType) {
+    const fields = type.getFields();
+
+    return (
+      <div
+        /** CHANGE TO FRAGMENT AT THE END */ style={{
+          width: '33%',
+          marginLeft: '70px',
+          padding: '20px',
+          backgroundColor: '#202a3b',
+        }}
+      >
+        {fields &&
+          Object.keys(fields as object).map((key) => (
+            <div key={key}>
+              <Field field={fields![key]} changeContent={setContentType} />
+            </div>
+          ))}
+      </div>
+    );
+  }
+
+  if (type instanceof GraphQLScalarType) {
+    return (
+      <div
+        /** CHANGE TO FRAGMENT AT THE END */ style={{
+          width: '33%',
+          marginLeft: '70px',
+          padding: '20px',
+          backgroundColor: '#202a3b',
+        }}
+      >
+        <div className={styles.field}>
+          <div className={styles.scalarTitle}>{type.name}</div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: type.description?.replace(/`([^`]+)`/g, '<code>$1</code>') || '',
+            }}
+          ></div>
+        </div>
+      </div>
+    );
+  }
+
+  return <div>Do not have schema</div>;
 };
 
 const Field = ({
   field,
   changeContent,
 }: {
-  field: GraphQLField<unknown, unknown>;
+  field: GraphQLField<unknown, unknown> | GraphQLInputField;
   changeContent: (newContentTypeName: string) => void;
 }) => {
   return (
-    <>
+    <div className={styles.field}>
       <div>
-        <span style={{ color: 'blue' }}>{`${field?.name}`}</span>
-        (
-        <Arguments args={field?.args} changeContent={changeContent} />){`: `}
+        <span onClick={() => changeContent(field.name)} className={styles.fieldName}>
+          {field.name}
+        </span>
+
+        {'args' in field && field.args.length > 0 && (
+          <>
+            (
+            <Arguments args={field.args} changeContent={changeContent} />)
+          </>
+        )}
+
+        {`: `}
+
         <GraphqlType inputType={field.type} changeContent={changeContent} />
       </div>
-      <div>{field?.description}</div>
-      <br />
-    </>
+
+      {field.description && <div>{field.description}</div>}
+    </div>
   );
 };
 
@@ -66,11 +145,12 @@ const Arguments = ({
 }) => {
   return (
     <span>
+      {/* ( */}
       {args?.map((arg, index) => {
         const children = (
           <>
-            {' '}
-            <span style={{ color: 'magenta' }}>{`${arg.name}: `}</span>
+            <span className={styles.argName}>{arg.name}</span>
+            {`: `}
             <GraphqlType inputType={arg.type} changeContent={changeContent} />
             {index !== args.length - 1 && ', '}
           </>
@@ -79,11 +159,12 @@ const Arguments = ({
         return args.length === 1 ? (
           <span key={arg.name}>{children}</span>
         ) : (
-          <div style={{ paddingLeft: '10px' }} key={arg.name}>
+          <div className={styles.argBlock} key={arg.name}>
             {children}
           </div>
         );
       })}
+      {/* ) */}
     </span>
   );
 };
@@ -130,7 +211,7 @@ const GraphqlType: FC<{
           <NonNullPostfix>{prev}</NonNullPostfix>
         ),
       <span
-        style={{ color: 'orange', cursor: 'pointer' }}
+        className={styles.type}
         onClick={() => changeContent && 'name' in type && changeContent(type.name)}
       >{`${type.name}`}</span>
     );

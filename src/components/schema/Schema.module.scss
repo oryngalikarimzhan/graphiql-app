@@ -1,0 +1,50 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 20px;
+  border-radius: 15px;
+  background-color: rgba($color-secondary, 0.5);
+  overflow: hidden;
+  color: $color-main;
+
+  margin-bottom: 20px; // DELETE WHEN MOUNT
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+}
+
+.field-name {
+  color: $color-additional-3;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.arg-name {
+  color: $color-additional-1;
+}
+
+.type {
+  color: $color-additional-2;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.arg-block {
+  margin-left: 10px;
+}
+
+.scalar-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.scalar-description {
+}
