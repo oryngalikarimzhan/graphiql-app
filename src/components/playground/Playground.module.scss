@@ -98,6 +98,10 @@
   background-color: $color-secondary;
 }
 
+.api-title {
+  justify-content: flex-start;
+}
+
 .query-container {
   .query-box {
     width: 100%;
