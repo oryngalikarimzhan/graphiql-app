@@ -12,6 +12,7 @@ import { ReactComponent as ArrowUpIcon } from '../../assets/icons/arrow-up-icon.
 import { ReactComponent as ArrowDownIcon } from '../../assets/icons/arrow-down-icon.svg';
 import { StatusMarker } from '../status-marker/StatusMarker';
 import { useAppSelector, useActions } from '../../store/hooks';
+import { Schema } from '../schema/Schema';
 
 export const Playground: FC = () => {
   const {
@@ -68,8 +69,11 @@ export const Playground: FC = () => {
             [styles.schemaContainerHidden]: !schemaIsOpen,
           })}
         >
-          <h2 className={styles.schemaTitle}>{t('schema')}</h2>
-          <div className={styles.schemaContent}>SCHEME CONTENT HERE</div>
+          <div className={styles.schemaHeading}>
+            <h3 className={styles.schemaTitle}>{t('schema')}</h3>
+          </div>
+
+          <Schema />
         </div>
 
         <section className={classnames(styles.playgroundSection, styles.queryContainer)}>

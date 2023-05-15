@@ -1,4 +1,5 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode } from 'react';
+import classnames from 'classnames';
 import {
   buildClientSchema,
   GraphQLArgument,
@@ -8,7 +9,6 @@ import {
   GraphQLOutputType,
   GraphQLObjectType,
   GraphQLInputObjectType,
-  GraphQLScalarType,
   GraphQLField /* getIntrospectionQuery */,
   GraphQLInputField,
 } from 'graphql';
@@ -18,51 +18,47 @@ import schemaData from './schemaData.json';
 import { ReactComponent as TypeIcon } from '../../assets/icons/type-icon.svg';
 import { ReactComponent as ArgumentIcon } from '../../assets/icons/argument-icon.svg';
 import { ReactComponent as FieldIcon } from '../../assets/icons/field-icon.svg';
+import { ReactComponent as BackwardIcon } from '../../assets/icons/backward-icon.svg';
+import { SquareButton } from '../buttons/square-button/SquareButton';
+import { useActions, useAppSelector } from '../../store/hooks';
 
 const data = JSON.parse(JSON.stringify(schemaData)).data;
 const schema = buildClientSchema(data);
-// const fields = schema.getQueryType()?.getFields();
 
 export const Schema: FC = () => {
-  const [contentType, setContentType] = useState<string>('Query');
-  // const [prevContentType, setPrevContentType] = useState<ReactNode>(null);
+  const { currentType } = useAppSelector((state) => state.schema);
 
-  // console.log(getIntrospectionQuery());
-  // console.log(contentType);
+  if (!schema) return <div className={styles.schema}>Do not have schema</div>;
 
-  const type = schema.getType(contentType);
-
-  console.log(type);
+  const type = schema.getType(currentType);
 
   if (!type) {
     const queryTypeFields = schema.getQueryType()?.getFields();
-    if (queryTypeFields && contentType in queryTypeFields) {
-      const field = queryTypeFields?.[contentType];
+
+    if (queryTypeFields && currentType in queryTypeFields) {
+      const field = queryTypeFields?.[currentType];
 
       return (
-        <div
-          /** CHANGE TO FRAGMENT AT THE END */ style={{
-            width: '33%',
-            marginLeft: '70px',
-            padding: '20px',
-            backgroundColor: '#202a3b',
-          }}
-        >
+        <div className={styles.schema}>
+          <div className={styles.schemaHeading}>
+            <div className={styles.name}>{field.name}</div>
+            <PreviousButton />
+          </div>
+
+          <div>{field.description}</div>
+          <div className={styles.title}>
+            <TypeIcon height={16} width={16} />
+            <span>Type</span>
+          </div>
           <div className={styles.field}>
-            <div className={styles.title}>
-              <TypeIcon height={16} width={16} />
-              <span>Type</span>
-            </div>
-
-            <GraphqlType inputType={field.type} />
-
-            <div className={styles.title}>
-              <ArgumentIcon height={16} width={16} />
-              <span>Arguments</span>
-            </div>
-            <div>
-              <Arguments args={field.args} changeContent={setContentType} />
-            </div>
+            <GraphqlTypeParser inputType={field.type} />
+          </div>
+          <div className={styles.title}>
+            <ArgumentIcon height={16} width={16} />
+            <span>Arguments</span>
+          </div>
+          <div className={styles.field}>
+            <GraphqlArgumentsParser args={field.args} />
           </div>
         </div>
       );
@@ -73,23 +69,21 @@ export const Schema: FC = () => {
     const fields = type.getFields();
 
     return (
-      <div
-        /** CHANGE TO FRAGMENT AT THE END */ style={{
-          width: '33%',
-          marginLeft: '70px',
-          padding: '20px',
-          backgroundColor: '#202a3b',
-        }}
-      >
+      <div className={styles.schema}>
         {fields && (
           <>
+            <div className={styles.schemaHeading}>
+              <div className={styles.name}>{type?.name}</div>
+              <PreviousButton />
+            </div>
+
             <div className={styles.title}>
-              <ArgumentIcon height={16} width={16} />
+              <FieldIcon height={16} width={16} />
               <span>Fields</span>
             </div>
-            {Object.keys(fields as object).map((key) => (
+            {Object.keys(fields).map((key) => (
               <div key={key}>
-                <Field field={fields![key]} changeContent={setContentType} />
+                <GraphqlFieldParser field={fields![key]} />
               </div>
             ))}
           </>
@@ -98,56 +92,47 @@ export const Schema: FC = () => {
     );
   }
 
-  if (type instanceof GraphQLScalarType) {
-    return (
-      <div
-        /** CHANGE TO FRAGMENT AT THE END */ style={{
-          width: '33%',
-          marginLeft: '70px',
-          padding: '20px',
-          backgroundColor: '#202a3b',
-        }}
-      >
-        <div className={styles.field}>
-          <div className={styles.scalarName}>{type.name}</div>
-          <div
-            className={styles.scalarDescription}
-            dangerouslySetInnerHTML={{
-              __html: type.description?.replace(/`([^`]+)`/g, '<code>$1</code>') || '',
-            }}
-          ></div>
-        </div>
+  return (
+    <div className={styles.schema}>
+      <div className={styles.schemaHeading}>
+        <div className={styles.name}>{type?.name}</div>
+        <PreviousButton />
       </div>
-    );
-  }
 
-  return <div>Do not have schema</div>;
+      <div className={styles.field}>
+        <div
+          className={styles.scalarDescription}
+          dangerouslySetInnerHTML={{
+            __html: type?.description?.replace(/`([^`]+)`/g, '<code>$1</code>') || '',
+          }}
+        ></div>
+      </div>
+    </div>
+  );
 };
 
-const Field = ({
-  field,
-  changeContent,
-}: {
+const GraphqlFieldParser: FC<{
   field: GraphQLField<unknown, unknown> | GraphQLInputField;
-  changeContent: (newContentTypeName: string) => void;
-}) => {
+}> = ({ field }) => {
+  const { setCurrentGraphqlType } = useActions();
+
   return (
     <div className={styles.field}>
       <div>
-        <span onClick={() => changeContent(field.name)} className={styles.fieldName}>
+        <span onClick={() => setCurrentGraphqlType(field.name)} className={styles.fieldName}>
           {field.name}
         </span>
 
         {'args' in field && field.args.length > 0 && (
           <>
             (
-            <Arguments args={field.args} changeContent={changeContent} />)
+            <GraphqlArgumentsParser args={field.args} />)
           </>
         )}
 
         {`: `}
 
-        <GraphqlType inputType={field.type} changeContent={changeContent} />
+        <GraphqlTypeParser inputType={field.type} />
       </div>
 
       {field.description && <div>{field.description}</div>}
@@ -155,58 +140,27 @@ const Field = ({
   );
 };
 
-const Arguments = ({
-  args,
-  changeContent,
-}: {
+const GraphqlArgumentsParser: FC<{
   args?: readonly GraphQLArgument[];
-  changeContent?: (newContentType: string) => void;
-}) => {
+}> = ({ args }) => {
   return (
-    <span>
-      {/* ( */}
-      {args?.map((arg, index) => {
-        const children = (
-          <>
-            <span className={styles.argName}>{arg.name}</span>
-            {`: `}
-            <GraphqlType inputType={arg.type} changeContent={changeContent} />
-            {index !== args.length - 1 && ', '}
-          </>
-        );
-
-        return args.length === 1 ? (
-          <span key={arg.name}>{children}</span>
-        ) : (
-          <div className={styles.argBlock} key={arg.name}>
-            {children}
-          </div>
-        );
-      })}
-      {/* ) */}
-    </span>
+    <>
+      {args?.map((arg, index) => (
+        <span key={arg.name} className={classnames({ [styles.argBlock]: args.length > 1 })}>
+          <span className={styles.argName}>{arg.name}</span>
+          {`: `}
+          <GraphqlTypeParser inputType={arg.type} />
+          {index !== args.length - 1 && ', '}
+        </span>
+      ))}
+    </>
   );
 };
 
-const NonNullPostfix: FC<{ children: ReactNode }> = ({ children }) => (
-  <>
-    {children}
-    <span>!</span>
-  </>
-);
-
-const ListSquareBrackets: FC<{ children: ReactNode }> = ({ children }) => (
-  <>
-    <span>[</span>
-    {children}
-    <span>]</span>
-  </>
-);
-
-const GraphqlType: FC<{
+const GraphqlTypeParser: FC<{
   inputType: GraphQLInputType | GraphQLOutputType;
-  changeContent?: (newContentType: string) => void;
-}> = ({ inputType, changeContent }) => {
+}> = ({ inputType }) => {
+  const { setCurrentGraphqlType } = useActions();
   let type = inputType;
   const layers: string[] = [];
 
@@ -225,13 +179,42 @@ const GraphqlType: FC<{
     .reduce(
       (prev, curr) =>
         curr === 'GraphQLList' ? (
-          <ListSquareBrackets>{prev}</ListSquareBrackets>
+          <GraphqlListSign>{prev}</GraphqlListSign>
         ) : (
-          <NonNullPostfix>{prev}</NonNullPostfix>
+          <GraphqlNonNullSign>{prev}</GraphqlNonNullSign>
         ),
       <span
         className={styles.type}
-        onClick={() => changeContent && 'name' in type && changeContent(type.name)}
+        onClick={() => 'name' in type && setCurrentGraphqlType(type.name)}
       >{`${type.name}`}</span>
     );
+};
+
+const GraphqlNonNullSign: FC<{ children: ReactNode }> = ({ children }) => (
+  <>
+    {children}
+    <span>!</span>
+  </>
+);
+
+const GraphqlListSign: FC<{ children: ReactNode }> = ({ children }) => (
+  <>
+    <span>[</span>
+    {children}
+    <span>]</span>
+  </>
+);
+
+const PreviousButton: FC = () => {
+  const { previousType } = useAppSelector((state) => state.schema);
+  const { getPreviousGraphqlType } = useActions();
+  return (
+    <>
+      {previousType !== '' && (
+        <SquareButton className={styles.previousButton} onClick={() => getPreviousGraphqlType()}>
+          <BackwardIcon /> {previousType}
+        </SquareButton>
+      )}
+    </>
+  );
 };
