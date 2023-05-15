@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
 
@@ -11,16 +11,29 @@ import { ReactComponent as FilledDocsIcon } from '../../assets/icons/filled-docs
 import { ReactComponent as ArrowUpIcon } from '../../assets/icons/arrow-up-icon.svg';
 import { ReactComponent as ArrowDownIcon } from '../../assets/icons/arrow-down-icon.svg';
 import { StatusMarker } from '../status-marker/StatusMarker';
+import { useAppSelector, useActions } from '../../store/hooks';
 
 export const Playground: FC = () => {
-  const [queryEditorValue, setQueryEditorValue] = useState<string>('');
-  const [variablesEditorValue, setVariablesEditorValue] = useState<string>('');
-  const [headersEditorValue, setHeadersEditorValue] = useState<string>('');
-  const [responseEditorValue, setResponseEditorValue] = useState<string>('');
-  const [schemaIsOpen, setSchemaIsOpen] = useState(true);
+  const {
+    queryEditorValue,
+    variablesEditorValue,
+    headersEditorValue,
+    schemaIsOpen,
+    isParamsOpen,
+    responseEditorValue,
+    paramsEditor,
+  } = useAppSelector((state) => state.playground);
 
-  const [isParamsOpen, setIsParamsOpen] = useState(false);
-  const [paramsEditor, setParamsEditor] = useState<'variables' | 'headers'>('variables');
+  const {
+    setHeadersEditorValue,
+    setParamsEditor,
+    setIsParamsOpen,
+    setQueryEditorValue,
+    setResponseEditorValue,
+    setSchemaIsOpen,
+    setVariablesEditorValue,
+  } = useActions();
+
   const { t } = useTranslation();
 
   const openParams = (paramName: 'variables' | 'headers') => {
@@ -34,7 +47,7 @@ export const Playground: FC = () => {
   return (
     <div className={styles.playground}>
       <div className={styles.sideBar}>
-        <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaIsOpen((prev) => !prev)}>
+        <SquareButton isActive={schemaIsOpen} onClick={() => setSchemaIsOpen(!schemaIsOpen)}>
           {schemaIsOpen ? (
             <FilledDocsIcon height={22} width={18} />
           ) : (
@@ -93,7 +106,7 @@ export const Playground: FC = () => {
               </h3>
               <SquareButton
                 className={styles.arrowButton}
-                onClick={() => setIsParamsOpen((prev) => !prev)}
+                onClick={() => setIsParamsOpen(!isParamsOpen)}
               >
                 {isParamsOpen ? (
                   <ArrowUpIcon height={9} width={14} />
