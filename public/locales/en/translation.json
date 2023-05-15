@@ -29,6 +29,30 @@
     "8-chars": "At least 8 chars",
     "password-should-contain-letter-number-special": "Password should contain at least 1 letter, 1 number and 1 special character"
   },
+  "developer-card": {
+    "ihar": {
+      "description": "I am Software Engineer. I like to invent, design, and create useful things or programs. I like computer games and I am crazy about computers and programming."
+    },
+    "orygali": {
+      "description": "I am Software Engineer. I like to invent, design, and create useful things or programs. I like computer games and I am crazy about computers and programming."
+    },
+    "stepan": {
+      "description": "I am Software Engineer. I like to invent, design, and create useful things or programs. I like computer games and I am crazy about computers and programming."
+    }
+  },
   "main-page": "Main",
-  "welcome-page": "Welcome"
+  "welcome-page": "Welcome",
+  "final-project": {
+    "name": "The Final project",
+    "description": "The main page is only available to registered users."
+  },
+  "course": {
+    "name": "Course: RS School. React.",
+    "description": "RS School is an educational project that runs courses in various areas of web development. One such course is the React course. The course is intended for RS School students who have passed the second stage of RS School and new students with practical experience and knowledge of JavaScript, TypeScript, Git, GitHub, CSS3 / HTML."
+  },
+  "project": {
+    "name": "Project: GraphiQL.",
+    "description": "GraphiQL is an interactive GraphQL development environment in the browser. It allows you to form queries and explore the GraphQL schema."
+  },
+  "developers": "Developers."
 }
