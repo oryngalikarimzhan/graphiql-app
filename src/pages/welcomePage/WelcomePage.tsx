@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './WelcomePage.module.scss';
 import AuthWelcomeController from '../../components/auth-welcome-controller/AuthWelcomeController';
 import iharImage from '../../assets/img/ihar2.jpg';
+import oryngaliImage from '../../assets/img/oryngali.jpg';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../config/FirebaseConfig';
 import DeveloperCard from '../../components/developer-card/DeveloperCard';
@@ -34,10 +35,10 @@ const WelcomePage: FC = () => {
             description={t('developer-card.ihar.description') || ''}
           />
           <DeveloperCard
-            image={iharImage}
-            name="Ihar Antonenka"
-            avatarLink="https://www.linkedin.com/in/ihar-antonenka-ba52371a5/"
-            description={t('developer-card.orygali.description') || ''}
+            image={oryngaliImage}
+            name="Oryngali Karimzhan"
+            avatarLink="https://github.com/oryngalikarimzhan"
+            description={t('developer-card.oryngali.description') || ''}
           />
           <DeveloperCard
             image={iharImage}
