@@ -15,6 +15,9 @@ import {
 
 import styles from './Schema.module.scss';
 import schemaData from './schemaData.json';
+import { ReactComponent as TypeIcon } from '../../assets/icons/type-icon.svg';
+import { ReactComponent as ArgumentIcon } from '../../assets/icons/argument-icon.svg';
+import { ReactComponent as FieldIcon } from '../../assets/icons/field-icon.svg';
 
 const data = JSON.parse(JSON.stringify(schemaData)).data;
 const schema = buildClientSchema(data);
@@ -46,9 +49,17 @@ export const Schema: FC = () => {
           }}
         >
           <div className={styles.field}>
-            <div>Type</div>
-            <div>{field.name}</div>
-            <div>Arguments</div>
+            <div className={styles.title}>
+              <TypeIcon height={16} width={16} />
+              <span>Type</span>
+            </div>
+
+            <GraphqlType inputType={field.type} />
+
+            <div className={styles.title}>
+              <ArgumentIcon height={16} width={16} />
+              <span>Arguments</span>
+            </div>
             <div>
               <Arguments args={field.args} changeContent={setContentType} />
             </div>
@@ -70,12 +81,19 @@ export const Schema: FC = () => {
           backgroundColor: '#202a3b',
         }}
       >
-        {fields &&
-          Object.keys(fields as object).map((key) => (
-            <div key={key}>
-              <Field field={fields![key]} changeContent={setContentType} />
+        {fields && (
+          <>
+            <div className={styles.title}>
+              <ArgumentIcon height={16} width={16} />
+              <span>Fields</span>
             </div>
-          ))}
+            {Object.keys(fields as object).map((key) => (
+              <div key={key}>
+                <Field field={fields![key]} changeContent={setContentType} />
+              </div>
+            ))}
+          </>
+        )}
       </div>
     );
   }
@@ -91,8 +109,9 @@ export const Schema: FC = () => {
         }}
       >
         <div className={styles.field}>
-          <div className={styles.scalarTitle}>{type.name}</div>
+          <div className={styles.scalarName}>{type.name}</div>
           <div
+            className={styles.scalarDescription}
             dangerouslySetInnerHTML={{
               __html: type.description?.replace(/`([^`]+)`/g, '<code>$1</code>') || '',
             }}

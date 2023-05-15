@@ -41,10 +41,24 @@
   margin-left: 10px;
 }
 
-.scalar-title {
-  font-size: 20px;
-  font-weight: bold;
+.scalar-name {
+  font-size: 22px;
 }
 
 .scalar-description {
+  code {
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 1px 2px;
+    background-color: rgba($color-main, 0.2);
+  }
+}
+
+.title {
+  color: $color-main;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: bold;
 }
