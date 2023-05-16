@@ -12,3 +12,18 @@
     text-decoration: solid;
   }
 }
+
+.text-underline {
+  width: 100%;
+  border-bottom: 1px solid #0000003f;
+  text-align: left;
+  padding-top: 1rem;
+}
+
+.developers-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0;
+}
