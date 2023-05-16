@@ -1,31 +1,27 @@
-import { FC, ReactNode } from 'react';
-import classnames from 'classnames';
+import { FC, useMemo } from 'react';
 import {
   buildClientSchema,
-  GraphQLArgument,
-  GraphQLNonNull,
-  GraphQLList,
-  GraphQLInputType,
-  GraphQLOutputType,
   GraphQLObjectType,
   GraphQLInputObjectType,
-  GraphQLField /* getIntrospectionQuery */,
-  GraphQLInputField,
+  IntrospectionQuery,
 } from 'graphql';
 
 import styles from './Schema.module.scss';
-import schemaData from './schemaData.json';
 import { ReactComponent as TypeIcon } from '../../assets/icons/type-icon.svg';
 import { ReactComponent as ArgumentIcon } from '../../assets/icons/argument-icon.svg';
 import { ReactComponent as FieldIcon } from '../../assets/icons/field-icon.svg';
-import { ReactComponent as BackwardIcon } from '../../assets/icons/backward-icon.svg';
-import { SquareButton } from '../buttons/square-button/SquareButton';
-import { useActions, useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
+import { GraphqlTypeParser } from './graphql-type-parser/GraphqlTypeParser';
+import { GraphqlArgumentsParser } from './graphql-arguments-parser/GraphqlArgumentsParser';
+import { GraphqlFieldParser } from './graphql-field-parser/GraphqlFieldParser';
+import { PreviousButton } from './previous-button/PreviousButton';
+import { ISchemaProps } from './types';
 
-const data = JSON.parse(JSON.stringify(schemaData)).data;
-const schema = buildClientSchema(data);
-
-export const Schema: FC = () => {
+export const Schema: FC<ISchemaProps> = ({ schemaData }) => {
+  const schema = useMemo(
+    () => buildClientSchema(schemaData as unknown as IntrospectionQuery),
+    [schemaData]
+  );
   const { currentType } = useAppSelector((state) => state.schema);
 
   if (!schema) return <div className={styles.schema}>Do not have schema</div>;
@@ -108,108 +104,5 @@ export const Schema: FC = () => {
         ></div>
       </div>
     </div>
-  );
-};
-
-const GraphqlFieldParser: FC<{
-  field: GraphQLField<unknown, unknown> | GraphQLInputField;
-}> = ({ field }) => {
-  const { setCurrentGraphqlType } = useActions();
-
-  return (
-    <div className={styles.field}>
-      <div>
-        <span onClick={() => setCurrentGraphqlType(field.name)} className={styles.fieldName}>
-          {field.name}
-        </span>
-
-        {'args' in field && field.args.length > 0 && (
-          <>
-            (
-            <GraphqlArgumentsParser args={field.args} />)
-          </>
-        )}
-
-        {`: `}
-
-        <GraphqlTypeParser inputType={field.type} />
-      </div>
-
-      {field.description && <div>{field.description}</div>}
-    </div>
-  );
-};
-
-const GraphqlArgumentsParser: FC<{
-  args?: readonly GraphQLArgument[];
-}> = ({ args }) => {
-  return (
-    <>
-      {args?.map((arg, index) => (
-        <span key={arg.name} className={classnames({ [styles.argBlock]: args.length > 1 })}>
-          <span className={styles.argName}>{arg.name}</span>
-          {`: `}
-          <GraphqlTypeParser inputType={arg.type} />
-          {index !== args.length - 1 && ', '}
-        </span>
-      ))}
-    </>
-  );
-};
-
-const GraphqlTypeParser: FC<{
-  inputType: GraphQLInputType | GraphQLOutputType;
-}> = ({ inputType }) => {
-  const { setCurrentGraphqlType } = useActions();
-  let type = inputType;
-  const layers: string[] = [];
-
-  while ('ofType' in type) {
-    layers.push(type[Symbol.toStringTag]);
-    type = type.ofType;
-  }
-
-  return layers
-    .reverse()
-    .reduce(
-      (prev, curr) =>
-        curr === 'GraphQLList' ? (
-          <GraphqlListSign>{prev}</GraphqlListSign>
-        ) : (
-          <GraphqlNonNullSign>{prev}</GraphqlNonNullSign>
-        ),
-      <span
-        className={styles.type}
-        onClick={() => 'name' in type && setCurrentGraphqlType(type.name)}
-      >{`${type.name}`}</span>
-    );
-};
-
-const GraphqlNonNullSign: FC<{ children: ReactNode }> = ({ children }) => (
-  <>
-    {children}
-    <span>!</span>
-  </>
-);
-
-const GraphqlListSign: FC<{ children: ReactNode }> = ({ children }) => (
-  <>
-    <span>[</span>
-    {children}
-    <span>]</span>
-  </>
-);
-
-const PreviousButton: FC = () => {
-  const { previousType } = useAppSelector((state) => state.schema);
-  const { getPreviousGraphqlType } = useActions();
-  return (
-    <>
-      {previousType !== '' && (
-        <SquareButton className={styles.previousButton} onClick={() => getPreviousGraphqlType()}>
-          <BackwardIcon /> {previousType}
-        </SquareButton>
-      )}
-    </>
   );
 };

@@ -1,0 +1,23 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba($color-secondary, 0.5);
+  overflow: hidden;
+  color: $color-main;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+}
+
+.field-name {
+  color: $color-additional-3;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
