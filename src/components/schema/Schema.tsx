@@ -36,7 +36,7 @@ export const Schema: FC = () => {
     const queryTypeFields = schema.getQueryType()?.getFields();
 
     if (queryTypeFields && currentType in queryTypeFields) {
-      const field = queryTypeFields?.[currentType];
+      const field = queryTypeFields[currentType];
 
       return (
         <div className={styles.schema}>
@@ -73,7 +73,7 @@ export const Schema: FC = () => {
         {fields && (
           <>
             <div className={styles.schemaHeading}>
-              <div className={styles.name}>{type?.name}</div>
+              <div className={styles.name}>{type.name}</div>
               <PreviousButton />
             </div>
 
@@ -165,12 +165,7 @@ const GraphqlTypeParser: FC<{
   const layers: string[] = [];
 
   while ('ofType' in type) {
-    if (type instanceof GraphQLNonNull) {
-      layers.push(type[Symbol.toStringTag]);
-    } else if (type instanceof GraphQLList) {
-      layers.push(type[Symbol.toStringTag]);
-    }
-
+    layers.push(type[Symbol.toStringTag]);
     type = type.ofType;
   }
 
