@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import styles from './AuthWelcomeController.module.scss';
-import { auth } from '../../config/FirebaseConfig';
+import { auth } from '../../configs/FirebaseConfig';
 import { IAuthWelcomeController } from './types';
 
 const AuthWelcomeController: FC<IAuthWelcomeController> = ({ className }) => {

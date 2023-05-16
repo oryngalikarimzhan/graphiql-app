@@ -5,8 +5,8 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import styles from './SignUp.module.scss';
 import AuthForm from '../auth-form/AuthForm';
 import { IAuthFormInputs } from '../auth-form/types';
-import { auth } from '../../config/FirebaseConfig';
-import { getErrorMessage } from '../../helper/errorQuery';
+import { auth } from '../../configs/FirebaseConfig';
+import { getErrorMessage } from '../../helpers/errorQuery';
 import { Link } from 'react-router-dom';
 
 const SignUp: FC = () => {

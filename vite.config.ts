@@ -7,7 +7,6 @@ import react from '@vitejs/plugin-react';
 import { configDefaults } from 'vitest/config';
 import svgr from 'vite-plugin-svgr';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: '/graphiql-app',
   plugins: [react(), svgr()],
@@ -17,7 +16,7 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/styles/abstract/variables";`,
+        additionalData: `@import "./src/styles/global";`,
       },
     },
   },

@@ -6,7 +6,7 @@ import iharImage from '../../assets/img/ihar2.jpg';
 import oryngaliImage from '../../assets/img/oryngali.jpg';
 import stepanImage from '../../assets/img/stepan.jpg';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../config/FirebaseConfig';
+import { auth } from '../../configs/FirebaseConfig';
 import DeveloperCard from '../../components/developer-card/DeveloperCard';
 
 const WelcomePage: FC = () => {

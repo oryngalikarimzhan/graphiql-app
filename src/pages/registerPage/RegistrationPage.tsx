@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './RegistrationPage.module.scss';
 import SignUp from '../../components/sign-up/SignUp';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../config/FirebaseConfig';
+import { auth } from '../../configs/FirebaseConfig';
 
 const RegistrationPage: FC = () => {
   const navigate = useNavigate();

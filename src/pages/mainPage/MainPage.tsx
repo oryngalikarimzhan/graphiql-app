@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import './MainPage.module.scss';
-import { auth } from '../../config/FirebaseConfig';
+import { auth } from '../../configs/FirebaseConfig';
 import { Playground } from '../../components/playground/Playground';
 
 const MainPage: FC = () => {

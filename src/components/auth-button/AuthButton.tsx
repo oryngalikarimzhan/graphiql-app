@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
 import styles from './AuthButton.module.scss';
-import { auth } from '../../config/FirebaseConfig';
+import { auth } from '../../configs/FirebaseConfig';
 import { IAuthButtonProps } from './types';
 import classNames from 'classnames';
 

@@ -1,28 +1,26 @@
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
 
 body {
-  background-image: url("./assets/gallery_background.jpg");
-  background-size: auto;
   margin: 0;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
 }
 
 .wrapper {
-  // height: 2000px;
   min-height: 100vh;
   max-width: 1220px;
   margin: 0 auto;
   padding-left: 30px;
   padding-right: 30px;
-}
-
-*,
-*::before,
-*::after {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
