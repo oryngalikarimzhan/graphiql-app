@@ -25,7 +25,6 @@
 }
 
 .playground-container {
-  position: relative;
   flex: 1;
   display: flex;
   justify-content: space-between;
@@ -34,106 +33,104 @@
   background-color: $color-secondary;
   border-radius: 20px;
   overflow: hidden;
+}
 
-  .playground-section {
+.playground-section {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schema-container {
+  background-color: $color-primary;
+  border-radius: 15px;
+  gap: 0;
+}
+
+.schema-container-hidden {
+  display: none;
+}
+
+.editor-box,
+.api-box {
+  background-color: $color-primary;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editor-heading,
+.schema-heading {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  align-items: center;
+}
+
+.editor-title,
+.api-title,
+.schema-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 10px;
+  font-size: 20px;
+  font-weight: normal;
+  color: $color-main;
+  margin: 0;
+
+  &:hover {
+    text-shadow: 0 0 1px $color-main;
+  }
+}
+
+.editor-title-active,
+.api-title,
+.schema-title {
+  background-color: $color-secondary;
+}
+
+.api-title {
+  justify-content: flex-start;
+}
+
+.query-container {
+  .query-box {
+    width: 100%;
     flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
   }
 
-  .schema-container {
-    padding: 0 10px;
-
-    .schema-title {
-      margin: 0;
-      font-size: 24px;
-      color: $color-main;
-    }
-
-    .schema-content {
-      color: $color-main;
-      flex: 1;
-    }
+  .params-box {
+    width: 100%;
+    max-height: 35%;
   }
 
-  .schema-container-hidden {
+  .arrow-button {
+    margin-left: auto;
+  }
+
+  .params-hidden {
     display: none;
   }
+}
 
-  .editor-box,
-  .api-box {
-    background-color: $color-primary;
-    border-radius: 15px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .editor-heading {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    align-items: center;
-  }
-
-  .editor-title,
-  .api-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    padding: 0 10px;
-    font-size: 20px;
-    font-weight: normal;
+.response-container {
+  .api-container {
     color: $color-main;
-    margin: 0;
-
-    &:hover {
-      text-shadow: 0 0 1px $color-main;
-    }
+    padding: 10px;
+    justify-content: space-evenly;
   }
 
-  .editor-title-active,
-  .api-title {
-    background-color: $color-secondary;
-  }
-
-  .query-container {
-    .query-box {
-      width: 100%;
-      flex: 1;
-    }
-
-    .params-box {
-      width: 100%;
-      max-height: 30%;
-    }
-
-    .arrow-button {
-      margin-left: auto;
-    }
-
-    .params-hidden {
-      display: none;
-    }
-  }
-
-  .response-container {
-    .api-container {
-      color: $color-main;
-      padding: 10px;
-      justify-content: space-evenly;
-    }
-
-    .response-box {
-      width: 100%;
-      flex: 1;
-    }
+  .response-box {
+    width: 100%;
+    flex: 1;
   }
 }

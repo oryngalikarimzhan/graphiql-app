@@ -5,4 +5,6 @@ enum Language {
   EN = 'en',
 }
 
-export { Language, LOCALIZATION_COOKIE_KEY };
+const GRAPHQL_API = 'https://rickandmortyapi.com/graphql';
+
+export { Language, LOCALIZATION_COOKIE_KEY, GRAPHQL_API };

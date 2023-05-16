@@ -1,0 +1,8 @@
+.type {
+  color: $color-additional-2;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
