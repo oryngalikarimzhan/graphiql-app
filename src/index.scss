@@ -12,7 +12,8 @@ body {
 }
 
 .wrapper {
-  height: 2000px;
+  // height: 2000px;
+  min-height: 100vh;
   max-width: 1220px;
   margin: 0 auto;
   padding-left: 30px;
