@@ -3,6 +3,10 @@
   background-color: $color-primary;
   height: $footer-height;
   padding: 30px 0;
+
+  @include tablet {
+    height: auto;
+  }
 }
 
 .container {
@@ -10,6 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 30px;
 
   @include mobile {
     flex-direction: column;
@@ -53,19 +58,45 @@
 .authors {
   display: flex;
   gap: 10px;
-  align-self: flex-end;
+  flex-direction: column;
+
   @include mobile {
     align-self: center;
   }
 }
 
 .github-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: $color-main;
+  gap: 5px;
+  text-decoration: none;
+
+  span {
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.3s linear;
+
+    @include tablet {
+      transform: scaleX(1);
+    }
+    @media (hover: none) {
+      transform: scaleX(1);
+    }
+  }
+
   .github-logo {
     fill: $color-main;
-    transition: fill 0.3s linear, transform 0.7s linear;
+    transition: fill 0.3s linear, transform 0.5s linear;
   }
 
   &:hover {
+    span {
+      transform: scaleX(1);
+    }
+
     .github-logo {
       transform: rotate(360deg);
       fill: #fff;
