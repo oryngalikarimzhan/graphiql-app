@@ -1,42 +1,86 @@
 .footer {
+  margin-top: auto;
   background-color: $color-primary;
   height: $footer-height;
-}
-
-.logoRss {
-  height: 50px;
+  padding: 30px 0;
 }
 
 .container {
-  margin: 0 auto;
-  padding: 0 30px;
-  max-width: $content-width;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
-.text {
-  color: #fff;
-  font-size: 20px;
-}
+.copyright {
+  align-self: flex-end;
+  color: $color-main;
 
-.github {
-  height: 50px;
-}
-
-.ghContainer {
-  display: flex;
-  gap: 7px;
-}
-
-@media (max-width: $custom-mobile-big-width) {
-  .logoRss {
-    height: 35px;
+  span {
+    font-size: 25px;
+    letter-spacing: 3px;
   }
 
-  .github {
-    height: 35px;
+  @include mobile {
+    align-self: center;
+    order: 1;
+  }
+}
+
+.course-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .rss-logo {
+    height: 50px;
+    transition: filter 0.3s ease-out;
+
+    &:hover {
+      filter: drop-shadow(0 0 2px $color-main);
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.authors {
+  display: flex;
+  gap: 10px;
+  align-self: flex-end;
+  @include mobile {
+    align-self: center;
+  }
+}
+
+.github-link {
+  .github-logo {
+    fill: $color-main;
+    transition: fill 0.3s linear, transform 0.7s linear;
+  }
+
+  &:hover {
+    .github-logo {
+      transform: rotate(360deg);
+      fill: #fff;
+      filter: drop-shadow(0 0 2px $color-main);
+    }
+  }
+}
+
+.github-logo {
+  fill: $color-main;
+  transition: fill 0.3s linear, transform 0.7s linear;
+
+  &:hover {
+    transform: rotate(360deg);
+    fill: #fff;
+    filter: drop-shadow(0 0 2px $color-main);
   }
 }

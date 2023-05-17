@@ -1,18 +1,24 @@
-$font-family-roboto: "Roboto", sans-serif;
-
 $header-height: 60px;
 $header-sticky-height: 50px;
-$footer-height: 60px;
+$footer-height: 300px;
 
 $content-width: 1600px;
-$custom-content-one: 1480px;
-$custom-content-two: 1380px;
-$tablet-width: 1200px;
-$custom-tablet-one: 900px;
-$mobile-big-width: 640px;
 $custom-mobile-big-width: 590px;
-$custom-middle-width: 460px;
-$mobile-small-width: 320px;
+
+$desktop-max-width: 1920px;
+$desktop-min-width: 1440px;
+
+$laptop-max-width: 1439px;
+$laptop-min-width: 1024px;
+
+$mobile-max-width: 1023px;
+$tablet-min-width: 768px;
+
+$mobile-max-width: 767px;
+$mobile-min-width: 320px;
+
+$max-content-width: 1260px;
+$min-content-width: 300px;
 
 $color-primary: #202a3b;
 $color-secondary: #303949;
