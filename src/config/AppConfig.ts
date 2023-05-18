@@ -1,5 +1,5 @@
 const appConfig = {
-  apiUrl: 'https://dummyjson.com/products',
+  apiUrl: 'https://rickandmortyapi.com/graphql',
 };
 
 export default appConfig;
