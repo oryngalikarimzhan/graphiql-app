@@ -1,48 +1,54 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
+
+import { ReactComponent as HamburgerIcon } from '../../assets/icons/hamburger-icon.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icons/close-icon.svg';
 
 import styles from './Navbar.module.scss';
 
 const Navbar: FC = () => {
-  const [navBurger, setNavBurger] = useState(false);
+  const [isNavBurgerOpen, setIsNavBurgerOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
 
-  const setActive = ({ isActive }: { isActive: boolean }) =>
+  const defineActive = ({ isActive }: { isActive: boolean }) =>
     classNames(styles.navLink, { [styles.active]: isActive });
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleOutsideClick = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as HTMLElement)) {
-        setNavBurger(false);
+        setIsNavBurgerOpen(false);
       }
     };
-    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener('click', handleOutsideClick, true);
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
+      document.removeEventListener('click', handleOutsideClick, true);
     };
   }, [menuRef]);
 
   return (
     <>
-      <AiOutlineMenu
-        className={classNames(styles.menuIcon, { [styles.active]: !navBurger })}
-        size={'25'}
-        onClick={() => setNavBurger(true)}
+      <HamburgerIcon
+        height={25}
+        width={25}
+        className={classNames(styles.burgerIcon, { [styles.burgerIconVisible]: !isNavBurgerOpen })}
+        onClick={() => setIsNavBurgerOpen(true)}
       />
-      <AiOutlineClose
-        className={classNames(styles.menuIcon, { [styles.active]: navBurger })}
-        size={'25'}
-        onClick={() => setNavBurger(false)}
+      <CloseIcon
+        height={25}
+        width={25}
+        className={classNames(styles.burgerIcon, { [styles.burgerIconVisible]: isNavBurgerOpen })}
       />
-      <nav className={classNames(styles.nav, { [styles.active]: navBurger })} ref={menuRef}>
-        <NavLink className={setActive} to={'/welcome'}>
+      <nav
+        className={classNames(styles.nav, { [styles.navActive]: isNavBurgerOpen })}
+        ref={menuRef}
+      >
+        <NavLink className={defineActive} to={'/welcome'}>
           {t('welcome-page')}
         </NavLink>
-        <NavLink className={setActive} to={'/main'}>
+        <NavLink className={defineActive} to={'/main'}>
           {t('main-page')}
         </NavLink>
       </nav>

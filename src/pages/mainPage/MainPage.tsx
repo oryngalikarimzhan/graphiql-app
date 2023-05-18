@@ -16,7 +16,7 @@ const MainPage: FC = () => {
       return;
     }
     if (!user) {
-      return navigate('/login');
+      return navigate('/welcome');
     }
   }, [user, isLoading, navigate]);
 

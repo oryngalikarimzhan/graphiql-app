@@ -5,7 +5,7 @@ import cookies from 'js-cookie';
 
 import { Language, LOCALIZATION_COOKIE_KEY } from '../../configs/constants';
 import { supportedLngs as languages } from '../../configs/i18n';
-import styles from './languageSelector.module.scss';
+import styles from './LanguageSelector.module.scss';
 import { DropdownSelector } from '../dropdown-selector/DropdownSelector';
 import { ILanguageSelectorProps } from './types';
 

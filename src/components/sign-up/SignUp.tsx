@@ -12,11 +12,11 @@ import { Link } from 'react-router-dom';
 const SignUp: FC = () => {
   const { t } = useTranslation();
 
-  const [сreateUserWithEmailAndPassword, , isLoading, error] =
+  const [createUserWithEmailAndPassword, , isLoading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
-  const handleSignUp = (userData: IAuthFormInputs) => {
-    сreateUserWithEmailAndPassword(userData.email, userData.password);
+  const handleSignUp = ({ email, password }: IAuthFormInputs) => {
+    createUserWithEmailAndPassword(email, password);
   };
 
   return (

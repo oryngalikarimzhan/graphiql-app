@@ -1,10 +1,10 @@
 .footer {
   margin-top: auto;
-  background-color: $color-primary;
+  background-color: $color-secondary;
   height: $footer-height;
   padding: 30px 0;
 
-  @include tablet {
+  @include mobile {
     height: auto;
   }
 }
@@ -21,18 +21,47 @@
   }
 }
 
-.copyright {
-  align-self: flex-end;
-  color: $color-main;
-
-  span {
-    font-size: 25px;
-    letter-spacing: 3px;
-  }
+.info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
   @include mobile {
-    align-self: center;
     order: 1;
+  }
+
+  .title {
+    background: linear-gradient(
+      90deg,
+      $color-additional-3,
+      $color-additional-2,
+      $color-main,
+      $color-additional-1,
+      $color-additional-4
+    );
+    -webkit-background-clip: text;
+    background-size: 500% auto;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    color: $color-main;
+    font-size: 25px;
+    letter-spacing: 3px;
+    animation: shine 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .copyright {
+    color: $color-main;
   }
 }
 
@@ -42,16 +71,12 @@
   gap: 20px;
 
   .rss-logo {
-    height: 50px;
+    height: 40px;
     transition: filter 0.3s ease-out;
 
     &:hover {
       filter: drop-shadow(0 0 2px $color-main);
     }
-  }
-
-  @include mobile {
-    flex-direction: column;
   }
 }
 
@@ -61,57 +86,62 @@
   flex-direction: column;
 
   @include mobile {
-    align-self: center;
+    flex-direction: row;
+    gap: 20px;
   }
-}
 
-.github-link {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  .github-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: $color-main;
+    gap: 5px;
+    text-decoration: none;
 
-  color: $color-main;
-  gap: 5px;
-  text-decoration: none;
+    span {
+      user-select: none;
+      border: 1px solid $color-main;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: $color-primary;
+      transform-origin: right;
+      scale: 0 1;
+      transition: scale 0.3s linear;
 
-  span {
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform 0.3s linear;
-
-    @include tablet {
-      transform: scaleX(1);
+      @include tablet {
+        scale: 1;
+      }
+      @media (hover: none) {
+        scale: 1;
+      }
     }
-    @media (hover: none) {
-      transform: scaleX(1);
+
+    .github-logo {
+      fill: $color-main;
+      transition: fill 0.3s linear, transform 0.3s linear;
+    }
+
+    &:hover {
+      span {
+        scale: 1;
+      }
+
+      .github-logo {
+        transform: rotate(-360deg);
+        fill: #fff;
+        filter: drop-shadow(0 0 2px $color-main);
+      }
     }
   }
 
   .github-logo {
     fill: $color-main;
-    transition: fill 0.3s linear, transform 0.5s linear;
-  }
+    transition: fill 0.3s linear, transform 0.7s linear;
 
-  &:hover {
-    span {
-      transform: scaleX(1);
-    }
-
-    .github-logo {
+    &:hover {
       transform: rotate(360deg);
       fill: #fff;
       filter: drop-shadow(0 0 2px $color-main);
     }
-  }
-}
-
-.github-logo {
-  fill: $color-main;
-  transition: fill 0.3s linear, transform 0.7s linear;
-
-  &:hover {
-    transform: rotate(360deg);
-    fill: #fff;
-    filter: drop-shadow(0 0 2px $color-main);
   }
 }

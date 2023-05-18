@@ -14,8 +14,8 @@ const Login: FC = () => {
 
   const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
 
-  const handleLogin = (userData: IAuthFormInputs) => {
-    signInWithEmailAndPassword(userData.email, userData.password);
+  const handleLogin = ({ email, password }: IAuthFormInputs) => {
+    signInWithEmailAndPassword(email, password);
   };
 
   return (

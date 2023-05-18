@@ -6,10 +6,6 @@
   outline: none;
   border-radius: 3px;
   appearance: none;
-  transition: all 0.3s;
   cursor: pointer;
-}
-
-.selector:hover {
-  transform: scale(1.05);
+  user-select: none;
 }

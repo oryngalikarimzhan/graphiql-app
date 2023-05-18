@@ -11,9 +11,12 @@
 
 body {
   min-width: 320px;
+  background-color: $color-primary;
 }
 
 #root {
+  margin-top: $header-height;
+  color: $color-main;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -27,7 +30,7 @@ body {
   margin: 0 auto;
   padding: 0 30px;
 
-  @include mobile {
+  @include tablet {
     padding: 0 10px;
   }
 }

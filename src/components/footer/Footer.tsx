@@ -16,9 +16,10 @@ const Footer = () => {
           </a>
         </div>
 
-        <p className={styles.copyright}>
-          <span>GRAPHiQL</span> &copy; 2023
-        </p>
+        <div className={styles.info}>
+          <h1 className={styles.title}>GRAPHiQL</h1>
+          <p className={styles.copyright}>Copyright &copy; 2023</p>
+        </div>
 
         <div className={styles.authors}>
           {Object.keys(githubAuthors).map((name) => (

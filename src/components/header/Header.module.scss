@@ -1,54 +1,43 @@
 .header {
-  height: $header-height;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0px;
   background-color: $color-primary;
-  color: #fff;
+  padding: 15px 0;
+  transform: translateY();
+  transition: background 0.5s, padding 0.4s;
+
+  .language {
+    background-color: $color-secondary;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .auth {
+    background-color: $color-secondary;
+  }
 }
 
 .sticky {
-  top: 0px;
-  position: sticky;
-  height: $header-sticky-height;
-  animation: slideDown 0.35s ease-out;
+  padding: 0;
+  background-color: $color-secondary;
+
+  .inverted {
+    background-color: $color-primary;
+  }
 }
 
 .container {
-  margin: 0 auto;
-  padding: 0 30px;
-  max-width: $content-width;
-  height: 100%;
+  height: calc($header-height - 30px);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 30px;
 }
 
-.auth {
-  background-color: #fff;
-  border-radius: 3px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  height: 30px;
-  width: 80px;
+.header-buttons {
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  &:hover {
-    transform: scale(1.05);
-    text-decoration: solid;
-  }
-}
-
-.btns {
-  display: flex;
-  gap: 20px;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  gap: 10px;
 }
