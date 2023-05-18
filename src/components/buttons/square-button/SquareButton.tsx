@@ -12,13 +12,9 @@ export const SquareButton: FC<ISquareButtonProps> = ({
 }) => {
   return (
     <button
-      className={classnames(
-        styles.squareButton,
-        {
-          [styles.squareButtonActive]: isActive,
-        },
-        className
-      )}
+      className={classnames(className, styles.squareButton, {
+        [styles.squareButtonActive]: isActive,
+      })}
       onClick={onClick}
     >
       {children}

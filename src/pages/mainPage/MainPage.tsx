@@ -12,8 +12,6 @@ const MainPage = () => {
 
   const [user, isLoading] = useAuthState(auth);
 
-  console.log(isLoading);
-
   useEffect(() => {
     if (!user) {
       navigate('/welcome');

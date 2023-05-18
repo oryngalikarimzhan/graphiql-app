@@ -1,5 +1,28 @@
 .rectangular-button {
-  display: flex !important;
-  padding: 0 10px !important;
-  width: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background-color: $color-secondary;
+  color: $color-main;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    text-shadow: 0 0 1px $color-main;
+    background-color: $color-secondary;
+  }
+
+  &:active {
+    outline: 2px solid $color-main;
+  }
+}
+
+.rectangular-button-active {
+  outline: 2px solid $color-main;
 }

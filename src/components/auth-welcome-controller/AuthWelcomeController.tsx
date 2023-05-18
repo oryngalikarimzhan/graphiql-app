@@ -7,28 +7,41 @@ import classNames from 'classnames';
 import styles from './AuthWelcomeController.module.scss';
 import { auth } from '../../configs/FirebaseConfig';
 import { IAuthWelcomeController } from './types';
+import { SpinnerLoader } from '../spinner-loader/SpinnerLoader';
+import { RectangularButton } from '../buttons/rectangular-button/RectangularButton';
 
 const AuthWelcomeController: FC<IAuthWelcomeController> = ({ className }) => {
   const { t } = useTranslation();
   const [user, isLoading] = useAuthState(auth);
 
   if (isLoading) {
-    return null;
+    return (
+      <div className={styles.container}>
+        <RectangularButton>
+          <SpinnerLoader />
+        </RectangularButton>
+      </div>
+    );
   }
 
   return (
     <div>
       {user ? (
-        <Link to="/main" className={styles.loginLink}>
-          <button className={classNames(className)}>{t('main-page')}</button>
-        </Link>
+        <div className={styles.container}>
+          <h3>
+            {t('user')} : {user.email}
+          </h3>
+          <Link to="/main" className={styles.loginLink}>
+            <RectangularButton className={classNames(className)}>{t('explore')}</RectangularButton>
+          </Link>
+        </div>
       ) : (
         <div className={styles.container}>
           <Link to="/login" className={styles.loginLink}>
-            <button className={classNames(className)}>{t('sign-in')}</button>
+            <RectangularButton className={classNames(className)}>{t('sign-in')}</RectangularButton>
           </Link>
           <Link to="/registration" className={styles.loginLink}>
-            <button className={classNames(className)}>{t('sign-up')}</button>
+            <RectangularButton className={classNames(className)}>{t('sign-up')}</RectangularButton>
           </Link>
         </div>
       )}

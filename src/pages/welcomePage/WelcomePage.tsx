@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import classnames from 'classnames';
+
 import styles from './WelcomePage.module.scss';
 import AuthWelcomeController from '../../components/auth-welcome-controller/AuthWelcomeController';
 import iharImage from '../../assets/img/ihar2.jpg';
@@ -11,22 +13,29 @@ import DeveloperCard from '../../components/developer-card/DeveloperCard';
 
 const WelcomePage: FC = () => {
   const { t } = useTranslation();
-  const [user] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
   return (
-    <div className="wrapper">
-      <h2>{t('final-project.name')}</h2>
-      <p>{!user && t('final-project.description')}</p>
-      <AuthWelcomeController className={styles.authWelcome} />
-      <div>
+    <section className={classnames('wrapper', styles.welcome)}>
+      <div className={styles.heading}>
+        <h2>{t('final-project.name')}</h2>
+
+        <p>{!user && !isLoading && t('final-project.description')}</p>
+
+        <AuthWelcomeController />
+      </div>
+
+      <div className={styles.infoContent}>
         <h3 className={styles.textUnderline}>{t('course.name')}</h3>
         <p>{t('course.description')}</p>
       </div>
-      <div>
+
+      <div className={styles.infoContent}>
         <h3 className={styles.textUnderline}>{t('project.name')}</h3>
         <p>{t('project.description')}</p>
       </div>
-      <div>
+
+      <div className={styles.infoContent}>
         <h3 className={styles.textUnderline}>{t('developers')}</h3>
         <div className={styles.developersContainer}>
           <DeveloperCard
@@ -49,7 +58,7 @@ const WelcomePage: FC = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

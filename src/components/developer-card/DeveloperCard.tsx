@@ -7,11 +7,14 @@ import Avatar from '../avatar/Avatar';
 const DeveloperCard: FC<IDevCardProps> = ({ image, name, avatarLink, description }) => {
   return (
     <div className={styles.cardContainer}>
-      <a href={avatarLink} target={'_blank'} rel="noreferrer">
-        <Avatar image={image}></Avatar>
+      <a className={styles.image} href={avatarLink} target={'_blank'} rel="noreferrer">
+        <Avatar image={image} />
       </a>
-      <h4>{name}</h4>
-      <div className={styles.developerCardDescription}>{description}</div>
+
+      <div className={styles.info}>
+        <h4>{name}</h4>
+        <p className={styles.developerCardDescription}>{description}</p>
+      </div>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
-import styles from './AuthButton.module.scss';
 import { auth } from '../../configs/FirebaseConfig';
 import { IAuthButtonProps } from './types';
 import { RectangularButton } from '../buttons/rectangular-button/RectangularButton';
@@ -16,7 +15,7 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
 
   if (isLoading) {
     return (
-      <RectangularButton className={className} onClick={() => signOut(auth)}>
+      <RectangularButton className={className}>
         <SpinnerLoader />
       </RectangularButton>
     );
@@ -29,9 +28,14 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
           {t('sign-out')}
         </RectangularButton>
       ) : (
-        <Link to="/login">
-          <RectangularButton className={className}>{t('sign-in')}</RectangularButton>
-        </Link>
+        <>
+          <Link to="/login">
+            <RectangularButton className={className}>{t('sign-in')}</RectangularButton>
+          </Link>
+          <Link to="/registration">
+            <RectangularButton className={className}>{t('sign-up')}</RectangularButton>
+          </Link>
+        </>
       )}
     </>
   );

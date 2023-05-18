@@ -8,17 +8,18 @@
   @include mobile {
     height: auto;
   }
-}
 
-.container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 0 30px;
 
-  @include mobile {
-    flex-direction: column;
+    @include mobile {
+      flex-direction: column;
+    }
   }
 }
 
@@ -88,7 +89,10 @@
 
   @include mobile {
     flex-direction: row;
-    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   .github-link {

@@ -1,15 +1,8 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './RectangularButton.module.scss';
-import { SquareButton } from '../../buttons/square-button/SquareButton';
-
-interface IRectangularButtonProps {
-  children: ReactNode;
-  isActive?: boolean;
-  className?: string;
-  onClick?: () => void;
-}
+import { IRectangularButtonProps } from './types';
 
 export const RectangularButton: FC<IRectangularButtonProps> = ({
   children,
@@ -18,12 +11,13 @@ export const RectangularButton: FC<IRectangularButtonProps> = ({
   onClick,
 }) => {
   return (
-    <SquareButton
-      className={classnames(styles.rectangularButton, className)}
-      isActive={isActive}
+    <button
+      className={classnames(styles.rectangularButton, className, {
+        [styles.rectangularButtonActive]: isActive,
+      })}
       onClick={onClick}
     >
       {children}
-    </SquareButton>
+    </button>
   );
 };

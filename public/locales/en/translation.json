@@ -52,7 +52,9 @@
   },
   "project": {
     "name": "Project: GraphiQL.",
-    "description": "GraphiQL is an interactive GraphQL development environment in the browser. It allows you to form queries and explore the GraphQL schema."
+    "description": "GraphiQL is an interactive GraphQL development environment in the browser. It allows you to form queries and explore the GraphQL schema. We used public API \"Rick and Morty\""
   },
-  "developers": "Developers."
+  "developers": "Developers.",
+  "explore": "Start exploring",
+  "user": "User"
 }
