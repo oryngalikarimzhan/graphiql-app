@@ -1,18 +1,25 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import classnames from 'classnames';
 
-import styles from './TextInput.module.scss';
-import { ITextInputProps } from './types';
+import styles from './FormTextInputField.module.scss';
+import { IFormTextInputFieldProps } from './types';
 
-const TextInput: FC<ITextInputProps> = ({ id, label, formRegister, error, ...props }) => {
+const FormTextInputField: FC<IFormTextInputFieldProps> = ({
+  id,
+  label,
+  formRegister,
+  error,
+  ...props
+}) => {
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.field}>
       <label htmlFor={id}>{label}</label>
       <input
         className={classnames(styles.textInput, { [styles.inputError]: !!error })}
         id={id}
         {...props}
         {...formRegister}
+        autoComplete="on"
         data-testid="text-input-element"
         role="text-input"
       />
@@ -21,4 +28,4 @@ const TextInput: FC<ITextInputProps> = ({ id, label, formRegister, error, ...pro
   );
 };
 
-export default TextInput;
+export default FormTextInputField;

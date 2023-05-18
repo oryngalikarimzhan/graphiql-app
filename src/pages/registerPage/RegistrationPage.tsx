@@ -1,29 +1,31 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './RegistrationPage.module.scss';
 import SignUp from '../../components/sign-up/SignUp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../configs/FirebaseConfig';
+import { SpinnerLoader } from '../../components/spinner-loader/SpinnerLoader';
 
-const RegistrationPage: FC = () => {
+const RegistrationPage = () => {
   const navigate = useNavigate();
 
   const [user, isLoading] = useAuthState(auth);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
     if (user) {
       navigate('/main');
     }
-  }, [user, isLoading, navigate]);
+  }, [navigate, user]);
+
+  if (isLoading) return <SpinnerLoader />;
 
   return (
-    <div className="wrapper">
-      <SignUp />
-    </div>
+    !user && (
+      <div className="wrapper">
+        <SignUp />
+      </div>
+    )
   );
 };
 

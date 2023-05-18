@@ -1,26 +1,62 @@
-.auth-form-btn {
+.form-container {
+  margin: 30px 0;
+  background: $color-secondary;
+  border-radius: 15px;
+  width: 300px;
+  padding: 30px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
-  min-width: 131px;
-  margin-top: 10px;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-title {
   text-align: center;
-  border-radius: 5px;
-  padding: 12px auto;
-  border: 0;
-  height: 2rem;
-  transition: all 0.3s;
-  color: rgb(255, 255, 255);
-  background-color: #00a82d;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-button {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+  color: $color-main;
+  background-color: $color-primary;
   cursor: pointer;
+  user-select: none;
+  transition: text-shadow 0.3s, background-color 0.3s;
 
   &:hover:not([disabled]) {
-    background-color: #008f26;
+    text-shadow: 0 0 1px $color-main;
+    background-color: rgba($color-primary, 0.8);
   }
 
   &:disabled {
-    background-color: #9c9e9c;
+    background-color: rgba($color-primary, 0.3);
+  }
+
+  &:active {
+    outline: 2px solid $color-main;
+  }
+}
+
+.redirect-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  a {
+    font-weight: bold;
+    color: $color-main;
+    transition: text-shadow 0.3s;
+
+    &:hover {
+      text-shadow: 0 0 1px $color-main;
+    }
   }
 }

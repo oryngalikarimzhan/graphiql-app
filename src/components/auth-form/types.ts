@@ -1,6 +1,11 @@
-export interface IAuthProps {
+export interface IAuthFormProps {
   handleClick: (user: IAuthFormInputs) => void;
-  buttonName: string;
+  contentContext: {
+    title: string;
+    question: string;
+    redirectLink: string;
+    redirectLinkTitle: string;
+  };
   errorMessage?: string;
   isLoading?: boolean;
 }
