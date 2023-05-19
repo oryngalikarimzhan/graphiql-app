@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import 'normalize.css';
 
 import Header from './components/header/Header';
@@ -11,6 +11,7 @@ import MainPage from './pages/mainPage/MainPage';
 import RegistrationPage from './pages/registerPage/RegistrationPage';
 
 const App = () => {
+  const { pathname } = useLocation();
   return (
     <>
       <Header />
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      {pathname !== '/main' && <Footer />}
     </>
   );
 };

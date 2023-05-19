@@ -1,5 +1,5 @@
 import { useEffect, useState, FC } from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 import styles from './Header.module.scss';
 import { LanguageSelector } from '../language-selector/LanguageSelector';
@@ -7,23 +7,26 @@ import Navbar from '../navbar/Navbar';
 import AuthButton from '../auth-button/AuthButton';
 
 const Header: FC = () => {
-  const [sticky, setSticky] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      window.pageYOffset > 60 ? setSticky(true) : setSticky(false);
+      window.pageYOffset > 0 ? setIsSticky(true) : setIsSticky(false);
     };
     window.addEventListener('scroll', handleScroll);
-    return window.removeEventListener('scroll', handleScroll);
+    return document.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <header className={classNames(styles.header, { [styles.sticky]: sticky })}>
-      <div className={styles.container}>
+    <header className={classnames(styles.header, { [styles.sticky]: isSticky })}>
+      <div className={classnames('wrapper', styles.container)}>
         <Navbar />
-        <div className={styles.btns}>
-          <LanguageSelector />
-          <AuthButton className={styles.auth} />
+
+        <div className={styles.headerButtons}>
+          <LanguageSelector
+            className={classnames(styles.language, { [styles.inverted]: isSticky })}
+          />
+          <AuthButton className={classnames(styles.auth, { [styles.inverted]: isSticky })} />
         </div>
       </div>
     </header>

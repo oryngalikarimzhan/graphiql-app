@@ -1,42 +1,152 @@
 .footer {
-  background-color: $color-footer-background;
+  margin-top: auto;
+  background-color: $color-secondary;
   height: $footer-height;
-}
+  padding: 30px 0;
+  width: 100%;
 
-.logoRss {
-  height: 50px;
-}
-
-.container {
-  margin: 0 auto;
-  padding: 0 30px;
-  max-width: $content-width;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.text {
-  color: #fff;
-  font-size: 20px;
-}
-
-.github {
-  height: 50px;
-}
-
-.ghContainer {
-  display: flex;
-  gap: 7px;
-}
-
-@media (max-width: $custom-mobile-big-width) {
-  .logoRss {
-    height: 35px;
+  @include mobile {
+    height: auto;
   }
 
-  .github {
-    height: 35px;
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 0 30px;
+
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+}
+
+.info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mobile {
+    order: 1;
+  }
+
+  .title {
+    background: linear-gradient(
+      90deg,
+      $color-additional-3,
+      $color-additional-2,
+      $color-main,
+      $color-additional-1,
+      $color-additional-4
+    );
+    -webkit-background-clip: text;
+    background-size: 500% auto;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    color: $color-main;
+    font-size: 25px;
+    letter-spacing: 3px;
+    animation: shine 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .copyright {
+    color: $color-main;
+  }
+}
+
+.course-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .rss-logo {
+    height: 40px;
+    transition: filter 0.3s ease-out;
+
+    &:hover {
+      filter: drop-shadow(0 0 2px $color-main);
+    }
+  }
+}
+
+.authors {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+
+  @include mobile {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .github-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: $color-main;
+    gap: 5px;
+    text-decoration: none;
+
+    span {
+      user-select: none;
+      border: 1px solid $color-main;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: $color-primary;
+      transform-origin: right;
+      scale: 0 1;
+      transition: scale 0.3s linear;
+
+      @include tablet {
+        scale: 1;
+      }
+      @media (hover: none) {
+        scale: 1;
+      }
+    }
+
+    .github-logo {
+      fill: $color-main;
+      transition: fill 0.3s linear, transform 0.3s linear;
+    }
+
+    &:hover {
+      span {
+        scale: 1;
+      }
+
+      .github-logo {
+        transform: rotate(-360deg);
+        fill: #fff;
+        filter: drop-shadow(0 0 2px $color-main);
+      }
+    }
+  }
+
+  .github-logo {
+    fill: $color-main;
+    transition: fill 0.3s linear, transform 0.7s linear;
+
+    &:hover {
+      transform: rotate(360deg);
+      fill: #fff;
+      filter: drop-shadow(0 0 2px $color-main);
+    }
   }
 }

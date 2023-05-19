@@ -4,29 +4,38 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
-import styles from './AuthButton.module.scss';
-import { auth } from '../../config/FirebaseConfig';
+import { auth } from '../../configs/FirebaseConfig';
 import { IAuthButtonProps } from './types';
-import classNames from 'classnames';
+import { RectangularButton } from '../buttons/rectangular-button/RectangularButton';
+import { SpinnerLoader } from '../spinner-loader/SpinnerLoader';
 
 const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
   const { t } = useTranslation();
   const [user, isLoading] = useAuthState(auth);
 
   if (isLoading) {
-    return null;
+    return (
+      <RectangularButton className={className}>
+        <SpinnerLoader />
+      </RectangularButton>
+    );
   }
 
   return (
     <>
       {user ? (
-        <button className={classNames(className)} onClick={() => signOut(auth)}>
+        <RectangularButton className={className} onClick={() => signOut(auth)}>
           {t('sign-out')}
-        </button>
+        </RectangularButton>
       ) : (
-        <Link to="/login" className={styles.loginLink}>
-          <button className={classNames(className)}>{t('sign-in')}</button>
-        </Link>
+        <>
+          <Link to="/login">
+            <RectangularButton className={className}>{t('sign-in')}</RectangularButton>
+          </Link>
+          <Link to="/registration">
+            <RectangularButton className={className}>{t('sign-up')}</RectangularButton>
+          </Link>
+        </>
       )}
     </>
   );

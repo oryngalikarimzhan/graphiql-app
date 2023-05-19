@@ -7,7 +7,6 @@ const Avatar: FC<IAvatarProps> = ({ image }) => {
   return (
     <div className={styles.avatarContainer}>
       <img className={styles.avatarImage} src={image} alt="user image" />
-      <div className={styles.avatarShadow}></div>
     </div>
   );
 };

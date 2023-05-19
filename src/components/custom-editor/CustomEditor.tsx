@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import HashLoader from 'react-spinners/HashLoader';
 import { Editor } from '@monaco-editor/react';
 import classnames from 'classnames';
 
@@ -7,6 +6,7 @@ import styles from './CustomEditor.module.scss';
 import { customTheme, customOptions } from './editorConfigs';
 import { CopyButton } from '../buttons/copy-button/CopyButton';
 import { ICustomEditorProps } from './types';
+import { SpinnerLoader } from '../spinner-loader/SpinnerLoader';
 
 export const CustomEditor: FC<ICustomEditorProps> = ({
   language,
@@ -27,7 +27,7 @@ export const CustomEditor: FC<ICustomEditorProps> = ({
           }}
           onChange={setValue}
           options={{ ...customOptions, ...options }}
-          loading={<HashLoader color="#a836d6" />}
+          loading={<SpinnerLoader />}
         />
       </div>
 
