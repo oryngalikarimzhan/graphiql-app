@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import HashLoader from 'react-spinners/HashLoader';
 
 import styles from '../Playground.module.scss';
 import { useAppSelector } from '../../../store/hooks';

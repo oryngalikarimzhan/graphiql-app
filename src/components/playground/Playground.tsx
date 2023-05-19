@@ -9,6 +9,7 @@ import { useLazyGetDataQuery } from '../../store/api';
 import { useActions, useAppSelector } from '../../store/hooks';
 import { getIntrospectionQuery } from 'graphql';
 import { getErrorData, getErrorStatus } from '../../helper/errorQuery';
+import { getErrorMessage } from '../../helper/errorQuery';
 
 export const Playground: FC = () => {
   const [getData, { isFetching }] = useLazyGetDataQuery();
@@ -18,21 +19,40 @@ export const Playground: FC = () => {
     useAppSelector((state) => state.playground);
   const { setSchemaIsOpen, setResponseEditorValue, setIsSuccess, setStatus } = useActions();
 
-  const graphqlApiHandler = async () => {
-    const data = await getData({
-      query: queryEditorValue,
-      variables: variablesEditorValue ? JSON.parse(variablesEditorValue) : '',
-      headers: headersEditorValue ? JSON.parse(headersEditorValue) : '',
-    });
+  const isValidEditor = (name: string, value: string) => {
+    if (value) {
+      try {
+        JSON.parse(value);
+      } catch (error) {
+        setResponseEditorValue(`Invalid ${name}. \n${getErrorMessage(error)}`);
+        setStatus('');
+        setIsSuccess(false);
+        return false;
+      }
+    }
+    return true;
+  };
 
-    if (data.error) {
-      setIsSuccess(false);
-      setStatus(getErrorStatus(data.error));
-      setResponseEditorValue(JSON.stringify(getErrorData(data.error), null, '\t'));
-    } else {
-      setIsSuccess(true);
-      setStatus('200');
-      setResponseEditorValue(JSON.stringify(data.data, null, '\t'));
+  const graphqlApiHandler = async () => {
+    if (
+      isValidEditor('Variables', variablesEditorValue) &&
+      isValidEditor('Headers', headersEditorValue)
+    ) {
+      const data = await getData({
+        query: queryEditorValue,
+        variables: variablesEditorValue ? JSON.parse(variablesEditorValue) : '',
+        headers: headersEditorValue ? JSON.parse(headersEditorValue) : '',
+      });
+
+      if (data.error) {
+        setIsSuccess(false);
+        setStatus(getErrorStatus(data.error));
+        setResponseEditorValue(JSON.stringify(getErrorData(data.error), null, '\t'));
+      } else {
+        setIsSuccess(true);
+        setStatus('200');
+        setResponseEditorValue(JSON.stringify(data.data, null, '\t'));
+      }
     }
   };
 
