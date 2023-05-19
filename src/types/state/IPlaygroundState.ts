@@ -6,4 +6,6 @@ export interface IPlaygroundState {
   isParamsOpen: boolean;
   responseEditorValue: string;
   paramsEditor: 'variables' | 'headers';
+  status: string;
+  isSuccess: boolean;
 }

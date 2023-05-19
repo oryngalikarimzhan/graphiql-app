@@ -10,6 +10,8 @@ const initialState: IPlaygroundState = {
   isParamsOpen: false,
   responseEditorValue: '',
   paramsEditor: 'variables',
+  status: '',
+  isSuccess: false,
 };
 
 const playgroundSlice = createSlice({
@@ -37,9 +39,14 @@ const playgroundSlice = createSlice({
     setParamsEditor: (state, action) => {
       state.paramsEditor = action.payload;
     },
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    setIsSuccess: (state, action) => {
+      state.isSuccess = action.payload;
+    },
   },
 });
 
 export const playgroundActions = playgroundSlice.actions;
-
 export const playgroundReducer = playgroundSlice.reducer;

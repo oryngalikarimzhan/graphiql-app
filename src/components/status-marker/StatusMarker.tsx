@@ -2,9 +2,12 @@ import { FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './StatusMarker.module.scss';
-import { IStatusMarkerProps } from './types';
+import { useAppSelector } from '../../store/hooks';
 
-export const StatusMarker: FC<IStatusMarkerProps> = ({ isOk, statusCode }) => {
+export const StatusMarker: FC = () => {
+  const isOk = useAppSelector((state) => state.playground.isSuccess);
+  const statusCode = useAppSelector((state) => state.playground.status);
+
   return (
     <div className={styles.statusMarker}>
       <span className={classnames(styles.statusPin, { [styles.errorPin]: !isOk })} />

@@ -11,7 +11,7 @@ export const PlaygroundSideBar: FC = ({ getData }) => {
   const { queryEditorValue, schemaIsOpen, variablesEditorValue } = useAppSelector(
     (state) => state.playground
   );
-  const { setSchemaIsOpen, setResponseEditorValue } = useActions();
+  const { setSchemaIsOpen, setResponseEditorValue, setIsSuccess, setStatus } = useActions();
 
   const graphqlApiHandler = async () => {
     const data = await getData({
@@ -19,8 +19,14 @@ export const PlaygroundSideBar: FC = ({ getData }) => {
       variables: variablesEditorValue ? JSON.parse(variablesEditorValue) : '',
     });
     if (data.error) {
+      setIsSuccess(false);
+      setStatus(data.error.originalStatus || data.error.status);
       setResponseEditorValue(JSON.stringify(data.error.data, null, '\t'));
-    } else setResponseEditorValue(JSON.stringify(data.data, null, '\t'));
+    } else {
+      setIsSuccess(true);
+      setStatus('200');
+      setResponseEditorValue(JSON.stringify(data.data, null, '\t'));
+    }
   };
 
   return (

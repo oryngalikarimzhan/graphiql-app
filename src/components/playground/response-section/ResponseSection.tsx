@@ -10,16 +10,14 @@ import { CustomEditor } from '../../custom-editor/CustomEditor';
 
 export const ResponseSection: FC = () => {
   const { responseEditorValue } = useAppSelector((state) => state.playground);
-
   const { setResponseEditorValue } = useActions();
-
   const { t } = useTranslation();
 
   return (
     <section className={classnames(styles.playgroundSection, styles.responseContainer)}>
       <div className={classnames(styles.apiBox, styles.apiContainer)}>
         <h2 className={styles.apiTitle}>{GRAPHQL_API}</h2>
-        <StatusMarker isOk={false} statusCode={500} />
+        <StatusMarker />
       </div>
 
       <div className={classnames(styles.editorBox, styles.responseBox)}>
