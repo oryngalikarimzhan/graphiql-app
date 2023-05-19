@@ -14,17 +14,16 @@ export const Playground: FC = () => {
   const [getData, { isFetching }] = useLazyGetDataQuery();
   const [getSchema, { data: schema, isFetching: isSchemeFetching }] = useLazyGetDataQuery();
 
-  const { queryEditorValue, schemaIsOpen, variablesEditorValue } = useAppSelector(
-    (state) => state.playground
-  );
+  const { queryEditorValue, schemaIsOpen, variablesEditorValue, headersEditorValue } =
+    useAppSelector((state) => state.playground);
   const { setSchemaIsOpen, setResponseEditorValue, setIsSuccess, setStatus } = useActions();
 
   const graphqlApiHandler = async () => {
     const data = await getData({
       query: queryEditorValue,
       variables: variablesEditorValue ? JSON.parse(variablesEditorValue) : '',
+      headers: headersEditorValue ? JSON.parse(headersEditorValue) : '',
     });
-    console.log(data);
 
     if (data.error) {
       setIsSuccess(false);

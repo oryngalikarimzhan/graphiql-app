@@ -34,6 +34,7 @@ export const ResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
           </div>
         )}
         <CustomEditor
+          className={isFetching ? styles.none : ''}
           options={{ readOnly: true }}
           language="json"
           value={responseEditorValue}

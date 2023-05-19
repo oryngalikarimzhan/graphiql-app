@@ -7,10 +7,11 @@ export const graphqlApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: appConfig.apiUrl }),
   endpoints: (build) => ({
     getData: build.query({
-      query: (body) => ({
+      query: (args) => ({
         url: '',
         method: 'POST',
-        body,
+        body: { query: args.query, variables: args.variables },
+        headers: { ...args.headers },
       }),
     }),
   }),
