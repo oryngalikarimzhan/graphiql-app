@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IPlaygroundState } from '../../types/state/IPlaygroundState';
+import { IPlaygroundState } from './types';
 
 const initialState: IPlaygroundState = {
   queryEditorValue: '',

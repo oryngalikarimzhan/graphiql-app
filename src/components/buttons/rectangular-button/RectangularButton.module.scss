@@ -1,17 +1,17 @@
-.square-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+.rectangular-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  user-select: none;
-  font-size: 16px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background-color: $color-secondary;
   color: $color-main;
+  font-size: 16px;
   border: none;
   outline: none;
-  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
 
   &:hover {
     text-shadow: 0 0 1px $color-main;
@@ -23,6 +23,6 @@
   }
 }
 
-.square-button-active {
+.rectangular-button-active {
   outline: 2px solid $color-main;
 }

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from '../Playground.module.scss';
 import { useActions, useAppSelector } from '../../../store/hooks';
-import { GRAPHQL_API } from '../../../config/constants';
+import { GRAPHQL_API } from '../../../configs/constants';
 import { StatusMarker } from '../../status-marker/StatusMarker';
 import { CustomEditor } from '../../custom-editor/CustomEditor';
 

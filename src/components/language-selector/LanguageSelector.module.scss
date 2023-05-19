@@ -1,3 +1,11 @@
 .language-selector {
   text-transform: uppercase;
+  color: $color-main;
+  border: none;
+  outline: none;
+  transition: background 0.3s;
+
+  &:hover {
+    text-shadow: 0 0 2px $color-main;
+  }
 }

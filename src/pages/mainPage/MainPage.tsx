@@ -1,26 +1,26 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import './MainPage.module.scss';
-import { auth } from '../../config/FirebaseConfig';
+import { auth } from '../../configs/FirebaseConfig';
 import { Playground } from '../../components/playground/Playground';
+import { SpinnerLoader } from '../../components/spinner-loader/SpinnerLoader';
 
-const MainPage: FC = () => {
+const MainPage = () => {
   const navigate = useNavigate();
 
   const [user, isLoading] = useAuthState(auth);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
     if (!user) {
-      return navigate('/login');
+      navigate('/welcome');
     }
-  }, [user, isLoading, navigate]);
+  }, [navigate, user]);
 
-  return <Playground />;
+  if (isLoading) return <SpinnerLoader />;
+
+  return user && <Playground />;
 };
 
 export default MainPage;
