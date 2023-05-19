@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { getIntrospectionQuery } from 'graphql';
 
 import styles from './Playground.module.scss';
 import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
@@ -7,9 +8,7 @@ import { ResponseSection } from './response-section/ResponseSection';
 import { QuerySection } from './query-section/QuerySection';
 import { useLazyGetDataQuery } from '../../store/api';
 import { useActions, useAppSelector } from '../../store/hooks';
-import { getIntrospectionQuery } from 'graphql';
-import { getErrorData, getErrorStatus } from '../../helper/errorQuery';
-import { getErrorMessage } from '../../helper/errorQuery';
+import { getErrorData, getErrorStatus, getErrorMessage } from '../../helpers/errorQuery';
 
 export const Playground: FC = () => {
   const [getData, { isFetching }] = useLazyGetDataQuery();
