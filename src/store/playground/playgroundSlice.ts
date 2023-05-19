@@ -6,7 +6,7 @@ const initialState: IPlaygroundState = {
   queryEditorValue: '',
   variablesEditorValue: '',
   headersEditorValue: '',
-  schemaIsOpen: true,
+  schemaIsOpen: false,
   isParamsOpen: false,
   responseEditorValue: '',
   paramsEditor: 'variables',
@@ -49,4 +49,5 @@ const playgroundSlice = createSlice({
 });
 
 export const playgroundActions = playgroundSlice.actions;
+
 export const playgroundReducer = playgroundSlice.reducer;

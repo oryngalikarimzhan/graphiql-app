@@ -13,6 +13,18 @@ export const isErrorWithMessage = (error: unknown): error is { message: string }
   );
 };
 
+export const isErrorWithData = (error: unknown): error is { data: string } => {
+  return typeof error === 'object' && error != null && 'data' in error;
+};
+
+export const isErrorWithStatus = (error: unknown): error is { status: string } => {
+  return typeof error === 'object' && error != null && 'status' in error;
+};
+
+export const isErrorWithOriginalStatus = (error: unknown): error is { originalStatus: string } => {
+  return typeof error === 'object' && error != null && 'originalStatus' in error;
+};
+
 export const getErrorMessage = (error: unknown): string => {
   if (!error) {
     return '';
@@ -27,6 +39,34 @@ export const getErrorMessage = (error: unknown): string => {
 
   if (isErrorWithMessage(error)) {
     return error.message;
+  }
+
+  return 'unknown error';
+};
+
+export const getErrorData = (error: unknown): string => {
+  if (!error) {
+    return '';
+  }
+
+  if (isErrorWithData(error)) {
+    return error.data;
+  }
+
+  return 'unknown error';
+};
+
+export const getErrorStatus = (error: unknown): string => {
+  if (!error) {
+    return '';
+  }
+
+  if (isErrorWithOriginalStatus(error)) {
+    return error.originalStatus;
+  }
+
+  if (isErrorWithStatus(error)) {
+    return error.status;
   }
 
   return 'unknown error';
