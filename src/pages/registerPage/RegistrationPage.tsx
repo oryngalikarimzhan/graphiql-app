@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './RegistrationPage.module.scss';
@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../configs/FirebaseConfig';
 import { SpinnerLoader } from '../../components/spinner-loader/SpinnerLoader';
 
-const RegistrationPage = () => {
+const RegistrationPage: FC = () => {
   const navigate = useNavigate();
 
   const [user, isLoading] = useAuthState(auth);
@@ -20,13 +20,11 @@ const RegistrationPage = () => {
 
   if (isLoading) return <SpinnerLoader />;
 
-  return (
-    !user && (
-      <div className="wrapper">
-        <SignUp />
-      </div>
-    )
-  );
+  return !user ? (
+    <div className="wrapper">
+      <SignUp />
+    </div>
+  ) : null;
 };
 
 export default RegistrationPage;
