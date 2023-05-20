@@ -13,10 +13,10 @@ const MainPage: FC = () => {
   const [user, isLoading] = useAuthState(auth);
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !isLoading) {
       navigate('/welcome');
     }
-  }, [navigate, user]);
+  }, [isLoading, navigate, user]);
 
   if (isLoading) return <SpinnerLoader />;
 
