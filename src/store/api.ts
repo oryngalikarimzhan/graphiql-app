@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import appConfig from '../config/AppConfig';
+import { GRAPHQL_API } from '../configs/constants';
 
 export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
-  baseQuery: fetchBaseQuery({ baseUrl: appConfig.apiUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: GRAPHQL_API }),
   endpoints: (build) => ({
     getData: build.query({
       query: (args) => ({

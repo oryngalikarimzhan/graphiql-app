@@ -2,7 +2,7 @@ import { IntrospectionQuery } from 'graphql';
 
 export interface SchemaSectionProps {
   schema: Data;
-  isFetching: boolean;
+  isLoading: boolean;
 }
 
 interface Data {

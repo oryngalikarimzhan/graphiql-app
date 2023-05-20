@@ -13,15 +13,15 @@ const isErrorWithMessage = (error: unknown): error is { message: string } => {
   );
 };
 
-export const isErrorWithData = (error: unknown): error is { data: string } => {
+const isErrorWithData = (error: unknown): error is { data: string } => {
   return typeof error === 'object' && error != null && 'data' in error;
 };
 
-export const isErrorWithStatus = (error: unknown): error is { status: string } => {
+const isErrorWithStatus = (error: unknown): error is { status: string } => {
   return typeof error === 'object' && error != null && 'status' in error;
 };
 
-export const isErrorWithOriginalStatus = (error: unknown): error is { originalStatus: string } => {
+const isErrorWithOriginalStatus = (error: unknown): error is { originalStatus: string } => {
   return typeof error === 'object' && error != null && 'originalStatus' in error;
 };
 

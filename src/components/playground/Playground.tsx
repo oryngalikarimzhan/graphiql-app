@@ -12,35 +12,35 @@ import { getErrorData, getErrorStatus, getErrorMessage } from '../../helpers/err
 
 export const Playground: FC = () => {
   const [getData, { isFetching }] = useLazyGetDataQuery();
-  const [getSchema, { data: schema, isFetching: isSchemeFetching }] = useLazyGetDataQuery();
+  const [getSchema, { data: schema, isLoading }] = useLazyGetDataQuery();
 
   const { queryEditorValue, schemaIsOpen, variablesEditorValue, headersEditorValue } =
     useAppSelector((state) => state.playground);
   const { setSchemaIsOpen, setResponseEditorValue, setIsSuccess, setStatus } = useActions();
 
-  const isValidEditor = (name: string, value: string) => {
-    if (value) {
-      try {
-        JSON.parse(value);
-      } catch (error) {
-        setResponseEditorValue(`Invalid ${name}. \n${getErrorMessage(error)}`);
-        setStatus('');
-        setIsSuccess(false);
-        return false;
-      }
+  const validateAndParse = (name: string, value: string) => {
+    if (!value) return value;
+
+    try {
+      const result = JSON.parse(value);
+      if (typeof result !== 'object') throw new Error(`${name} is not JSON object`);
+      return result;
+    } catch (e) {
+      setResponseEditorValue(`Invalid ${name}. \n${getErrorMessage(e)}`);
+      setStatus('');
+      setIsSuccess(false);
     }
-    return true;
   };
 
   const graphqlApiHandler = async () => {
-    if (
-      isValidEditor('Variables', variablesEditorValue) &&
-      isValidEditor('Headers', headersEditorValue)
-    ) {
+    const variables = validateAndParse('Variables', variablesEditorValue);
+    const headers = validateAndParse('Headers', headersEditorValue);
+
+    if (variables !== undefined && headers !== undefined) {
       const data = await getData({
         query: queryEditorValue,
-        variables: variablesEditorValue ? JSON.parse(variablesEditorValue) : '',
-        headers: headersEditorValue ? JSON.parse(headersEditorValue) : '',
+        variables: variables,
+        headers: headers,
       });
 
       if (data.error) {
@@ -68,7 +68,7 @@ export const Playground: FC = () => {
       />
 
       <article className={styles.playgroundContainer}>
-        <SchemaSection schema={schema} isFetching={isSchemeFetching} />
+        <SchemaSection schema={schema} isLoading={isLoading} />
         <QuerySection />
         <ResponseSection isFetching={isFetching} />
       </article>

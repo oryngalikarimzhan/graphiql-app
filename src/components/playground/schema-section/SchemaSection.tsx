@@ -8,7 +8,7 @@ import { Schema } from '../../schema/Schema';
 import { SchemaSectionProps } from './types';
 import { SectionLoading } from '../section-loading/SectionLoading';
 
-export const SchemaSection: FC<SchemaSectionProps> = ({ schema: schema, isFetching }) => {
+export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading }) => {
   const { schemaIsOpen } = useAppSelector((state) => state.playground);
   const { t } = useTranslation();
   return (
@@ -21,7 +21,7 @@ export const SchemaSection: FC<SchemaSectionProps> = ({ schema: schema, isFetchi
         <h3 className={styles.schemaTitle}>{t('schema')}</h3>
       </div>
 
-      {isFetching ? <SectionLoading /> : schema && <Schema schemaData={schema.data} />}
+      {isLoading ? <SectionLoading /> : schema && <Schema schemaData={schema.data} />}
     </div>
   );
 };
