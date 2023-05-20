@@ -5,10 +5,10 @@ import 'normalize.css';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import NotFound from './pages/notFound/NotFound';
-import LoginPage from './pages/loginPage/LoginPage';
-import WelcomePage from './pages/welcomePage/WelcomePage';
-import MainPage from './pages/mainPage/MainPage';
-import RegistrationPage from './pages/registerPage/RegistrationPage';
+import { LoginPageLazy } from './pages/loginPage/LoginPageLazy';
+import { WelcomePageLazy } from './pages/welcomePage/WelcomePageLazy';
+import { MainPageLazy } from './pages/mainPage/MainPageLazy';
+import { RegistrationPageLazy } from './pages/registerPage/RegistrationPageLazy';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -17,10 +17,10 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Navigate to="/welcome" replace />} />
-        <Route index path="/main" element={<MainPage />} />
-        <Route path="/welcome" element={<WelcomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<RegistrationPage />} />
+        <Route index path="/main" element={<MainPageLazy />} />
+        <Route path="/welcome" element={<WelcomePageLazy />} />
+        <Route path="/login" element={<LoginPageLazy />} />
+        <Route path="/registration" element={<RegistrationPageLazy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {pathname !== '/main' && <Footer />}
