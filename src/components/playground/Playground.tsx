@@ -19,7 +19,6 @@ export const Playground: FC = () => {
   const { setSchemaIsOpen, setResponseEditorValue, setIsSuccess, setStatus } = useActions();
 
   useEffect(() => {
-    console.log('!!!');
     if (!schema && schemaIsOpen) {
       getSchema({ query: getIntrospectionQuery() });
     }
