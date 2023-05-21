@@ -22,6 +22,7 @@ const schemaSlice = createSlice({
       state.history.pop();
       state.previousType = state.history[state.history.length - 1] || '';
     },
+    resetSchemaProgress: () => initialState,
   },
 });
 

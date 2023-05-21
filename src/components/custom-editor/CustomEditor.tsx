@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Editor } from '@monaco-editor/react';
+import { FC, useEffect } from 'react';
+import { Editor, useMonaco } from '@monaco-editor/react';
 import classnames from 'classnames';
 
 import styles from './CustomEditor.module.scss';
@@ -15,16 +15,23 @@ export const CustomEditor: FC<ICustomEditorProps> = ({
   className,
   options,
 }) => {
+  const monaco = useMonaco();
+
+  useEffect(() => {
+    monaco?.editor.defineTheme('customTheme', customTheme);
+    monaco?.editor.setTheme('customTheme');
+    if (monaco) {
+      console.log('here is the monaco instance:', monaco);
+    }
+  }, [monaco]);
+
   return (
     <div className={classnames(styles.editorContainer, className)}>
       <div className={styles.editorContent}>
         <Editor
           value={value}
           defaultLanguage={language}
-          onMount={(_, monaco) => {
-            monaco.editor.defineTheme('customTheme', customTheme);
-            monaco.editor.setTheme('customTheme');
-          }}
+          theme={'customTheme'}
           onChange={setValue}
           options={{ ...customOptions, ...options }}
           loading={<SpinnerLoader />}
