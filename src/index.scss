@@ -23,6 +23,10 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @include mobile {
+    padding-top: calc($header-height - 30px);
+  }
 }
 
 .wrapper {

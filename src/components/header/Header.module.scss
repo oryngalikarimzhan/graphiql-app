@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   width: 100%;
   top: 0px;
   background-color: $color-primary;
@@ -16,6 +16,10 @@
 
   .auth {
     background-color: $color-secondary;
+  }
+
+  @include mobile {
+    padding: 0;
   }
 }
 
@@ -34,6 +38,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 30px;
+
+  @include mobile {
+    height: calc($header-height - 30px);
+  }
 }
 
 .header-buttons {
