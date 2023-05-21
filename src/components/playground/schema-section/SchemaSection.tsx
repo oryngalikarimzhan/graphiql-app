@@ -21,7 +21,13 @@ export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading }) => 
         <h3 className={styles.schemaTitle}>{t('schema')}</h3>
       </div>
 
-      {isLoading ? <SectionLoading /> : schema && <Schema schemaData={schema.data} />}
+      {isLoading ? (
+        <SectionLoading />
+      ) : schema ? (
+        <Schema schemaData={schema.data} />
+      ) : (
+        <div className={styles.schemaError}>{t('schema-error')}</div>
+      )}
     </div>
   );
 };

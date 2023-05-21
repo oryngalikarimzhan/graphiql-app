@@ -142,3 +142,20 @@
   justify-content: center;
   align-items: center;
 }
+
+.schemaError {
+  position: relative;
+  padding: 0 10px;
+  color: $color-main;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 10px 0;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}

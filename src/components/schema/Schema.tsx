@@ -16,8 +16,6 @@ export const Schema: FC<ISchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
   const { currentType } = useAppSelector((state) => state.schema);
 
-  if (!schema) return <div className={styles.schema}>Do not have schema</div>;
-
   const type = schema.getType(currentType);
 
   if (!type) {

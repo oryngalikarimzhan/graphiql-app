@@ -9,14 +9,14 @@ import { ReactComponent as FilledDocsIcon } from '../../../assets/icons/filled-d
 import { PlaygroundSideBarProps } from './types';
 
 export const PlaygroundSideBar: FC<PlaygroundSideBarProps> = ({
-  graphqlSchemeHandler,
+  graphqlSchemaHandler,
   graphqlApiHandler,
 }) => {
   const { schemaIsOpen } = useAppSelector((state) => state.playground);
 
   return (
     <aside className={styles.sideBar}>
-      <SquareButton isActive={schemaIsOpen} onClick={graphqlSchemeHandler}>
+      <SquareButton isActive={schemaIsOpen} onClick={graphqlSchemaHandler}>
         {schemaIsOpen ? (
           <FilledDocsIcon height={22} width={18} />
         ) : (

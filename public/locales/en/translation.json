@@ -56,5 +56,6 @@
   },
   "developers": "Developers.",
   "explore": "Start exploring",
-  "user": "User"
+  "user": "User",
+  "schema-error": "Failed to get schema"
 }

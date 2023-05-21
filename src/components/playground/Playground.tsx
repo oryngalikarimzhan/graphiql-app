@@ -55,7 +55,7 @@ export const Playground: FC = () => {
     }
   };
 
-  const graphqlSchemeHandler = () => {
+  const graphqlSchemaHandler = () => {
     !schemaIsOpen && getSchema({ query: getIntrospectionQuery() });
     setSchemaIsOpen(!schemaIsOpen);
   };
@@ -63,7 +63,7 @@ export const Playground: FC = () => {
   return (
     <div className={styles.playground}>
       <PlaygroundSideBar
-        graphqlSchemeHandler={graphqlSchemeHandler}
+        graphqlSchemaHandler={graphqlSchemaHandler}
         graphqlApiHandler={graphqlApiHandler}
       />
 
