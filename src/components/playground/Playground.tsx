@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { getIntrospectionQuery } from 'graphql';
 
 import styles from './Playground.module.scss';
@@ -17,6 +17,13 @@ export const Playground: FC = () => {
   const { queryEditorValue, schemaIsOpen, variablesEditorValue, headersEditorValue } =
     useAppSelector((state) => state.playground);
   const { setSchemaIsOpen, setResponseEditorValue, setIsSuccess, setStatus } = useActions();
+
+  useEffect(() => {
+    console.log('!!!');
+    if (!schema && schemaIsOpen) {
+      getSchema({ query: getIntrospectionQuery() });
+    }
+  }, [getSchema, schema, schemaIsOpen]);
 
   const validateAndParse = (name: string, value: string) => {
     if (!value) return value;
