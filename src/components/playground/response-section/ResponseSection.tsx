@@ -7,19 +7,19 @@ import { useActions, useAppSelector } from '../../../store/hooks';
 import { GRAPHQL_API } from '../../../configs/constants';
 import { StatusMarker } from '../../status-marker/StatusMarker';
 import { CustomEditor } from '../../custom-editor/CustomEditor';
+import { ResponseSectionProps } from './types';
+import { SectionLoading } from '../section-loading/SectionLoading';
 
-export const ResponseSection: FC = () => {
+export const ResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
   const { responseEditorValue } = useAppSelector((state) => state.playground);
-
   const { setResponseEditorValue } = useActions();
-
   const { t } = useTranslation();
 
   return (
     <section className={classnames(styles.playgroundSection, styles.responseContainer)}>
       <div className={classnames(styles.apiBox, styles.apiContainer)}>
         <h2 className={styles.apiTitle}>{GRAPHQL_API}</h2>
-        <StatusMarker isOk={false} statusCode={500} />
+        <StatusMarker />
       </div>
 
       <div className={classnames(styles.editorBox, styles.responseBox)}>
@@ -28,6 +28,7 @@ export const ResponseSection: FC = () => {
             {t('response')}
           </h3>
         </div>
+        {isFetching && <SectionLoading />}
         <CustomEditor
           options={{ readOnly: true }}
           language="json"

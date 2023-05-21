@@ -1,10 +1,5 @@
 import { FC, useMemo } from 'react';
-import {
-  buildClientSchema,
-  GraphQLObjectType,
-  GraphQLInputObjectType,
-  IntrospectionQuery,
-} from 'graphql';
+import { buildClientSchema, GraphQLObjectType, GraphQLInputObjectType } from 'graphql';
 
 import styles from './Schema.module.scss';
 import { ReactComponent as TypeIcon } from '../../assets/icons/type-icon.svg';
@@ -18,13 +13,8 @@ import { PreviousButton } from './previous-button/PreviousButton';
 import { ISchemaProps } from './types';
 
 export const Schema: FC<ISchemaProps> = ({ schemaData }) => {
-  const schema = useMemo(
-    () => buildClientSchema(schemaData as unknown as IntrospectionQuery),
-    [schemaData]
-  );
+  const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
   const { currentType } = useAppSelector((state) => state.schema);
-
-  if (!schema) return <div className={styles.schema}>Do not have schema</div>;
 
   const type = schema.getType(currentType);
 

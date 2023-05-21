@@ -5,11 +5,10 @@ import { useTranslation } from 'react-i18next';
 import styles from '../Playground.module.scss';
 import { useAppSelector } from '../../../store/hooks';
 import { Schema } from '../../schema/Schema';
-import schemaData from '../schemaData.json';
+import { SchemaSectionProps } from './types';
+import { SectionLoading } from '../section-loading/SectionLoading';
 
-const schemaString = JSON.stringify(schemaData);
-
-export const SchemaSection: FC = () => {
+export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading }) => {
   const { schemaIsOpen } = useAppSelector((state) => state.playground);
   const { t } = useTranslation();
   return (
@@ -22,7 +21,13 @@ export const SchemaSection: FC = () => {
         <h3 className={styles.schemaTitle}>{t('schema')}</h3>
       </div>
 
-      <Schema schemaData={JSON.parse(schemaString).data} />
+      {isLoading ? (
+        <SectionLoading />
+      ) : schema ? (
+        <Schema schemaData={schema.data} />
+      ) : (
+        <div className={styles.schemaError}>{t('schema-error')}</div>
+      )}
     </div>
   );
 };

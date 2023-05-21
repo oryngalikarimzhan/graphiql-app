@@ -6,10 +6,12 @@ const initialState: IPlaygroundState = {
   queryEditorValue: '',
   variablesEditorValue: '',
   headersEditorValue: '',
-  schemaIsOpen: true,
+  schemaIsOpen: false,
   isParamsOpen: false,
   responseEditorValue: '',
   paramsEditor: 'variables',
+  status: '',
+  isSuccess: false,
 };
 
 const playgroundSlice = createSlice({
@@ -36,6 +38,12 @@ const playgroundSlice = createSlice({
     },
     setParamsEditor: (state, action) => {
       state.paramsEditor = action.payload;
+    },
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    setIsSuccess: (state, action) => {
+      state.isSuccess = action.payload;
     },
   },
 });
