@@ -3,12 +3,12 @@ import { getIntrospectionQuery } from 'graphql';
 
 import styles from './Playground.module.scss';
 import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
-import { SchemaSection } from './schema-section/SchemaSection';
 import { ResponseSection } from './response-section/ResponseSection';
 import { QuerySection } from './query-section/QuerySection';
 import { useLazyGetDataQuery } from '../../store/api';
 import { useActions, useAppSelector } from '../../store/hooks';
 import { getErrorData, getErrorStatus, getErrorMessage } from '../../helpers/errorQuery';
+import SchemaSection from './schema-section/SchemaSection';
 
 export const Playground: FC = () => {
   const [getData, { isFetching }] = useLazyGetDataQuery();
