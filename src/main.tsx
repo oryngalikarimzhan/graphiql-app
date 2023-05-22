@@ -12,12 +12,10 @@ import { SpinnerLoader } from './components/spinner-loader/SpinnerLoader';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Suspense fallback={<SpinnerLoader />}>
-    <React.StrictMode>
-      <Provider store={store}>
-        <HashRouter>
-          <App />
-        </HashRouter>
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>
   </Suspense>
 );

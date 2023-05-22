@@ -45,6 +45,7 @@ const playgroundSlice = createSlice({
     setIsSuccess: (state, action) => {
       state.isSuccess = action.payload;
     },
+    resetPlaygroundProgress: () => initialState,
   },
 });
 

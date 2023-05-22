@@ -25,23 +25,29 @@ const AuthWelcomeController: FC<IAuthWelcomeController> = ({ className }) => {
   }
 
   return (
-    <div>
+    <div className={styles.userAuth}>
       {user ? (
         <div className={styles.container}>
           <h3>
             {t('user')} : {user.email}
           </h3>
           <Link to="/main" className={styles.loginLink}>
-            <RectangularButton className={classNames(className)}>{t('explore')}</RectangularButton>
+            <RectangularButton className={classNames(styles.exploreButton, className)}>
+              {t('explore')}
+            </RectangularButton>
           </Link>
         </div>
       ) : (
         <div className={styles.container}>
           <Link to="/login" className={styles.loginLink}>
-            <RectangularButton className={classNames(className)}>{t('sign-in')}</RectangularButton>
+            <RectangularButton className={classNames(styles.exploreButton, className)}>
+              {t('sign-in')}
+            </RectangularButton>
           </Link>
           <Link to="/registration" className={styles.loginLink}>
-            <RectangularButton className={classNames(className)}>{t('sign-up')}</RectangularButton>
+            <RectangularButton className={classNames(styles.exploreButton, className)}>
+              {t('sign-up')}
+            </RectangularButton>
           </Link>
         </div>
       )}

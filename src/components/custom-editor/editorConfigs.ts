@@ -21,6 +21,7 @@ export const customOptions: editor.IStandaloneEditorConstructionOptions = {
     verticalScrollbarSize: 0,
   },
   lineNumbersMinChars: 3,
+  folding: false,
   renderLineHighlight: 'none',
   wordWrap: 'on',
 };

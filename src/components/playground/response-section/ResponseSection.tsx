@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import styles from '../Playground.module.scss';
-import { useActions, useAppSelector } from '../../../store/hooks';
+import { useAppSelector } from '../../../store/hooks';
 import { GRAPHQL_API } from '../../../configs/constants';
 import { StatusMarker } from '../../status-marker/StatusMarker';
 import { CustomEditor } from '../../custom-editor/CustomEditor';
@@ -12,7 +12,6 @@ import { SectionLoading } from '../section-loading/SectionLoading';
 
 export const ResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
   const { responseEditorValue } = useAppSelector((state) => state.playground);
-  const { setResponseEditorValue } = useActions();
   const { t } = useTranslation();
 
   return (
@@ -29,12 +28,7 @@ export const ResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
           </h3>
         </div>
         {isFetching && <SectionLoading />}
-        <CustomEditor
-          options={{ readOnly: true }}
-          language="json"
-          value={responseEditorValue}
-          setValue={(value) => setResponseEditorValue(value || '')}
-        />
+        <CustomEditor options={{ readOnly: true }} language="json" value={responseEditorValue} />
       </div>
     </section>
   );

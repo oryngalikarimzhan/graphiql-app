@@ -18,25 +18,45 @@ const WelcomePage: FC = () => {
   return (
     <section className={classnames('wrapper', styles.welcome)}>
       <div className={styles.heading}>
-        <h2>{t('final-project.name')}</h2>
+        <h2
+          className={classnames(styles.layeredText, styles.headingTitle)}
+          data-text={t('final-project.name')}
+        >
+          {t('final-project.name')}
+        </h2>
 
         <p>{!user && !isLoading && t('final-project.description')}</p>
 
         <AuthWelcomeController />
       </div>
 
-      <div className={styles.infoContent}>
-        <h3 className={styles.textUnderline}>{t('course.name')}</h3>
-        <p>{t('course.description')}</p>
+      <div className={styles.infoContainer}>
+        <h3
+          className={classnames(styles.layeredText, styles.textUnderline)}
+          data-text={t('course.name')}
+        >
+          {t('course.name')}
+        </h3>
+        <p className={styles.infoContent}>{t('course.description')}</p>
       </div>
 
-      <div className={styles.infoContent}>
-        <h3 className={styles.textUnderline}>{t('project.name')}</h3>
-        <p>{t('project.description')}</p>
+      <div className={styles.infoContainer}>
+        <h3
+          className={classnames(styles.layeredText, styles.textUnderline)}
+          data-text={t('project.name')}
+        >
+          {t('project.name')}
+        </h3>
+        <p className={styles.infoContent}>{t('project.description')}</p>
       </div>
 
-      <div className={styles.infoContent}>
-        <h3 className={styles.textUnderline}>{t('developers')}</h3>
+      <div className={styles.infoContainer}>
+        <h3
+          className={classnames(styles.layeredText, styles.textUnderline)}
+          data-text={t('developers')}
+        >
+          {t('developers')}
+        </h3>
         <div className={styles.developersContainer}>
           <DeveloperCard
             image={iharImage}

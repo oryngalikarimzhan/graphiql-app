@@ -7,7 +7,7 @@ import { actions } from './actions';
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
-export const useActions = () => {
+export function useActions() {
   const dispatch = useDispatch();
   return useMemo(() => {
     return bindActionCreators(actions, dispatch);

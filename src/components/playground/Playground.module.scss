@@ -1,11 +1,22 @@
 .playground {
   background-color: $color-primary;
-  height: calc(100vh - $header-height);
+  height: calc(100vh - $header-max-height);
   width: 100%;
   padding: 10px;
   display: flex;
   gap: 10px;
   overflow-x: hidden;
+
+  @include tablet {
+    height: auto;
+    min-height: calc(100vh - $header-height);
+    overflow-y: auto;
+  }
+
+  @include mobile {
+    padding: 5px;
+    gap: 5px;
+  }
 }
 
 .side-bar {
@@ -22,6 +33,10 @@
       background-color: rgba($color-positive, 0.9);
     }
   }
+
+  @include mobile {
+    padding-right: 5px;
+  }
 }
 
 .playground-container {
@@ -33,6 +48,14 @@
   background-color: $color-secondary;
   border-radius: 20px;
   overflow: hidden;
+
+  @include tablet {
+    flex-direction: column;
+  }
+
+  @include mobile {
+    padding: 5px;
+  }
 }
 
 .playground-section {
@@ -41,6 +64,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @include tablet {
+    flex: none;
+    max-height: 100vh;
+    height: 80vh;
+  }
 }
 
 .schema-container {
@@ -69,6 +98,11 @@
   gap: 10px;
   padding: 10px;
   align-items: center;
+
+  @include mobile {
+    padding: 5px;
+    gap: 5px;
+  }
 }
 
 .editor-title,
@@ -86,9 +120,20 @@
   font-weight: normal;
   color: $color-main;
   margin: 0;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 
   &:hover {
     text-shadow: 0 0 1px $color-main;
+  }
+
+  @include mobile {
+    font-size: 16px;
+    padding: 0 5px;
   }
 }
 
@@ -99,7 +144,12 @@
 }
 
 .api-title {
+  display: block;
+  padding: 10px;
   justify-content: flex-start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .query-container {
