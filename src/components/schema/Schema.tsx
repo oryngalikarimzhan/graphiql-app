@@ -12,7 +12,7 @@ import { GraphqlFieldParser } from './graphql-field-parser/GraphqlFieldParser';
 import { PreviousButton } from './previous-button/PreviousButton';
 import { ISchemaProps } from './types';
 
-export const Schema: FC<ISchemaProps> = ({ schemaData }) => {
+const Schema: FC<ISchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
   const { currentType } = useAppSelector((state) => state.schema);
 
@@ -96,3 +96,5 @@ export const Schema: FC<ISchemaProps> = ({ schemaData }) => {
     </div>
   );
 };
+
+export default Schema;
