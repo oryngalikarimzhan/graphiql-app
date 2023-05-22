@@ -13,7 +13,7 @@
 }
 
 .heading-title {
-  font-size: 60px;
+  font-size: 55px;
 
   @include tablet {
     font-size: 40px;
@@ -31,7 +31,6 @@
   background-color: $color-secondary;
   padding: 20px;
   border-radius: 15px;
-  font-size: 18px;
 
   @include tablet {
     margin: 10px 20px;
@@ -42,7 +41,7 @@
 
 .text-underline {
   width: 100%;
-  font-size: 45px;
+  font-size: 40px;
   border-bottom: 1px solid $color-main;
 
   @include tablet {
