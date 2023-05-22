@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 30px 10px;
+
+  @include mobile {
+    padding: 30px 10px;
+  }
 }
 
 .heading {
