@@ -1,6 +1,6 @@
 .playground {
   background-color: $color-primary;
-  height: calc(100vh - $header-height);
+  height: calc(100vh - $header-max-height);
   width: 100%;
   padding: 10px;
   display: flex;
@@ -9,6 +9,7 @@
 
   @include tablet {
     height: auto;
+    min-height: calc(100vh - $header-height);
     overflow-y: auto;
   }
 
@@ -51,6 +52,7 @@
   @include tablet {
     flex-direction: column;
   }
+
   @include mobile {
     padding: 5px;
   }
@@ -62,11 +64,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
   @include tablet {
-    min-height: 70vh;
-  }
-  @include mobile {
-    min-height: 85vh;
+    flex: none;
+    max-height: 100vh;
+    height: 80vh;
   }
 }
 
@@ -142,7 +144,12 @@
 }
 
 .api-title {
+  display: block;
+  padding: 10px;
   justify-content: flex-start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .query-container {

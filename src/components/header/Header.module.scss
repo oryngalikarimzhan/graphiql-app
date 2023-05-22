@@ -3,9 +3,9 @@
   z-index: 3;
   width: 100%;
   top: 0px;
+  max-height: $header-max-height;
   background-color: $color-primary;
   padding: 15px 0;
-  transform: translateY();
   transition: background 0.5s, padding 0.4s;
 
   .language {
@@ -19,7 +19,7 @@
   }
 
   @include mobile {
-    padding: 0;
+    padding: 10px;
   }
 }
 
@@ -33,14 +33,15 @@
 }
 
 .container {
-  height: calc($header-height - 30px);
+  height: calc($header-max-height - 30px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
+  padding: 5px;
 
   @include mobile {
-    height: calc($header-height - 30px);
+    height: calc($header-max-height - 40px);
   }
 }
 
