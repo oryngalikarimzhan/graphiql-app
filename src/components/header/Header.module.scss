@@ -1,12 +1,14 @@
 .header {
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   width: 100%;
   top: 0px;
+  max-height: $header-max-height;
   background-color: $color-primary;
-  padding: 15px 0;
-  transform: translateY();
-  transition: background 0.5s, padding 0.4s;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: calc(100vw - 100%);
+  transition: background 0.5s, padding-top 0.4s, padding-bottom 0.4s;
 
   .language {
     background-color: $color-secondary;
@@ -17,10 +19,21 @@
   .auth {
     background-color: $color-secondary;
   }
+
+  @media (hover: none) {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  @include mobile {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 .sticky {
-  padding: 0;
+  padding-top: 0px;
+  padding-bottom: 0px;
   background-color: $color-secondary;
 
   .inverted {
@@ -29,11 +42,16 @@
 }
 
 .container {
-  height: calc($header-height - 30px);
+  height: calc($header-max-height - 30px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
+  padding: 5px;
+
+  @include mobile {
+    height: calc($header-max-height - 40px);
+  }
 }
 
 .header-buttons {

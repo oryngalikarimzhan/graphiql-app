@@ -28,5 +28,19 @@
       top: 0;
       right: 10px;
     }
+
+    @include mobile {
+      gap: 10px;
+      padding: 35px 5px 5px;
+
+      .language-title {
+        font-size: 12px;
+        right: 5px;
+      }
+    }
+  }
+
+  @include mobile {
+    gap: 5px;
   }
 }

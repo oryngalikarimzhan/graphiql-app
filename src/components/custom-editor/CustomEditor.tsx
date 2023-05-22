@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Editor } from '@monaco-editor/react';
+import { FC, useEffect, useState } from 'react';
+import { Editor, useMonaco } from '@monaco-editor/react';
 import classnames from 'classnames';
 
 import styles from './CustomEditor.module.scss';
@@ -15,18 +15,44 @@ export const CustomEditor: FC<ICustomEditorProps> = ({
   className,
   options,
 }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const monaco = useMonaco();
+
+  useEffect(() => {
+    const query = matchMedia('(max-width: 767px)');
+
+    if (query.matches) setIsMobile(true);
+
+    const changeOption = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsMobile(true);
+      else setIsMobile(false);
+    };
+
+    query.addEventListener('change', changeOption);
+
+    return () => {
+      query.removeEventListener('change', changeOption);
+    };
+  }, []);
+
+  useEffect(() => {
+    monaco?.editor.defineTheme('customTheme', customTheme);
+    monaco?.editor.setTheme('customTheme');
+  }, [monaco]);
+
   return (
     <div className={classnames(styles.editorContainer, className)}>
       <div className={styles.editorContent}>
         <Editor
           value={value}
           defaultLanguage={language}
-          onMount={(_, monaco) => {
-            monaco.editor.defineTheme('customTheme', customTheme);
-            monaco.editor.setTheme('customTheme');
-          }}
+          theme={'customTheme'}
           onChange={setValue}
-          options={{ ...customOptions, ...options }}
+          options={
+            isMobile
+              ? { ...customOptions, lineNumbers: 'off', ...options }
+              : { ...customOptions, lineNumbers: 'on', ...options }
+          }
           loading={<SpinnerLoader />}
         />
       </div>

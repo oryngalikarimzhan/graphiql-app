@@ -8,10 +8,12 @@ import { auth } from '../../configs/FirebaseConfig';
 import { IAuthButtonProps } from './types';
 import { RectangularButton } from '../buttons/rectangular-button/RectangularButton';
 import { SpinnerLoader } from '../spinner-loader/SpinnerLoader';
+import { useActions } from '../../store/hooks';
 
 const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
   const { t } = useTranslation();
   const [user, isLoading] = useAuthState(auth);
+  const { resetPlaygroundProgress, resetSchemaProgress } = useActions();
 
   if (isLoading) {
     return (
@@ -20,11 +22,16 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
       </RectangularButton>
     );
   }
+  const onSignOut = () => {
+    signOut(auth);
+    resetPlaygroundProgress();
+    resetSchemaProgress();
+  };
 
   return (
     <>
       {user ? (
-        <RectangularButton className={className} onClick={() => signOut(auth)}>
+        <RectangularButton className={className} onClick={onSignOut}>
           {t('sign-out')}
         </RectangularButton>
       ) : (

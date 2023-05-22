@@ -1,3 +1,9 @@
+.user-auth {
+  padding: 20px;
+  background-color: $color-secondary;
+  border-radius: 10px;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -8,4 +14,13 @@
 
 .login-link {
   text-decoration: none;
+}
+
+.explore-button {
+  background-color: $color-primary;
+  transition: outline 0.3s;
+
+  &:hover {
+    outline: 1px solid $color-main;
+  }
 }
