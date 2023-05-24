@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import 'normalize.css';
 
 import Header from './components/header/Header';
