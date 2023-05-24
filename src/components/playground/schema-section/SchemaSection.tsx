@@ -19,7 +19,7 @@ export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading, error
     if (error) {
       showBoundary(error);
     }
-  });
+  }, [error, showBoundary]);
 
   return (
     <div
