@@ -8,11 +8,13 @@ import { QuerySection } from './query-section/QuerySection';
 import { useLazyGetDataQuery } from '../../store/api';
 import { useActions, useAppSelector } from '../../store/hooks';
 import { getErrorData, getErrorStatus, getErrorMessage } from '../../helpers/errorQuery';
-import SchemaSection from './schema-section/SchemaSection';
+import { SchemaSection } from './schema-section/SchemaSection';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from '../error-fallback/ErrorFallback';
 
 export const Playground: FC = () => {
   const [getData, { isFetching }] = useLazyGetDataQuery();
-  const [getSchema, { data: schema, isLoading }] = useLazyGetDataQuery();
+  const [getSchema, { data: schema, isLoading, error }] = useLazyGetDataQuery();
 
   const { queryEditorValue, schemaIsOpen, variablesEditorValue, headersEditorValue } =
     useAppSelector((state) => state.playground);
@@ -74,7 +76,9 @@ export const Playground: FC = () => {
       />
 
       <article className={styles.playgroundContainer}>
-        <SchemaSection schema={schema} isLoading={isLoading} />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <SchemaSection schema={schema} isLoading={isLoading} error={error} />
+        </ErrorBoundary>
         <QuerySection />
         <ResponseSection isFetching={isFetching} />
       </article>
