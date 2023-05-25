@@ -1,0 +1,14 @@
+.error-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.error-title {
+  text-transform: uppercase;
+  color: $color-negative;
+  font-size: 30px;
+}

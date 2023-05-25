@@ -2,12 +2,12 @@
   position: fixed;
   z-index: 3;
   width: 100%;
-  top: 0px;
+  top: 0;
+  left: 0;
   max-height: $header-max-height;
   background-color: $color-primary;
   padding-top: 15px;
   padding-bottom: 15px;
-  padding-left: calc(100vw - 100%);
   transition: background 0.5s, padding-top 0.4s, padding-bottom 0.4s;
 
   .language {
@@ -47,7 +47,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  padding: 5px;
 
   @include mobile {
     height: calc($header-max-height - 40px);
