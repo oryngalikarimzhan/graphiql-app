@@ -13,22 +13,18 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/assets/styles/global";`,
+        additionalData: `@import "./src/styles/global";`,
       },
     },
   },
   resolve: {
     alias: {
       assets: '/src/assets/index.ts',
-      'components/layout': '/src/components/layout/index.tsx',
-      'components/shared': '/src/components/shared/index.tsx',
-      'components/ui': '/src/components/ui/index.tsx',
-      features: '/src/features/index.ts',
-      pages: '/src/pages/index.tsx',
+      components: '/src/components/',
+      features: '/src/features/',
+      pages: '/src/pages/',
       store: '/src/store/index.ts',
-      'utils/constants': '/src/utils/constants/index.ts',
-      'utils/helpers': '/src/utils/helpers/index.ts',
-      'utils/types': '/src/utils/types/index.ts',
+      utils: '/src/utils/',
     },
   },
 });

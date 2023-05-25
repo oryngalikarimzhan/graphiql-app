@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { GRAPHQL_API } from '../configs/constants';
+import { GRAPHQL_API } from 'utils/constants/constants';
 
 export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',

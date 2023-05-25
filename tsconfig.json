@@ -20,15 +20,11 @@
     "jsx": "react-jsx",
     "paths": {
       "assets": ["assets/index"],
-      "components/layout": ["components/layout/index"],
-      "components/shared": ["components/shared/index"],
-      "components/ui": ["components/ui/index"],
-      "features": ["features/index"],
-      "pages": ["pages/index"],
+      "components": ["components/*"],
+      "features": ["features/*"],
+      "pages": ["pages/*"],
       "store": ["store/index"],
-      "utils/constants": ["utils/constants/index"],
-      "utils/helpers": ["utils/helpers/index"],
-      "utils/types": ["utils/types/index"]
+      "utils": ["utils/*"],
     }
   },
   "include": [".eslintrc.cjs", "./src/**/*", "vite.config.ts"],

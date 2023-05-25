@@ -4,11 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import './index.scss';
-import './configs/i18n';
-import './configs/FirebaseConfig';
+import './features/localization/i18n';
+import './features/auth/firebaseConfig';
 import { store } from './store/store';
 import App from './App';
-import { SpinnerLoader } from './components/spinner-loader/SpinnerLoader';
+import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
 
 ReactDOM.createRoot(document.getElementById('app')!).render(
   <Suspense fallback={<SpinnerLoader />}>
