@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import './LoginPage.module.scss';
 import Login from '../../components/login/Login';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../configs/FirebaseConfig';
 import { SpinnerLoader } from '../../components/spinner-loader/SpinnerLoader';
 

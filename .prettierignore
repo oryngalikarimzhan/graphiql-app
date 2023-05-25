@@ -1,7 +1,2 @@
-**/.git
-**/.svn
-**/.hg
-**/node_modules
-build
 dist
-coverage
+node_modules/

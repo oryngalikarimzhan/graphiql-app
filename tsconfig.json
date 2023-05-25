@@ -17,15 +17,21 @@
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "assets": ["assets/index"],
+      "components/layout": ["components/layout/index"],
+      "components/shared": ["components/shared/index"],
+      "components/ui": ["components/ui/index"],
+      "features": ["features/index"],
+      "pages": ["pages/index"],
+      "store": ["store/index"],
+      "utils/constants": ["utils/constants/index"],
+      "utils/helpers": ["utils/helpers/index"],
+      "utils/types": ["utils/types/index"]
+    }
   },
-  "include": [
-    ".eslintrc.cjs",
-    "./src/**/*",
-    "styled.d.ts",
-    "vite.config.ts",
-    "tsconfig.build.json"
-  ],
-  "exclude": ["node_modules"],
+  "include": [".eslintrc.cjs", "./src/**/*", "vite.config.ts"],
+  "exclude": ["node_modules", "src/**/*.{spec,test}.{ts,tsx}"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

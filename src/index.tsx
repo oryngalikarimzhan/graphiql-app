@@ -1,21 +1,21 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import './configs/i18n';
-import App from './App';
 import './index.scss';
-import { store } from './store/store';
+import './configs/i18n';
 import './configs/FirebaseConfig';
+import { store } from './store/store';
+import App from './App';
 import { SpinnerLoader } from './components/spinner-loader/SpinnerLoader';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('app')!).render(
   <Suspense fallback={<SpinnerLoader />}>
     <Provider store={store}>
-      <HashRouter>
+      <BrowserRouter>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   </Suspense>
 );

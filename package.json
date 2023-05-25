@@ -1,23 +1,17 @@
 {
-  "homepage": "https://iharant.github.io/graphiql-app",
+  "homepage": "https://github.com/oryngalikarimzhan/graphiql-app",
   "name": "graphiql-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --project tsconfig.build.json && vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
-    "devcheck": "eslint . && prettier --check . && vite",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "check": "prettier --check .",
-    "format": "prettier --write .",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
-    "predeploy": "npm run build",
+    "lint": "npx eslint src --max-warnings=0",
+    "lint:fix": "npx eslint src --fix",
     "deploy": "gh-pages -d dist",
-    "prepare": "husky install .husky"
+    "prepare": "[ -d .husky ] || (husky install && npx husky add .husky/pre-commit \"npx lint-staged\")"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.5.1",
@@ -46,34 +40,30 @@
     "vite-plugin-svgr": "^3.2.0"
   },
   "devDependencies": {
-    "@testing-library/dom": "^9.2.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "@vitejs/plugin-react": "^3.1.0",
-    "@vitest/coverage-c8": "^0.29.3",
     "eslint": "^8.2.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "gh-pages": "^5.0.0",
     "husky": "^8.0.3",
-    "jsdom": "^21.1.1",
-    "msw": "^1.2.1",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.4",
     "sass": "^1.59.3",
     "typescript": "^5.0.3",
-    "vite": "^4.1.0",
-    "vitest": "^0.29.3"
+    "vite": "^4.1.0"
+  },
+  "lint-staged": {
+    "src/**/*.tsx": [
+      "npm run lint:fix",
+      "npm run lint"
+    ]
   }
 }
