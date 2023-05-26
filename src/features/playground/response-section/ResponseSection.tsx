@@ -24,7 +24,7 @@ export const ResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
       <div className={classnames(styles.editorBox, styles.responseBox)}>
         <div className={styles.editorHeading}>
           <h3 className={classnames(styles.editorTitle, styles.editorTitleActive)}>
-            {t('response')}
+            {t('studio.response')}
           </h3>
         </div>
         {isFetching && <SectionLoading />}

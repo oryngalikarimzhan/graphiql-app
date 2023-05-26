@@ -35,7 +35,9 @@ export const QuerySection: FC = () => {
     <section className={classnames(styles.playgroundSection, styles.queryContainer)}>
       <div className={classnames(styles.editorBox, styles.queryBox)}>
         <div className={styles.editorHeading}>
-          <h3 className={classnames(styles.editorTitle, styles.editorTitleActive)}>{t('query')}</h3>
+          <h3 className={classnames(styles.editorTitle, styles.editorTitleActive)}>
+            {t('studio.query')}
+          </h3>
         </div>
         <CustomEditor
           language="graphql"
@@ -52,7 +54,7 @@ export const QuerySection: FC = () => {
               [styles.editorTitleActive]: isActiveParam('variables'),
             })}
           >
-            {t('q-var')}
+            {t('studio.query-var')}
           </h3>
           <h3
             onClick={() => openParams('headers')}
@@ -60,7 +62,7 @@ export const QuerySection: FC = () => {
               [styles.editorTitleActive]: isActiveParam('headers'),
             })}
           >
-            {t('http-head')}
+            {t('studio.http-head')}
           </h3>
           <SquareButton
             className={styles.arrowButton}

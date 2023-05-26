@@ -1,64 +1,61 @@
 {
-  "username": "Username",
-  "email": "Email",
-  "pass": "Password",
-  "confirm-pass": "Confirm Password",
-  "sign-in": "Log in",
-  "sign-up": "Sign up",
-  "sign-out": "Sign out",
-  "sign-up-btn": "Sign-up",
-  "home": "Home",
-  "not-found": "Page Not Found",
-  "redirect": "Go back to main page",
-  "q-var": "Variables",
-  "http-head": "Headers",
-  "schema": "Schema",
-  "response": "Response",
-  "query": "Query",
-  "language": "Language",
-  "ru": "Russian",
-  "en": "English",
-  "error-msg": "Error happened",
-  "welcome-msg": "Welcome page",
-  "do-not-have-acc": "Don't have an account?",
-  "have-acc": "Already have an account?",
-  "form-validation": {
-    "enter-email": "Please enter your email",
-    "enter-password": "Please enter your password",
-    "email-not-valid": "Email is not valid",
-    "8-chars": "At least 8 chars",
-    "password-should-contain-letter-number-special": "Password should contain at least 1 letter, 1 number and 1 special character"
+  "not-found": {
+    "page": "Page Not Found",
+    "redirect": "Go back to main page"
   },
-  "developer-card": {
-    "ihar": {
-      "description": "I am Software Engineer. I like to invent, design, and create useful things or programs. I like computer games and I am crazy about computers and programming."
-    },
-    "oryngali": {
-      "description": "Web Developer. Creative director in this project. Also a Jedi, Avenger, Jinchuuriki, Ascetic, Stoic, Perfectionist ..."
-    },
-    "stepan": {
-      "description": "Web Developer. I aim to develop and design websites that convey professionalism and style."
-    }
-  },
-  "main-page": "Main",
-  "welcome-page": "Welcome",
-  "final-project": {
-    "name": "The Final project",
-    "description": "The main page is only available to registered users."
-  },
-  "course": {
-    "name": "Course: RS School. React.",
-    "description": "RS School is an educational project that runs courses in various areas of web development. One such course is the React course. The course is intended for RS School students who have passed the second stage of RS School and new students with practical experience and knowledge of JavaScript, TypeScript, Git, GitHub, CSS3 / HTML."
-  },
-  "project": {
-    "name": "Project: GraphiQL.",
-    "description": "GraphiQL is an interactive GraphQL development environment in the browser. It allows you to form queries and explore the GraphQL schema. We used public API \"Rick and Morty\""
-  },
-  "developers": "Developers.",
-  "explore": "Start exploring",
-  "user": "User",
-  "schema-error": "Failed to get schema",
+
   "error": "Error!",
   "error-happened": "Something went wrong",
-  "refresh": "Reload Page"
+  "refresh": "Reload Page",
+
+  "landing": {
+    "page": "Home",
+    "start-button": "Get Started",
+    "project": {
+      "name": "Project: GraphiQL.",
+      "description": "GraphiQL is an interactive GraphQL development environment in the browser. It allows you to form queries and explore the GraphQL schema. We used public API \"Rick and Morty\""
+    },
+    "developer-card": {
+      "oryngali": {
+        "description": "Web Developer. Creative director in this project. Also a Jedi, Avenger, Jinchuuriki, Ascetic, Stoic, Perfectionist ..."
+      }
+    }
+  },
+
+  "studio": {
+    "page": "Studio",
+    "query-var": "Variables",
+    "http-head": "Headers",
+    "schema": "Schema",
+    "response": "Response",
+    "query": "Query",
+    "schema-error": "Failed to get schema"
+  },
+
+  "auth": {
+    "login": "Log in",
+    "sign-up": "Sign up",
+    "sign-out": "Sign out",
+    "user": "User",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "confirm-pass": "Confirm Password",
+      "have-account": "Already have an account?",
+      "no-account": "Don't have an account?",
+      "validation": {
+        "empty-email": "Please enter your email",
+        "empty-password": "Please enter your password",
+        "invalid-email": "Email is not valid",
+        "pass-length": "At least 8 chars",
+        "pass-pattern": "Password should contain at least 1 letter, 1 number and 1 special character"
+      }
+    }
+  },
+
+  "localization": {
+    "language": "Language",
+    "ru": "Russian",
+    "en": "English"
+  }
 }

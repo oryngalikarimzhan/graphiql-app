@@ -32,15 +32,15 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
     <>
       {user ? (
         <RectangularButton className={className} onClick={onSignOut}>
-          {t('sign-out')}
+          {t('auth.sign-out')}
         </RectangularButton>
       ) : (
         <>
           <Link to="/login">
-            <RectangularButton className={className}>{t('sign-in')}</RectangularButton>
+            <RectangularButton className={className}>{t('auth.login')}</RectangularButton>
           </Link>
           <Link to="/registration">
-            <RectangularButton className={className}>{t('sign-up')}</RectangularButton>
+            <RectangularButton className={className}>{t('auth.sign-up')}</RectangularButton>
           </Link>
         </>
       )}

@@ -5,7 +5,8 @@
   top: 0;
   left: 0;
   max-height: $header-max-height;
-  background-color: $color-primary;
+  background-color: transparent;
+  border-bottom: 1px solid $color-secondary;
   padding-top: 15px;
   padding-bottom: 15px;
   transition: background 0.5s, padding-top 0.4s, padding-bottom 0.4s;
@@ -34,7 +35,8 @@
 .sticky {
   padding-top: 0px;
   padding-bottom: 0px;
-  background-color: $color-secondary;
+  backdrop-filter: blur(10px);
+  background-color: rgba($color-secondary, 0.8);
 
   .inverted {
     background-color: $color-primary;

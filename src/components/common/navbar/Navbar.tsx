@@ -48,10 +48,10 @@ const Navbar: FC = () => {
         ref={menuRef}
       >
         <NavLink className={defineActive} to={'/welcome'}>
-          {t('welcome-page')}
+          {t('landing.page')}
         </NavLink>
         <NavLink className={defineActive} to={'/main'}>
-          {t('main-page')}
+          {t('studio.page')}
         </NavLink>
       </nav>
     </>

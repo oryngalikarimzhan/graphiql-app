@@ -20,8 +20,8 @@ body {
   min-width: 320px;
   width: 100vw;
   overflow-x: hidden;
-  background-color: $color-primary;
-
+  background: url("./assets//img/graph.svg") repeat, $color-primary;
+  background-size: 50%;
   &::-webkit-scrollbar {
     width: 0;
     height: 0;

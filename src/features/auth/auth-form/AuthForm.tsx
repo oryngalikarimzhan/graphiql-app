@@ -37,44 +37,40 @@ const AuthForm: FC<IAuthFormProps> = ({ handleClick, contentContext, errorMessag
       <h2 className={styles.formTitle}>{title}</h2>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormTextInputField
-          label={t('email')}
+          label={t('auth.form.email')}
           id="email"
           type="email"
           aria-label="email"
           formRegister={register('email', {
             required: {
               value: true,
-              message: t('form-validation.enter-email'),
-            },
-            minLength: {
-              value: 8,
-              message: t('form-validation.8-chars'),
+              message: t('auth.form.validation.empty-email'),
             },
             pattern: {
               value:
                 /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-              message: t('form-validation.email-not-valid'),
+              message: t('auth.form.validation.invalid-email'),
             },
           })}
           error={errors.email}
         />
         <FormTextInputField
-          label={t('pass')}
+          label={t('auth.form.password')}
           id="password"
           type="password"
           aria-label="password"
           formRegister={register('password', {
             required: {
               value: true,
-              message: t('form-validation.enter-password'),
+              message: t('auth.form.validation.empty-password'),
             },
             minLength: {
               value: 8,
-              message: t('form-validation.8-chars'),
+              message: t('auth.form.validation.pass-length'),
             },
             pattern: {
               value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i,
-              message: t('form-validation.password-should-contain-letter-number-special'),
+              message: t('auth.form.validation.pass-pattern'),
             },
           })}
           error={errors.password}
