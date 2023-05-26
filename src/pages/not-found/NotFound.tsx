@@ -10,7 +10,7 @@ const NotFound: FC = () => {
   return (
     <div className="wrapper">
       <h1>{t('not-found.page')}</h1>
-      <Link to="/welcome">{t('not-found.redirect')}</Link>
+      <Link to="/">{t('not-found.redirect')}</Link>
     </div>
   );
 };

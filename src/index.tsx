@@ -8,10 +8,10 @@ import './features/localization/i18n';
 import './features/auth/firebaseConfig';
 import { store } from './store/store';
 import App from './App';
-import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
+import { LoaderSection } from 'components/common/section-loader-wrapper/LoaderSection';
 
 ReactDOM.createRoot(document.getElementById('app')!).render(
-  <Suspense fallback={<SpinnerLoader />}>
+  <Suspense fallback={<LoaderSection className="loader-screen" />}>
     <Provider store={store}>
       <BrowserRouter>
         <App />

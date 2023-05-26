@@ -14,7 +14,7 @@ const Main: FC = () => {
 
   useEffect(() => {
     if (!user && !isLoading) {
-      navigate('/welcome');
+      navigate('/');
     }
   }, [isLoading, navigate, user]);
 

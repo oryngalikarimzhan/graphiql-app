@@ -22,40 +22,66 @@ interface SchemaProps {
 
 const Schema: FC<SchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
-  const currentType = useSchemaStore((state) => state.currentType);
+  const [currentType, previousType] = useSchemaStore((state) => [
+    state.currentType,
+    state.previousType,
+  ]);
 
   const type = schema.getType(currentType);
 
   if (!type) {
-    const queryTypeFields = schema.getQueryType()?.getFields();
+    if (previousType === '') {
+      const queryTypeFields = schema.getQueryType()?.getFields();
+      if (queryTypeFields && currentType in queryTypeFields) {
+        const field = queryTypeFields[currentType];
 
-    if (queryTypeFields && currentType in queryTypeFields) {
-      const field = queryTypeFields[currentType];
+        return (
+          <div className={styles.schema}>
+            <div className={styles.schemaHeading}>
+              <div className={styles.name}>{field.name}</div>
+              <PreviousButton />
+            </div>
 
-      return (
-        <div className={styles.schema}>
-          <div className={styles.schemaHeading}>
-            <div className={styles.name}>{field.name}</div>
-            <PreviousButton />
+            <div>{field.description}</div>
+            <div className={styles.title}>
+              <TypeIcon height={16} width={16} />
+              <span>Type</span>
+            </div>
+            <div className={styles.field}>
+              <GraphqlTypeParser inputType={field.type} />
+            </div>
+            <div className={styles.title}>
+              <ArgumentIcon height={16} width={16} />
+              <span>Arguments</span>
+            </div>
+            <div className={styles.field}>
+              <GraphqlArgumentsParser args={field.args} />
+            </div>
           </div>
+        );
+      }
+    } else {
+      const objectType = schema.getType(previousType);
 
-          <div>{field.description}</div>
-          <div className={styles.title}>
-            <TypeIcon height={16} width={16} />
-            <span>Type</span>
+      if (objectType instanceof GraphQLObjectType) {
+        const field = objectType.getFields()[currentType];
+
+        return (
+          <div className={styles.schema}>
+            <div className={styles.schemaHeading}>
+              <div className={styles.name}>{field.name}</div>
+              <PreviousButton />
+            </div>
+            <div className={styles.title}>
+              <TypeIcon height={16} width={16} />
+              <span>Type</span>
+            </div>
+            <div className={styles.field}>
+              <GraphqlTypeParser inputType={field.type} />
+            </div>
           </div>
-          <div className={styles.field}>
-            <GraphqlTypeParser inputType={field.type} />
-          </div>
-          <div className={styles.title}>
-            <ArgumentIcon height={16} width={16} />
-            <span>Arguments</span>
-          </div>
-          <div className={styles.field}>
-            <GraphqlArgumentsParser args={field.args} />
-          </div>
-        </div>
-      );
+        );
+      }
     }
   }
 

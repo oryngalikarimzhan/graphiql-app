@@ -6,8 +6,8 @@ import styles from '../Playground.module.scss';
 import { GRAPHQL_API } from 'utils/constants/constants';
 import { StatusMarker } from '../status-marker/StatusMarker';
 import { CustomEditor } from 'components/common/custom-editor/CustomEditor';
-import { SectionLoading } from '../section-loading/SectionLoading';
 import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
+import { LoaderSection } from 'components/common/section-loader-wrapper/LoaderSection';
 
 interface ResponseSectionProps {
   isFetching: boolean;
@@ -30,7 +30,7 @@ export const ResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
             {t('studio.response')}
           </h3>
         </div>
-        {isFetching && <SectionLoading />}
+        {isFetching && <LoaderSection />}
         <CustomEditor options={{ readOnly: true }} language="json" value={responseEditorValue} />
       </div>
     </section>

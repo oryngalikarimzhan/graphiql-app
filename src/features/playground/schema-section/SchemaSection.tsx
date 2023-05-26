@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { IntrospectionQuery } from 'graphql';
+import { useErrorBoundary } from 'react-error-boundary';
 
 import styles from '../Playground.module.scss';
-import { SectionLoading } from '../section-loading/SectionLoading';
-import { useErrorBoundary } from 'react-error-boundary';
 import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
+import { LoaderSection } from 'components/common/section-loader-wrapper/LoaderSection';
 
 const SchemaLazy = lazy(() => import('../../schema/Schema'));
 
@@ -41,10 +41,10 @@ export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading, error
         <h3 className={styles.schemaTitle}>{t('studio.schema')}</h3>
       </div>
       {isLoading ? (
-        <SectionLoading />
+        <LoaderSection />
       ) : (
         !!schema && (
-          <Suspense fallback={<SectionLoading />}>
+          <Suspense fallback={<LoaderSection />}>
             <SchemaLazy schemaData={schema.data} />
           </Suspense>
         )

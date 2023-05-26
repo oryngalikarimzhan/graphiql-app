@@ -1,29 +1,40 @@
-import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { FC, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
-import { RegistrationForm } from 'features/auth/registration-form/RegistrationForm';
+import { AuthForm } from 'features/auth/auth-form/AuthForm';
+import { AuthFormInputs } from 'features/auth/auth-form/interface';
+import { getErrorMessage } from 'utils/helpers/errorQuery';
 import { auth } from 'features/auth/firebaseConfig';
-import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
 
 const Registration: FC = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
 
-  const [user, isLoading] = useAuthState(auth);
+  const [createUserWithEmailAndPassword, , isLoading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
-  useEffect(() => {
-    if (user) {
-      navigate('/main');
-    }
-  }, [navigate, user]);
+  const handleSignUp = ({ email, password }: AuthFormInputs) => {
+    createUserWithEmailAndPassword(email, password);
+  };
 
-  if (isLoading) return <SpinnerLoader />;
+  const contentContext = useMemo(
+    () => ({
+      title: t('auth.sign-up'),
+      question: t('auth.form.have-account'),
+      redirectLink: '/login',
+      redirectLinkTitle: t('auth.login'),
+    }),
+    [t]
+  );
 
-  return !user ? (
-    <div className="wrapper">
-      <RegistrationForm />
-    </div>
-  ) : null;
+  return (
+    <AuthForm
+      contentContext={contentContext}
+      handleClick={handleSignUp}
+      isLoading={isLoading}
+      errorMessage={error && getErrorMessage(error)}
+    />
+  );
 };
 
 export default Registration;
