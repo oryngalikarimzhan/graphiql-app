@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import styles from './Header.module.scss';
 import { LanguageSelector } from '../../../features/localization/language-selector/LanguageSelector';
 import Navbar from '../../common/navbar/Navbar';
-import AuthButton from '../../../features/auth/auth-button/AuthButton';
+import { AuthControls } from 'features/auth/auth-controls/AuthControls';
 
 const Header: FC = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -26,7 +26,7 @@ const Header: FC = () => {
           <LanguageSelector
             className={classnames(styles.language, { [styles.inverted]: isSticky })}
           />
-          <AuthButton className={classnames(styles.auth, { [styles.inverted]: isSticky })} />
+          <AuthControls className={classnames(styles.auth, { [styles.inverted]: isSticky })} />
         </div>
       </div>
     </header>

@@ -1,0 +1,10 @@
+.auth-user {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block !important;
+
+  @include mobile {
+    max-width: 120px;
+  }
+}

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { getErrorMessage } from 'utils/helpers/errorQuery';
 import { RectangularButton } from '../buttons/rectangular-button/RectangularButton';
-import Message from '../message/Message';
+import Message from '../../message/Message';
 
 import styles from './ErrorFallback.module.scss';
 

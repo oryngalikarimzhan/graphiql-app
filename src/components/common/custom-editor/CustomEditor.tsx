@@ -1,14 +1,23 @@
 import { FC, useEffect, useState } from 'react';
 import { Editor, useMonaco } from '@monaco-editor/react';
 import classnames from 'classnames';
+import { editor } from 'monaco-editor';
+import { OnChange } from '@monaco-editor/react';
 
 import styles from './CustomEditor.module.scss';
 import { customTheme, customOptions } from './editorConfigs';
 import { CopyButton } from '../buttons/copy-button/CopyButton';
-import { ICustomEditorProps } from './types';
 import { SpinnerLoader } from '../spinner-loader/SpinnerLoader';
 
-export const CustomEditor: FC<ICustomEditorProps> = ({
+interface CustomEditorProps {
+  language: string;
+  value: string;
+  setValue?: OnChange;
+  className?: string;
+  options?: editor.IStandaloneEditorConstructionOptions;
+}
+
+export const CustomEditor: FC<CustomEditorProps> = ({
   language,
   value,
   setValue,

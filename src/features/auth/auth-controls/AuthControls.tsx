@@ -4,13 +4,18 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
+import styles from './AuthControls.module.scss';
 import { auth } from '../firebaseConfig';
-import { IAuthButtonProps } from './types';
-import { RectangularButton } from '../../../components/common/buttons/rectangular-button/RectangularButton';
-import { SpinnerLoader } from '../../../components/common/spinner-loader/SpinnerLoader';
-import { useActions } from '../../../store/hooks';
+import { RectangularButton } from 'components/common/buttons/rectangular-button/RectangularButton';
+import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
+import { useActions } from 'store/hooks';
+import classnames from 'classnames';
 
-const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
+interface AuthControlsProps {
+  className?: string;
+}
+
+export const AuthControls: FC<AuthControlsProps> = ({ className }) => {
   const { t } = useTranslation();
   const [user, isLoading] = useAuthState(auth);
   const { resetPlaygroundProgress, resetSchemaProgress } = useActions();
@@ -22,6 +27,7 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
       </RectangularButton>
     );
   }
+
   const onSignOut = () => {
     signOut(auth);
     resetPlaygroundProgress();
@@ -31,9 +37,17 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
   return (
     <>
       {user ? (
-        <RectangularButton className={className} onClick={onSignOut}>
-          {t('auth.sign-out')}
-        </RectangularButton>
+        <>
+          <RectangularButton
+            className={classnames(styles.authUser, className)}
+            title={user.email || ''}
+          >
+            {user.email}
+          </RectangularButton>
+          <RectangularButton className={className} onClick={onSignOut}>
+            {t('auth.sign-out')}
+          </RectangularButton>
+        </>
       ) : (
         <>
           <Link to="/login">
@@ -47,5 +61,3 @@ const AuthButton: FC<IAuthButtonProps> = ({ className }) => {
     </>
   );
 };
-
-export default AuthButton;

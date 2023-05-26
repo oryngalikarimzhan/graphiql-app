@@ -23,8 +23,8 @@
       "components": ["components/*"],
       "features": ["features/*"],
       "pages": ["pages/*"],
-      "store": ["store/index"],
-      "utils": ["utils/*"],
+      "store": ["store/*"],
+      "utils": ["utils/*"]
     }
   },
   "include": [".eslintrc.cjs", "./src/**/*", "vite.config.ts"],

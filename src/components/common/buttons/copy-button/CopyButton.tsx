@@ -3,9 +3,12 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SquareButton } from '../square-button/SquareButton';
 
 import { ReactComponent as CopyIcon } from '../../../../assets/icons/copy-icon.svg';
-import { ICopyButtonProps } from './types';
 
-export const CopyButton: FC<ICopyButtonProps> = ({ text }) => {
+interface CopyButtonProps {
+  text: string;
+}
+
+export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
   return (
     <CopyToClipboard text={text}>
       <SquareButton>

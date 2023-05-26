@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 import styles from './AuthForm.module.scss';
 import { IAuthFormInputs, IAuthFormProps } from './types';
-import FormTextInputField from '../../../components/common/form-text-input-field/FormTextInputField';
-import Message from '../../../components/common/message/Message';
+import FormTextInputField from '../../../components/form-text-input-field/FormTextInputField';
+import Message from '../../../components/message/Message';
 import { SpinnerLoader } from '../../../components/common/spinner-loader/SpinnerLoader';
 
 const AuthForm: FC<IAuthFormProps> = ({ handleClick, contentContext, errorMessage, isLoading }) => {

@@ -2,9 +2,15 @@ import { ChangeEvent, FC, ReactElement, useState } from 'react';
 import classnames from 'classnames';
 
 import styles from './DropdownSelector.module.scss';
-import { IDropdownSelectorProps } from './types';
 
-const DropdownSelector: FC<IDropdownSelectorProps> = ({
+interface DropdownSelectorProps {
+  options: string[];
+  onChange: (selectedOption: string) => void;
+  defaultOption: string;
+  className?: string;
+}
+
+const DropdownSelector: FC<DropdownSelectorProps> = ({
   options,
   onChange,
   defaultOption,
