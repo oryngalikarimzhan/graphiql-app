@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
 import styles from '../Playground.module.scss';
-import { useAppSelector } from 'store/hooks';
 import { SquareButton } from 'components/common/buttons/square-button/SquareButton';
 import { ReactComponent as DocsIcon } from 'assets/icons/docs-icon.svg';
 import { ReactComponent as ExecutorIcon } from 'assets/icons/executor-icon.svg';
 import { ReactComponent as FilledDocsIcon } from 'assets/icons/filled-docs-icon.svg';
+import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
 
 interface PlaygroundSideBarProps {
   graphqlApiHandler: () => void;
@@ -16,12 +16,12 @@ export const PlaygroundSideBar: FC<PlaygroundSideBarProps> = ({
   graphqlSchemaHandler,
   graphqlApiHandler,
 }) => {
-  const { schemaIsOpen } = useAppSelector((state) => state.playground);
+  const isSchemaOpen = usePlaygroundStore((state) => state.isSchemaOpen);
 
   return (
     <aside className={styles.sideBar}>
-      <SquareButton isActive={schemaIsOpen} onClick={graphqlSchemaHandler}>
-        {schemaIsOpen ? (
+      <SquareButton isActive={isSchemaOpen} onClick={graphqlSchemaHandler}>
+        {isSchemaOpen ? (
           <FilledDocsIcon height={22} width={18} />
         ) : (
           <DocsIcon height={22} width={18} />

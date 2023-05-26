@@ -9,7 +9,8 @@ import styles from './AuthControls.module.scss';
 import { auth } from '../firebaseConfig';
 import { RectangularButton } from 'components/common/buttons/rectangular-button/RectangularButton';
 import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
-import { useActions } from 'store/hooks';
+import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
+import { useSchemaStore } from 'store/schema/useSchemaStore';
 
 interface AuthControlsProps {
   className?: string;
@@ -18,7 +19,8 @@ interface AuthControlsProps {
 export const AuthControls: FC<AuthControlsProps> = ({ className }) => {
   const { t } = useTranslation();
   const [user, isLoading] = useAuthState(auth);
-  const { resetPlaygroundProgress, resetSchemaProgress } = useActions();
+  const resetPlaygroundStates = usePlaygroundStore((state) => state.resetPlaygroundStates);
+  const resetSchemaStates = useSchemaStore((state) => state.resetSchemaStates);
 
   if (isLoading) {
     return (
@@ -30,8 +32,8 @@ export const AuthControls: FC<AuthControlsProps> = ({ className }) => {
 
   const onSignOut = () => {
     signOut(auth);
-    resetPlaygroundProgress();
-    resetSchemaProgress();
+    resetPlaygroundStates();
+    resetSchemaStates();
   };
 
   return (

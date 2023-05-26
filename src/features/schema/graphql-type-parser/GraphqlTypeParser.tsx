@@ -2,16 +2,17 @@ import { FC } from 'react';
 import { GraphQLInputType, GraphQLOutputType } from 'graphql';
 
 import styles from './GraphqlTypeParser.module.scss';
-import { useActions } from 'store/hooks';
 import { GraphqlListSign } from '../graphql-list-sign/GraphqlListSign';
 import { GraphqlNonNullSign } from '../graphql-non-null-sign/GraphqlNonNullSign';
+import { useSchemaStore } from '../../../store/schema/useSchemaStore';
 
 interface GraphqlTypeParserProps {
   inputType: GraphQLInputType | GraphQLOutputType;
 }
 
 export const GraphqlTypeParser: FC<GraphqlTypeParserProps> = ({ inputType }) => {
-  const { setCurrentGraphqlType } = useActions();
+  const setCurrentGraphqlType = useSchemaStore((state) => state.setCurrentGraphqlType);
+
   let type = inputType;
   const layers: string[] = [];
 

@@ -2,16 +2,16 @@ import { FC } from 'react';
 import { GraphQLField, GraphQLInputField } from 'graphql';
 
 import styles from './GraphqlFieldParser.module.scss';
-import { useActions } from 'store/hooks';
 import { GraphqlArgumentsParser } from '../graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlTypeParser } from '../graphql-type-parser/GraphqlTypeParser';
+import { useSchemaStore } from 'store/schema/useSchemaStore';
 
 interface GraphqlFieldParserProps {
   field: GraphQLField<unknown, unknown> | GraphQLInputField;
 }
 
 export const GraphqlFieldParser: FC<GraphqlFieldParserProps> = ({ field }) => {
-  const { setCurrentGraphqlType } = useActions();
+  const setCurrentGraphqlType = useSchemaStore((state) => state.setCurrentGraphqlType);
 
   return (
     <div className={styles.field}>

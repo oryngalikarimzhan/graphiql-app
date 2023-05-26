@@ -6,9 +6,9 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { IntrospectionQuery } from 'graphql';
 
 import styles from '../Playground.module.scss';
-import { useAppSelector } from 'store/hooks';
 import { SectionLoading } from '../section-loading/SectionLoading';
 import { useErrorBoundary } from 'react-error-boundary';
+import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
 
 const SchemaLazy = lazy(() => import('../../schema/Schema'));
 
@@ -21,7 +21,7 @@ interface SchemaSectionProps {
 }
 
 export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading, error }) => {
-  const { schemaIsOpen } = useAppSelector((state) => state.playground);
+  const isSchemaOpen = usePlaygroundStore((state) => state.isSchemaOpen);
   const { t } = useTranslation();
   const { showBoundary } = useErrorBoundary();
 
@@ -34,7 +34,7 @@ export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading, error
   return (
     <div
       className={classnames(styles.playgroundSection, styles.schemaContainer, {
-        [styles.schemaContainerHidden]: !schemaIsOpen,
+        [styles.schemaContainerHidden]: !isSchemaOpen,
       })}
     >
       <div className={styles.schemaHeading}>

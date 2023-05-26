@@ -8,23 +8,39 @@ import { ResponseSection } from './response-section/ResponseSection';
 import { QuerySection } from './query-section/QuerySection';
 import { SchemaSection } from './schema-section/SchemaSection';
 import { useLazyGetDataQuery } from 'store/api';
-import { useActions, useAppSelector } from 'store/hooks';
 import { getErrorData, getErrorStatus, getErrorMessage } from 'utils/helpers/errorQuery';
 import { ErrorFallback } from 'components/common/error-fallback/ErrorFallback';
+import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
 
 export const Playground: FC = () => {
+  const [
+    isSchemaOpen,
+    setIsSchemaOpen,
+    queryEditorValue,
+    variablesEditorValue,
+    headersEditorValue,
+    setResponseEditorValue,
+    setIsSuccess,
+    setStatusCode,
+  ] = usePlaygroundStore((state) => [
+    state.isSchemaOpen,
+    state.setIsSchemaOpen,
+    state.queryEditorValue,
+    state.variablesEditorValue,
+    state.headersEditorValue,
+    state.setResponseEditorValue,
+    state.setIsSuccess,
+    state.setStatusCode,
+  ]);
+
   const [getData, { isFetching }] = useLazyGetDataQuery();
   const [getSchema, { data: schema, isLoading, error }] = useLazyGetDataQuery();
 
-  const { queryEditorValue, schemaIsOpen, variablesEditorValue, headersEditorValue } =
-    useAppSelector((state) => state.playground);
-  const { setSchemaIsOpen, setResponseEditorValue, setIsSuccess, setStatus } = useActions();
-
   useEffect(() => {
-    if (!schema && schemaIsOpen) {
+    if (!schema && isSchemaOpen) {
       getSchema({ query: getIntrospectionQuery() });
     }
-  }, [getSchema, schema, schemaIsOpen]);
+  }, [getSchema, schema, isSchemaOpen]);
 
   const validateAndParse = (name: string, value: string) => {
     if (!value) return value;
@@ -35,7 +51,7 @@ export const Playground: FC = () => {
       return result;
     } catch (e) {
       setResponseEditorValue(`Invalid ${name}. \n${getErrorMessage(e)}`);
-      setStatus('');
+      setStatusCode('');
       setIsSuccess(false);
     }
   };
@@ -53,19 +69,19 @@ export const Playground: FC = () => {
 
       if (data.error) {
         setIsSuccess(false);
-        setStatus(getErrorStatus(data.error));
+        setStatusCode(getErrorStatus(data.error));
         setResponseEditorValue(JSON.stringify(getErrorData(data.error), null, '\t'));
       } else {
         setIsSuccess(true);
-        setStatus('200');
+        setStatusCode('200');
         setResponseEditorValue(JSON.stringify(data.data, null, '\t'));
       }
     }
   };
 
   const graphqlSchemaHandler = () => {
-    !schemaIsOpen && getSchema({ query: getIntrospectionQuery() });
-    setSchemaIsOpen(!schemaIsOpen);
+    !isSchemaOpen && getSchema({ query: getIntrospectionQuery() });
+    setIsSchemaOpen(!isSchemaOpen);
   };
 
   return (
