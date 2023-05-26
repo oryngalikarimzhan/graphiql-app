@@ -1,11 +1,15 @@
 import { FC } from 'react';
 import classnames from 'classnames';
+import { GraphQLArgument } from 'graphql';
 
-import { IGraphqlArgumentsParserProps } from './types';
 import styles from './GraphqlArgumentsParser.module.scss';
 import { GraphqlTypeParser } from '../graphql-type-parser/GraphqlTypeParser';
 
-export const GraphqlArgumentsParser: FC<IGraphqlArgumentsParserProps> = ({ args }) => {
+interface GraphqlArgumentsParserProps {
+  args?: readonly GraphQLArgument[];
+}
+
+export const GraphqlArgumentsParser: FC<GraphqlArgumentsParserProps> = ({ args }) => {
   return (
     <>
       {args?.map((arg, index) => (

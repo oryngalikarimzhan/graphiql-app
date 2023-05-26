@@ -19,7 +19,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      assets: '/src/assets/index.ts',
+      assets: '/src/assets/',
       components: '/src/components/',
       features: '/src/features/',
       pages: '/src/pages/',

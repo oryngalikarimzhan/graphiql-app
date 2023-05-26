@@ -1,10 +1,9 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import './Registration.module.scss';
-import SignUp from 'features/auth/registration-form/SignUp';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../features/auth/firebaseConfig';
+
+import { RegistrationForm } from 'features/auth/registration-form/RegistrationForm';
+import { auth } from 'features/auth/firebaseConfig';
 import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
 
 const Registration: FC = () => {
@@ -22,7 +21,7 @@ const Registration: FC = () => {
 
   return !user ? (
     <div className="wrapper">
-      <SignUp />
+      <RegistrationForm />
     </div>
   ) : null;
 };

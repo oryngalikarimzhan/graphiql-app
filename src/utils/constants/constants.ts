@@ -1,9 +1,7 @@
 import { RegularObject } from 'utils/types/types';
 
-export const githubAuthors: RegularObject = {
-  ihar: 'https://github.com/IharAnt',
-  oryngali: 'https://github.com/oryngalikarimzhan',
-  stepan: 'https://github.com/Stepan9092',
+export const githubAuthor: RegularObject = {
+  oryngalikarimzhan: 'https://github.com/oryngalikarimzhan',
 };
 
 export const GRAPHQL_API = 'https://rickandmortyapi.com/graphql';

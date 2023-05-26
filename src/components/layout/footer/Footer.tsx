@@ -2,11 +2,11 @@ import { FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './Footer.module.scss';
-import rssReactLogoImage from '../../../assets/img/rs-school-react.svg';
-import { ReactComponent as GithubIcon } from '../../../assets/icons/github-icon.svg';
-import { githubAuthors } from 'utils/constants/constants';
+import rssReactLogoImage from 'assets/img/rs-school-react.svg';
+import { ReactComponent as GithubIcon } from 'assets/icons/github-icon.svg';
+import { githubAuthor } from 'utils/constants/constants';
 
-const Footer: FC = () => {
+export const Footer: FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={classnames('wrapper', styles.container)}>
@@ -22,17 +22,17 @@ const Footer: FC = () => {
         </div>
 
         <div className={styles.authors}>
-          {Object.keys(githubAuthors).map((name) => (
+          {Object.entries(githubAuthor).map(([key, value]) => (
             <a
-              key={name}
-              href={`${githubAuthors[name]}`}
+              key={key}
+              href={`${value}`}
               className={styles.githubLink}
-              title={name}
+              title={key}
               target={'_blank'}
               rel="noreferrer"
             >
-              <span>{name}</span>
               <GithubIcon className={styles.githubLogo} height={30} width={30} />
+              <span>{key}</span>
             </a>
           ))}
         </div>
@@ -40,5 +40,3 @@ const Footer: FC = () => {
     </footer>
   );
 };
-
-export default Footer;

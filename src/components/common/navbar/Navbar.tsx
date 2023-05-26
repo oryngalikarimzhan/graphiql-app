@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
-import { ReactComponent as HamburgerIcon } from '../../../assets/icons/hamburger-icon.svg';
-import { ReactComponent as CloseIcon } from '../../../assets/icons/close-icon.svg';
+import { ReactComponent as HamburgerIcon } from 'assets/icons/hamburger-icon.svg';
+import { ReactComponent as CloseIcon } from 'assets/icons/close-icon.svg';
 
 import styles from './Navbar.module.scss';
 
-const Navbar: FC = () => {
+export const Navbar: FC = () => {
   const [isNavBurgerOpen, setIsNavBurgerOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
@@ -57,5 +57,3 @@ const Navbar: FC = () => {
     </>
   );
 };
-
-export default Navbar;

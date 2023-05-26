@@ -4,22 +4,39 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import styles from './AuthForm.module.scss';
-import { IAuthFormInputs, IAuthFormProps } from './types';
-import FormTextInputField from '../../../components/form-text-input-field/FormTextInputField';
-import Message from '../../../components/message/Message';
-import { SpinnerLoader } from '../../../components/common/spinner-loader/SpinnerLoader';
+import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
+import { Message } from 'components/common/message/Message';
+import { FormTextInputField } from './form-text-input-field/FormTextInputField';
+import { AuthFormInputs } from './interface';
 
-const AuthForm: FC<IAuthFormProps> = ({ handleClick, contentContext, errorMessage, isLoading }) => {
+interface AuthFormProps {
+  handleClick: (user: AuthFormInputs) => void;
+  contentContext: {
+    title: string;
+    question: string;
+    redirectLink: string;
+    redirectLinkTitle: string;
+  };
+  errorMessage?: string;
+  isLoading?: boolean;
+}
+
+export const AuthForm: FC<AuthFormProps> = ({
+  handleClick,
+  contentContext,
+  errorMessage,
+  isLoading,
+}) => {
   const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAuthFormInputs>({
+  } = useForm<AuthFormInputs>({
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<IAuthFormInputs> = (data, e) => {
+  const onSubmit: SubmitHandler<AuthFormInputs> = (data, e) => {
     e?.preventDefault();
 
     if (handleClick) {
@@ -87,5 +104,3 @@ const AuthForm: FC<IAuthFormProps> = ({ handleClick, contentContext, errorMessag
     </div>
   );
 };
-
-export default AuthForm;

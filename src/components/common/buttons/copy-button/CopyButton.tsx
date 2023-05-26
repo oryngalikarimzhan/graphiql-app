@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { SquareButton } from '../square-button/SquareButton';
 
-import { ReactComponent as CopyIcon } from '../../../../assets/icons/copy-icon.svg';
+import { SquareButton } from '../square-button/SquareButton';
+import { ReactComponent as CopyIcon } from 'assets/icons/copy-icon.svg';
 
 interface CopyButtonProps {
   text: string;

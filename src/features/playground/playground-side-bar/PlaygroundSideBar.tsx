@@ -1,12 +1,16 @@
 import { FC } from 'react';
 
 import styles from '../Playground.module.scss';
-import { useAppSelector } from '../../../store/hooks';
-import { SquareButton } from '../../../components/common/buttons/square-button/SquareButton';
-import { ReactComponent as DocsIcon } from '../../../assets/icons/docs-icon.svg';
-import { ReactComponent as ExecutorIcon } from '../../../assets/icons/executor-icon.svg';
-import { ReactComponent as FilledDocsIcon } from '../../../assets/icons/filled-docs-icon.svg';
-import { PlaygroundSideBarProps } from './types';
+import { useAppSelector } from 'store/hooks';
+import { SquareButton } from 'components/common/buttons/square-button/SquareButton';
+import { ReactComponent as DocsIcon } from 'assets/icons/docs-icon.svg';
+import { ReactComponent as ExecutorIcon } from 'assets/icons/executor-icon.svg';
+import { ReactComponent as FilledDocsIcon } from 'assets/icons/filled-docs-icon.svg';
+
+interface PlaygroundSideBarProps {
+  graphqlApiHandler: () => void;
+  graphqlSchemaHandler: () => void;
+}
 
 export const PlaygroundSideBar: FC<PlaygroundSideBarProps> = ({
   graphqlSchemaHandler,

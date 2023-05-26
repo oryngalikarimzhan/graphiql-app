@@ -3,12 +3,15 @@ import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import styles from '../Playground.module.scss';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppSelector } from 'store/hooks';
 import { GRAPHQL_API } from 'utils/constants/constants';
 import { StatusMarker } from '../status-marker/StatusMarker';
-import { CustomEditor } from '../../../components/common/custom-editor/CustomEditor';
-import { ResponseSectionProps } from './types';
+import { CustomEditor } from 'components/common/custom-editor/CustomEditor';
 import { SectionLoading } from '../section-loading/SectionLoading';
+
+interface ResponseSectionProps {
+  isFetching: boolean;
+}
 
 export const ResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
   const { responseEditorValue } = useAppSelector((state) => state.playground);

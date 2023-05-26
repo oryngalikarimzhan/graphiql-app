@@ -2,11 +2,11 @@ import { useEffect, useState, FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './Header.module.scss';
-import { LanguageSelector } from '../../../features/localization/language-selector/LanguageSelector';
-import Navbar from '../../common/navbar/Navbar';
+import { LanguageSelector } from 'features/localization/language-selector/LanguageSelector';
 import { AuthControls } from 'features/auth/auth-controls/AuthControls';
+import { Navbar } from 'components/common/navbar/Navbar';
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -32,5 +32,3 @@ const Header: FC = () => {
     </header>
   );
 };
-
-export default Header;

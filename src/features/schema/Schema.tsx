@@ -1,18 +1,26 @@
 import { FC, useMemo } from 'react';
-import { buildClientSchema, GraphQLObjectType, GraphQLInputObjectType } from 'graphql';
+import {
+  buildClientSchema,
+  GraphQLObjectType,
+  GraphQLInputObjectType,
+  IntrospectionQuery,
+} from 'graphql';
 
 import styles from './Schema.module.scss';
-import { ReactComponent as TypeIcon } from '../../assets/icons/type-icon.svg';
-import { ReactComponent as ArgumentIcon } from '../../assets/icons/argument-icon.svg';
-import { ReactComponent as FieldIcon } from '../../assets/icons/field-icon.svg';
-import { useAppSelector } from '../../store/hooks';
+import { ReactComponent as TypeIcon } from 'assets/icons/type-icon.svg';
+import { ReactComponent as ArgumentIcon } from 'assets/icons/argument-icon.svg';
+import { ReactComponent as FieldIcon } from 'assets/icons/field-icon.svg';
+import { useAppSelector } from 'store/hooks';
 import { GraphqlTypeParser } from './graphql-type-parser/GraphqlTypeParser';
 import { GraphqlArgumentsParser } from './graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlFieldParser } from './graphql-field-parser/GraphqlFieldParser';
 import { PreviousButton } from './previous-button/PreviousButton';
-import { ISchemaProps } from './types';
 
-const Schema: FC<ISchemaProps> = ({ schemaData }) => {
+interface SchemaProps {
+  schemaData: IntrospectionQuery;
+}
+
+const Schema: FC<SchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
   const { currentType } = useAppSelector((state) => state.schema);
 

@@ -3,13 +3,16 @@ import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import cookies from 'js-cookie';
 
-import { Languages, LOCALIZATION_COOKIE_KEY } from 'utils/constants/constants';
-import { supportedLngs as languages } from '../i18n';
 import styles from './LanguageSelector.module.scss';
-import { DropdownSelector } from '../../../components/common/dropdown-selector/DropdownSelector';
-import { ILanguageSelectorProps } from './types';
+import { supportedLngs as languages } from '../i18n';
+import { Languages, LOCALIZATION_COOKIE_KEY } from 'utils/constants/constants';
+import { DropdownSelector } from 'components/common/dropdown-selector/DropdownSelector';
 
-const LanguageSelector: FC<ILanguageSelectorProps> = ({ className }): ReactElement => {
+interface LanguageSelectorProps {
+  className?: string;
+}
+
+const LanguageSelector: FC<LanguageSelectorProps> = ({ className }): ReactElement => {
   const currentLanguage = cookies.get(LOCALIZATION_COOKIE_KEY) || Languages.RU;
 
   const { i18n } = useTranslation();

@@ -2,17 +2,17 @@ import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
-import AuthForm from '../auth-form/AuthForm';
-import { IAuthFormInputs } from '../auth-form/types';
+import { AuthForm } from '../auth-form/AuthForm';
+import { AuthFormInputs } from '../auth-form/interface';
 import { getErrorMessage } from 'utils/helpers/errorQuery';
 import { auth } from '../firebaseConfig';
 
-const Login: FC = () => {
+export const LoginForm: FC = () => {
   const { t } = useTranslation();
 
   const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
 
-  const handleLogin = ({ email, password }: IAuthFormInputs) => {
+  const handleLogin = ({ email, password }: AuthFormInputs) => {
     signInWithEmailAndPassword(email, password);
   };
 
@@ -35,5 +35,3 @@ const Login: FC = () => {
     />
   );
 };
-
-export default Login;

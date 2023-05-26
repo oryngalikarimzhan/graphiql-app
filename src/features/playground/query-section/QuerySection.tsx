@@ -3,11 +3,11 @@ import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import styles from '../Playground.module.scss';
-import { useActions, useAppSelector } from '../../../store/hooks';
-import { CustomEditor } from '../../../components/common/custom-editor/CustomEditor';
-import { SquareButton } from '../../../components/common/buttons/square-button/SquareButton';
-import { ReactComponent as ArrowUpIcon } from '../../../assets/icons/arrow-up-icon.svg';
-import { ReactComponent as ArrowDownIcon } from '../../../assets/icons/arrow-down-icon.svg';
+import { useActions, useAppSelector } from 'store/hooks';
+import { CustomEditor } from 'components/common/custom-editor/CustomEditor';
+import { SquareButton } from 'components/common/buttons/square-button/SquareButton';
+import { ReactComponent as ArrowUpIcon } from 'assets/icons/arrow-up-icon.svg';
+import { ReactComponent as ArrowDownIcon } from 'assets/icons/arrow-down-icon.svg';
 
 export const QuerySection: FC = () => {
   const { queryEditorValue, variablesEditorValue, headersEditorValue, paramsEditor, isParamsOpen } =

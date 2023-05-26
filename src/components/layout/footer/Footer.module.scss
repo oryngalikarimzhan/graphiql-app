@@ -1,6 +1,7 @@
 .footer {
   margin-top: auto;
-  background-color: $color-secondary;
+  backdrop-filter: blur(5px);
+  background-color: rgba($color-secondary, 0.4);
   height: $footer-height;
   padding: 30px 0;
   width: 100%;
@@ -24,6 +25,7 @@
 }
 
 .info {
+  flex: 1;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -69,6 +71,7 @@
 }
 
 .course-logos {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -84,9 +87,11 @@
 }
 
 .authors {
+  flex: 1;
   display: flex;
   gap: 10px;
   flex-direction: column;
+  align-self: flex-end;
 
   @include mobile {
     flex-direction: row;
@@ -94,6 +99,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    align-self: center;
   }
 
   .github-link {
@@ -105,6 +111,7 @@
     text-decoration: none;
 
     span {
+      order: -1;
       user-select: none;
       border: 1px solid $color-main;
       padding: 10px;
@@ -117,6 +124,7 @@
       @include tablet {
         scale: 1;
       }
+
       @media (hover: none) {
         scale: 1;
       }
@@ -125,18 +133,16 @@
     .github-logo {
       fill: $color-main;
       transition: fill 0.3s linear, transform 0.3s cubic-bezier(1, -0.27, 0, 0.94);
-    }
 
-    &:hover {
-      span {
-        scale: 1;
-      }
-
-      .github-logo {
+      &:hover {
         transform: rotate(-360deg);
         fill: #fff;
         filter: drop-shadow(0 0 2px $color-main);
       }
+    }
+
+    .github-logo:hover + span {
+      scale: 1;
     }
   }
 

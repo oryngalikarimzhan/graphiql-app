@@ -1,12 +1,16 @@
 import { FC } from 'react';
+import { GraphQLField, GraphQLInputField } from 'graphql';
 
 import styles from './GraphqlFieldParser.module.scss';
-import { useActions } from '../../../store/hooks';
-import { IGraphqlFieldParserProps } from './types';
+import { useActions } from 'store/hooks';
 import { GraphqlArgumentsParser } from '../graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlTypeParser } from '../graphql-type-parser/GraphqlTypeParser';
 
-export const GraphqlFieldParser: FC<IGraphqlFieldParserProps> = ({ field }) => {
+interface GraphqlFieldParserProps {
+  field: GraphQLField<unknown, unknown> | GraphQLInputField;
+}
+
+export const GraphqlFieldParser: FC<GraphqlFieldParserProps> = ({ field }) => {
   const { setCurrentGraphqlType } = useActions();
 
   return (

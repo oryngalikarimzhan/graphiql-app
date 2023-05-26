@@ -2,7 +2,7 @@ import { FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './StatusMarker.module.scss';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppSelector } from 'store/hooks';
 
 export const StatusMarker: FC = () => {
   const isOk = useAppSelector((state) => state.playground.isSuccess);

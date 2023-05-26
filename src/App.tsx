@@ -2,8 +2,8 @@ import { FC, lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import Header from 'components/layout/header/Header';
-import Footer from 'components/layout/footer/Footer';
+import { Header } from 'components/layout/header/Header';
+import { Footer } from 'components/layout/footer/Footer';
 import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
 import { ErrorFallback } from 'components/common/error-fallback/ErrorFallback';
 

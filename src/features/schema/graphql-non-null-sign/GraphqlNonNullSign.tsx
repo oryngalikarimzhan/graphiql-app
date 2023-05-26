@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
-import { IGraphqlNonNullSignProps } from './types';
+interface GraphqlNonNullSignProps {
+  children: ReactNode;
+}
 
-export const GraphqlNonNullSign: FC<IGraphqlNonNullSignProps> = ({ children }) => (
+export const GraphqlNonNullSign: FC<GraphqlNonNullSignProps> = ({ children }) => (
   <>
     {children}
     <span>!</span>

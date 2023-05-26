@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ISchemaInitialState } from './types';
+interface SchemaInitialState {
+  currentType: string;
+  history: string[];
+  previousType: string;
+}
 
-const initialState: ISchemaInitialState = {
+const initialState: SchemaInitialState = {
   currentType: 'Query',
   history: [],
   previousType: '',

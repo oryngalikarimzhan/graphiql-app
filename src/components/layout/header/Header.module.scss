@@ -32,8 +32,8 @@
 .sticky {
   padding-top: 0px;
   padding-bottom: 0px;
-  backdrop-filter: blur(10px);
-  background-color: rgba($color-secondary, 0.8);
+  backdrop-filter: blur(5px);
+  background-color: rgba($color-secondary, 0.4);
 
   .inverted {
     background-color: $color-primary;

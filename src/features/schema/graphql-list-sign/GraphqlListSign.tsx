@@ -1,6 +1,8 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
-import { IGraphqlListSignProps } from './types';
+interface IGraphqlListSignProps {
+  children: ReactNode;
+}
 
 export const GraphqlListSign: FC<IGraphqlListSignProps> = ({ children }) => (
   <>

@@ -1,8 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IPlaygroundState } from './types';
+interface PlaygroundState {
+  queryEditorValue: string;
+  variablesEditorValue: string;
+  headersEditorValue: string;
+  schemaIsOpen: boolean;
+  isParamsOpen: boolean;
+  responseEditorValue: string;
+  paramsEditor: 'variables' | 'headers';
+  status: string;
+  isSuccess: boolean;
+}
 
-const initialState: IPlaygroundState = {
+const initialState: PlaygroundState = {
   queryEditorValue: '',
   variablesEditorValue: '',
   headersEditorValue: '',

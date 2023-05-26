@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
+import classnames from 'classnames';
 
 import styles from './AuthControls.module.scss';
 import { auth } from '../firebaseConfig';
 import { RectangularButton } from 'components/common/buttons/rectangular-button/RectangularButton';
 import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
 import { useActions } from 'store/hooks';
-import classnames from 'classnames';
 
 interface AuthControlsProps {
   className?: string;
