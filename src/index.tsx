@@ -4,11 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import './index.scss';
-import './features/localization/i18n';
-import './features/auth/firebaseConfig';
-import { store } from './store/store';
+import { LoaderSection } from 'components/common/section-loader/LoaderSection';
 import App from './App';
-import { LoaderSection } from 'components/common/section-loader-wrapper/LoaderSection';
+import 'features/localization/i18n';
+import 'features/auth/firebaseConfig';
+import { store } from 'store/store';
 
 ReactDOM.createRoot(document.getElementById('app')!).render(
   <Suspense fallback={<LoaderSection className="loader-screen" />}>

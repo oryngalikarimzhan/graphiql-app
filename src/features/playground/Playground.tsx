@@ -10,7 +10,7 @@ import { SchemaSection } from './schema-section/SchemaSection';
 import { useLazyGetDataQuery } from 'store/api';
 import { getErrorData, getErrorStatus, getErrorMessage } from 'utils/helpers/errorQuery';
 import { ErrorFallback } from 'components/common/error-fallback/ErrorFallback';
-import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
+import { usePlaygroundStore } from 'store/usePlaygroundStore';
 
 export const Playground: FC = () => {
   const [

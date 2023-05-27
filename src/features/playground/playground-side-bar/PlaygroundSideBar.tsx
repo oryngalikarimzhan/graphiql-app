@@ -5,7 +5,7 @@ import { SquareButton } from 'components/common/buttons/square-button/SquareButt
 import { ReactComponent as DocsIcon } from 'assets/icons/docs-icon.svg';
 import { ReactComponent as ExecutorIcon } from 'assets/icons/executor-icon.svg';
 import { ReactComponent as FilledDocsIcon } from 'assets/icons/filled-docs-icon.svg';
-import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
+import { usePlaygroundStore } from 'store/usePlaygroundStore';
 
 interface PlaygroundSideBarProps {
   graphqlApiHandler: () => void;

@@ -7,8 +7,8 @@ import { IntrospectionQuery } from 'graphql';
 import { useErrorBoundary } from 'react-error-boundary';
 
 import styles from '../Playground.module.scss';
-import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
-import { LoaderSection } from 'components/common/section-loader-wrapper/LoaderSection';
+import { usePlaygroundStore } from 'store/usePlaygroundStore';
+import { LoaderSection } from 'components/common/section-loader/LoaderSection';
 
 const SchemaLazy = lazy(() => import('../../schema/Schema'));
 

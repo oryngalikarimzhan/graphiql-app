@@ -14,7 +14,7 @@ import { GraphqlTypeParser } from './graphql-type-parser/GraphqlTypeParser';
 import { GraphqlArgumentsParser } from './graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlFieldParser } from './graphql-field-parser/GraphqlFieldParser';
 import { PreviousButton } from './previous-button/PreviousButton';
-import { useSchemaStore } from 'store/schema/useSchemaStore';
+import { useSchemaStore } from 'store/useSchemaStore';
 
 interface SchemaProps {
   schemaData: IntrospectionQuery;
@@ -22,6 +22,7 @@ interface SchemaProps {
 
 const Schema: FC<SchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
+
   const [currentType, previousType] = useSchemaStore((state) => [
     state.currentType,
     state.previousType,

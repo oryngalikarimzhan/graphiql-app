@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 interface PlaygroundState {
   queryEditorValue: string;
@@ -37,16 +38,25 @@ const initialState: PlaygroundState = {
   isSuccess: false,
 };
 
-export const usePlaygroundStore = create<PlaygroundState & PlaygroundActions>((set) => ({
-  ...initialState,
-  setQueryEditorValue: (value) => set(() => ({ queryEditorValue: value })),
-  setVariablesEditorValue: (value) => set(() => ({ variablesEditorValue: value })),
-  setHeadersEditorValue: (value) => set(() => ({ headersEditorValue: value })),
-  setResponseEditorValue: (value) => set(() => ({ responseEditorValue: value })),
-  changeParamsBoxEditor: (editor) => set(() => ({ paramsBoxEditor: editor })),
-  setIsSchemaOpen: (isOpen) => set(() => ({ isSchemaOpen: isOpen })),
-  setIsParamsOpen: (isOpen) => set(() => ({ isParamsOpen: isOpen })),
-  setStatusCode: (statusCode) => set(() => ({ statusCode: statusCode })),
-  setIsSuccess: (isSuccess) => set(() => ({ isSuccess: isSuccess })),
-  resetPlaygroundStates: () => set(initialState),
-}));
+export const usePlaygroundStore = create(
+  devtools(
+    persist<PlaygroundState & PlaygroundActions>(
+      (set) => ({
+        ...initialState,
+        setQueryEditorValue: (value) => set(() => ({ queryEditorValue: value })),
+        setVariablesEditorValue: (value) => set(() => ({ variablesEditorValue: value })),
+        setHeadersEditorValue: (value) => set(() => ({ headersEditorValue: value })),
+        setResponseEditorValue: (value) => set(() => ({ responseEditorValue: value })),
+        changeParamsBoxEditor: (editor) => set(() => ({ paramsBoxEditor: editor })),
+        setIsSchemaOpen: (isOpen) => set(() => ({ isSchemaOpen: isOpen })),
+        setIsParamsOpen: (isOpen) => set(() => ({ isParamsOpen: isOpen })),
+        setStatusCode: (statusCode) => set(() => ({ statusCode: statusCode })),
+        setIsSuccess: (isSuccess) => set(() => ({ isSuccess: isSuccess })),
+        resetPlaygroundStates: () => set(initialState),
+      }),
+      {
+        name: 'playground-store',
+      }
+    )
+  )
+);

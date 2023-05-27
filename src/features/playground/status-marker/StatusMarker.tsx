@@ -2,7 +2,7 @@ import { FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './StatusMarker.module.scss';
-import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
+import { usePlaygroundStore } from 'store/usePlaygroundStore';
 
 export const StatusMarker: FC = () => {
   const [isSuccess, statusCode] = usePlaygroundStore((state) => [

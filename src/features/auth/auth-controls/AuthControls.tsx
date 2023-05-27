@@ -9,8 +9,8 @@ import styles from './AuthControls.module.scss';
 import { auth } from '../firebaseConfig';
 import { RectangularButton } from 'components/common/buttons/rectangular-button/RectangularButton';
 import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
-import { usePlaygroundStore } from 'store/playground/usePlaygroundStore';
-import { useSchemaStore } from 'store/schema/useSchemaStore';
+import { usePlaygroundStore } from 'store/usePlaygroundStore';
+import { useSchemaStore } from 'store/useSchemaStore';
 
 interface AuthControlsProps {
   className?: string;

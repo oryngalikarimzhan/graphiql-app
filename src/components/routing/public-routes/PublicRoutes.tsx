@@ -5,10 +5,10 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { auth } from 'features/auth/firebaseConfig';
 import { LoaderSection } from 'components/common/section-loader/LoaderSection';
 
-export const PrivateRoutes: FC = () => {
+export const PublicRoutes: FC = () => {
   const [user, isLoading] = useAuthState(auth);
 
   if (isLoading) return <LoaderSection className="loader-screen" />;
 
-  return !isLoading && user ? <Outlet /> : <Navigate to={'/'} />;
+  return !isLoading && user ? <Navigate to={'/main'} /> : <Outlet />;
 };
