@@ -19,26 +19,6 @@
   }
 }
 
-.side-bar {
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-  padding-right: 10px;
-  border-right: 1px solid $color-secondary;
-
-  .executor-button {
-    background-color: $color-positive;
-
-    &:hover {
-      background-color: rgba($color-positive, 0.9);
-    }
-  }
-
-  @include mobile {
-    padding-right: 5px;
-  }
-}
-
 .playground-container {
   flex: 1;
   display: flex;
@@ -72,18 +52,7 @@
   }
 }
 
-.schema-container {
-  background-color: $color-primary;
-  border-radius: 15px;
-  gap: 0;
-}
-
-.schema-container-hidden {
-  display: none;
-}
-
-.editor-box,
-.api-box {
+.editor-box {
   background-color: $color-primary;
   border-radius: 15px;
   overflow: hidden;
@@ -92,8 +61,7 @@
   gap: 10px;
 }
 
-.editor-heading,
-.schema-heading {
+.playground-section-heading {
   display: flex;
   gap: 10px;
   padding: 10px;
@@ -105,9 +73,7 @@
   }
 }
 
-.editor-title,
-.api-title,
-.schema-title {
+.playground-section-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,11 +82,12 @@
   cursor: pointer;
   user-select: none;
   padding: 0 10px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   color: $color-main;
   margin: 0;
   overflow-x: auto;
+  background-color: $color-secondary;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -134,70 +101,5 @@
   @include mobile {
     font-size: 16px;
     padding: 0 5px;
-  }
-}
-
-.editor-title-active,
-.api-title,
-.schema-title {
-  background-color: $color-secondary;
-}
-
-.api-title {
-  display: block;
-  padding: 10px;
-  justify-content: flex-start;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.query-container {
-  .query-box {
-    width: 100%;
-    flex: 1;
-  }
-
-  .params-box {
-    width: 100%;
-    max-height: 35%;
-  }
-
-  .arrow-button {
-    margin-left: auto;
-  }
-
-  .params-hidden {
-    display: none;
-  }
-}
-
-.response-container {
-  .api-container {
-    color: $color-main;
-    padding: 10px;
-    justify-content: space-evenly;
-  }
-
-  .response-box {
-    width: 100%;
-    flex: 1;
-  }
-}
-
-.schemaError {
-  position: relative;
-  padding: 0 10px;
-  color: $color-main;
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin: 10px 0;
-
-  &::-webkit-scrollbar {
-    width: 0;
   }
 }

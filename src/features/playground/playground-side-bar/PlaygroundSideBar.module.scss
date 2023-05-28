@@ -1,0 +1,19 @@
+.side-bar {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  padding-right: 10px;
+  border-right: 1px solid $color-secondary;
+
+  .executor-button {
+    background-color: $color-positive;
+
+    &:hover {
+      background-color: rgba($color-positive, 0.9);
+    }
+  }
+
+  @include mobile {
+    padding-right: 5px;
+  }
+}

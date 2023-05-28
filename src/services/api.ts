@@ -2,6 +2,7 @@ import { getIntrospectionQuery } from 'graphql';
 import { RegularObject } from './../utils/types/types';
 import { GRAPHQL_API } from 'utils/constants/constants';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 type GraphqlResponseData = { body: RegularObject; headers?: RegularObject };
 
@@ -13,7 +14,7 @@ export const fetchData = async ({ headers, body }: GraphqlResponseData) => {
   return data;
 };
 
-export const fetchSchema = async () => {
+const fetchSchema = async () => {
   const { data } = await axios.post(
     GRAPHQL_API,
     { query: getIntrospectionQuery() },
@@ -23,4 +24,12 @@ export const fetchSchema = async () => {
   );
 
   return data;
+};
+
+export const useSchemaQuery = () => {
+  return useQuery({
+    queryKey: ['schema'],
+    queryFn: fetchSchema,
+    suspense: true,
+  });
 };

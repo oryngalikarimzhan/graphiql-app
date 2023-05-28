@@ -1,0 +1,25 @@
+.query-box {
+  width: 100%;
+  flex: 1;
+}
+
+.params-box {
+  width: 100%;
+  max-height: 35%;
+}
+
+.arrow-button {
+  margin-left: auto;
+}
+
+.params-hidden {
+  display: none;
+}
+
+.params-title {
+  background-color: $color-primary;
+}
+
+.params-active-title {
+  background-color: $color-secondary;
+}

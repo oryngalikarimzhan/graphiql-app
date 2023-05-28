@@ -1,0 +1,19 @@
+.api-container {
+  color: $color-main;
+  padding: 10px;
+  justify-content: space-evenly;
+}
+
+.response-box {
+  width: 100%;
+  flex: 1;
+}
+
+.api-title {
+  display: block;
+  padding: 10px;
+  justify-content: flex-start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

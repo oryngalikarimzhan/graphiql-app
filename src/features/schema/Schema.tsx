@@ -4,6 +4,10 @@ import {
   GraphQLObjectType,
   GraphQLInputObjectType,
   IntrospectionQuery,
+  GraphQLScalarType,
+  GraphQLInputFieldMap,
+  GraphQLFieldMap,
+  GraphQLField,
 } from 'graphql';
 
 import styles from './Schema.module.scss';
@@ -36,30 +40,7 @@ const Schema: FC<SchemaProps> = ({ schemaData }) => {
       if (queryTypeFields && currentType in queryTypeFields) {
         const field = queryTypeFields[currentType];
 
-        return (
-          <div className={styles.schema}>
-            <div className={styles.schemaHeading}>
-              <div className={styles.name}>{field.name}</div>
-              <PreviousButton />
-            </div>
-
-            <div>{field.description}</div>
-            <div className={styles.title}>
-              <TypeIcon height={16} width={16} />
-              <span>Type</span>
-            </div>
-            <div className={styles.field}>
-              <GraphqlTypeParser inputType={field.type} />
-            </div>
-            <div className={styles.title}>
-              <ArgumentIcon height={16} width={16} />
-              <span>Arguments</span>
-            </div>
-            <div className={styles.field}>
-              <GraphqlArgumentsParser args={field.args} />
-            </div>
-          </div>
-        );
+        return <QueryTypeFieldsSchema field={field} />;
       }
     } else {
       const objectType = schema.getType(previousType);
@@ -67,21 +48,7 @@ const Schema: FC<SchemaProps> = ({ schemaData }) => {
       if (objectType instanceof GraphQLObjectType) {
         const field = objectType.getFields()[currentType];
 
-        return (
-          <div className={styles.schema}>
-            <div className={styles.schemaHeading}>
-              <div className={styles.name}>{field.name}</div>
-              <PreviousButton />
-            </div>
-            <div className={styles.title}>
-              <TypeIcon height={16} width={16} />
-              <span>Type</span>
-            </div>
-            <div className={styles.field}>
-              <GraphqlTypeParser inputType={field.type} />
-            </div>
-          </div>
-        );
+        return <ObjectTypeFieldSchema field={field} />;
       }
     }
   }
@@ -89,30 +56,13 @@ const Schema: FC<SchemaProps> = ({ schemaData }) => {
   if (type instanceof GraphQLObjectType || type instanceof GraphQLInputObjectType) {
     const fields = type.getFields();
 
-    return (
-      <div className={styles.schema}>
-        {fields && (
-          <>
-            <div className={styles.schemaHeading}>
-              <div className={styles.name}>{type.name}</div>
-              <PreviousButton />
-            </div>
-
-            <div className={styles.title}>
-              <FieldIcon height={16} width={16} />
-              <span>Fields</span>
-            </div>
-            {Object.keys(fields).map((key) => (
-              <div key={key}>
-                <GraphqlFieldParser field={fields![key]} />
-              </div>
-            ))}
-          </>
-        )}
-      </div>
-    );
+    return <ObjectTypeSchema fields={fields} type={type} />;
   }
 
+  return <ScalarTypeSchema type={type as GraphQLScalarType} />;
+};
+
+const ScalarTypeSchema: FC<{ type: GraphQLScalarType }> = ({ type }) => {
   return (
     <div className={styles.schema}>
       <div className={styles.schemaHeading}>
@@ -127,6 +77,83 @@ const Schema: FC<SchemaProps> = ({ schemaData }) => {
             __html: type?.description?.replace(/`([^`]+)`/g, '<code>$1</code>') || '',
           }}
         ></div>
+      </div>
+    </div>
+  );
+};
+
+const ObjectTypeSchema: FC<{
+  type: GraphQLObjectType | GraphQLInputObjectType;
+  fields: GraphQLInputFieldMap | GraphQLFieldMap<unknown, unknown>;
+}> = ({ fields, type }) => {
+  return (
+    <div className={styles.schema}>
+      {fields && (
+        <>
+          <div className={styles.schemaHeading}>
+            <div className={styles.name}>{type.name}</div>
+            <PreviousButton />
+          </div>
+
+          <div className={styles.title}>
+            <FieldIcon height={16} width={16} />
+            <span>Fields</span>
+          </div>
+          {Object.keys(fields).map((key) => (
+            <div key={key}>
+              <GraphqlFieldParser field={fields![key]} />
+            </div>
+          ))}
+        </>
+      )}
+    </div>
+  );
+};
+
+const QueryTypeFieldsSchema: FC<{ field: GraphQLField<unknown, unknown, unknown> }> = ({
+  field,
+}) => {
+  return (
+    <div className={styles.schema}>
+      <div className={styles.schemaHeading}>
+        <div className={styles.name}>{field.name}</div>
+        <PreviousButton />
+      </div>
+
+      <div>{field.description}</div>
+      <div className={styles.title}>
+        <TypeIcon height={16} width={16} />
+        <span>Type</span>
+      </div>
+      <div className={styles.field}>
+        <GraphqlTypeParser inputType={field.type} />
+      </div>
+      <div className={styles.title}>
+        <ArgumentIcon height={16} width={16} />
+        <span>Arguments</span>
+      </div>
+      <div className={styles.field}>
+        <GraphqlArgumentsParser args={field.args} />
+      </div>
+    </div>
+  );
+};
+
+const ObjectTypeFieldSchema: FC<{ field: GraphQLField<unknown, unknown, unknown> }> = ({
+  field,
+}) => {
+  return (
+    <div className={styles.schema}>
+      <div className={styles.schemaHeading}>
+        <div className={styles.name}>{field.name}</div>
+        <PreviousButton />
+      </div>
+      <div className={styles.title}>
+        <TypeIcon height={16} width={16} />
+        <span>Type</span>
+      </div>
+      <div className={styles.field}>
+        <GraphqlTypeParser inputType={field.type} />
       </div>
     </div>
   );

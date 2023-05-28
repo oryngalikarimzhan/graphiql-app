@@ -1,22 +1,20 @@
-import { FC, useEffect } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { FC } from 'react';
 import { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 
-import styles from './Playground.module.scss';
+import './styles.scss';
+import { QueryBoundary } from 'components/common/query-boundary/QueryBoundary';
 import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
-import { ResponseSection } from './response-section/ResponseSection';
-import { QuerySection } from './query-section/QuerySection';
+import { QueryResponseSection } from './query-response-section/QueryResponseSection';
+import { QueryRequestSection } from './query-request-section/QueryRequestSection';
 import { SchemaSection } from './schema-section/SchemaSection';
 import { getErrorData, getErrorMessage } from 'utils/helpers/errorQuery';
-import { ErrorFallback } from 'components/common/error-fallback/ErrorFallback';
+import { fetchData } from 'services/api';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
-import { fetchData, fetchSchema } from 'services/api';
 
 export const Playground: FC = () => {
   const [
     isSchemaOpen,
-    setIsSchemaOpen,
     queryEditorValue,
     variablesEditorValue,
     headersEditorValue,
@@ -25,7 +23,6 @@ export const Playground: FC = () => {
     setStatusCode,
   ] = usePlaygroundStore((state) => [
     state.isSchemaOpen,
-    state.setIsSchemaOpen,
     state.queryEditorValue,
     state.variablesEditorValue,
     state.headersEditorValue,
@@ -79,40 +76,18 @@ export const Playground: FC = () => {
     },
   });
 
-  const {
-    mutate: getSchemaData,
-    data: schema,
-    isLoading,
-    error,
-  } = useMutation({
-    mutationKey: ['schema'],
-    mutationFn: fetchSchema,
-  });
-
-  useEffect(() => {
-    if (!schema && isSchemaOpen) {
-      getSchemaData();
-    }
-  }, [getSchemaData, schema, isSchemaOpen]);
-
-  const onDocsButtonClick = () => {
-    !isSchemaOpen && getSchemaData();
-    setIsSchemaOpen(!isSchemaOpen);
-  };
-
   return (
-    <div className={styles.playground}>
-      <PlaygroundSideBar
-        onDocsButtonClick={onDocsButtonClick}
-        onExecutorButtonClick={getResponseData}
-      />
+    <div className="playground">
+      <PlaygroundSideBar onExecutorButtonClick={getResponseData} />
 
-      <article className={styles.playgroundContainer}>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <SchemaSection schema={schema} isLoading={isLoading} error={error} />
-        </ErrorBoundary>
-        <QuerySection />
-        <ResponseSection isFetching={isFetching} />
+      <article className="playground-container">
+        {isSchemaOpen && (
+          <QueryBoundary>
+            <SchemaSection />
+          </QueryBoundary>
+        )}
+        <QueryRequestSection />
+        <QueryResponseSection isFetching={isFetching} />
       </article>
     </div>
   );
