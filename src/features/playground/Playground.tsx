@@ -8,9 +8,9 @@ import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
 import { QueryResponseSection } from './query-response-section/QueryResponseSection';
 import { QueryRequestSection } from './query-request-section/QueryRequestSection';
 import { SchemaSection } from './schema-section/SchemaSection';
-import { getErrorData, getErrorMessage } from 'utils/helpers/errorQuery';
-import { fetchData } from 'services/api';
+import { fetchQueryResponse } from 'services/api';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
+import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
 
 export const Playground: FC = () => {
   const [
@@ -31,39 +31,15 @@ export const Playground: FC = () => {
     state.setStatusCode,
   ]);
 
-  const validateAndParse = (name: string, value: string) => {
-    if (!value.trim()) return '';
-
-    try {
-      const result = JSON.parse(value);
-      if (typeof result !== 'object') throw new Error(`${name} is not JSON object`);
-      return result;
-    } catch (e) {
-      setResponseEditorValue(`Invalid ${name}. \n${getErrorMessage(e)}`);
-      setStatusCode('');
-      setIsSuccess(false);
-    }
-  };
-
-  const { mutate: getResponseData, isLoading: isFetching } = useMutation({
+  const { mutate: getResponseData, isLoading } = useMutation({
     mutationKey: ['response'],
-    mutationFn: async () => {
-      const variables = validateAndParse('Variables', variablesEditorValue);
-      const headers = validateAndParse('Headers', headersEditorValue);
-
-      if (variables !== undefined && headers !== undefined) {
-        return fetchData({
-          body: {
-            query: queryEditorValue,
-            variables: variables,
-          },
-          headers: headers,
-        });
-      }
-      return null;
-    },
+    mutationFn: fetchQueryResponse,
     onSuccess: (data) => {
-      if (data) {
+      if (isErrorWithMessage(data)) {
+        setResponseEditorValue(data.message);
+        setStatusCode('Bad request');
+        setIsSuccess(false);
+      } else if (data) {
         setIsSuccess(true);
         setStatusCode('200');
         setResponseEditorValue(JSON.stringify(data, null, '\t'));
@@ -71,14 +47,18 @@ export const Playground: FC = () => {
     },
     onError: (error: AxiosError) => {
       setIsSuccess(false);
-      setStatusCode(`${error.response?.status || '500'}`);
-      setResponseEditorValue(JSON.stringify(getErrorData(error.response), null, '\t'));
+      setStatusCode(`${error.response?.status}`);
+      setResponseEditorValue(JSON.stringify(error.response?.data || '', null, '\t'));
     },
   });
 
   return (
     <div className="playground">
-      <PlaygroundSideBar onExecutorButtonClick={getResponseData} />
+      <PlaygroundSideBar
+        onExecutorButtonClick={() =>
+          getResponseData({ queryEditorValue, variablesEditorValue, headersEditorValue })
+        }
+      />
 
       <article className="playground-container">
         {isSchemaOpen && (
@@ -87,7 +67,7 @@ export const Playground: FC = () => {
           </QueryBoundary>
         )}
         <QueryRequestSection />
-        <QueryResponseSection isFetching={isFetching} />
+        <QueryResponseSection isLoading={isLoading} />
       </article>
     </div>
   );

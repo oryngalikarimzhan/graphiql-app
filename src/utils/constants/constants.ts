@@ -4,7 +4,8 @@ export const githubAuthor: RegularObject = {
   oryngalikarimzhan: 'https://github.com/oryngalikarimzhan',
 };
 
-export const GRAPHQL_API = 'https://rickandmortyapi.com/graphql';
+// export const GRAPHQL_API = 'https://rickandmortyapi.com/graphql';
+export const GRAPHQL_API = 'https://countries.trevorblades.com/';
 
 export enum Languages {
   RU = 'ru',

@@ -7,6 +7,10 @@
 .response-box {
   width: 100%;
   flex: 1;
+
+  .editor-hidden {
+    display: none;
+  }
 }
 
 .api-title {
@@ -16,4 +20,5 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  user-select: all;
 }

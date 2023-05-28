@@ -4,7 +4,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 import { AuthForm } from 'features/auth/auth-form/AuthForm';
 import { AuthFormInputs } from 'features/auth/auth-form/interface';
-import { getErrorMessage } from 'utils/helpers/errorQuery';
+import { getErrorMessage } from 'utils/helpers/getErrorMessage';
 import { auth } from 'features/auth/firebaseConfig';
 
 const Login: FC = () => {

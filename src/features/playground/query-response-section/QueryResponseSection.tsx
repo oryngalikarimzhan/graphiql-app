@@ -10,10 +10,10 @@ import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { LoaderSection } from 'components/common/section-loader/LoaderSection';
 
 interface ResponseSectionProps {
-  isFetching: boolean;
+  isLoading: boolean;
 }
 
-export const QueryResponseSection: FC<ResponseSectionProps> = ({ isFetching }) => {
+export const QueryResponseSection: FC<ResponseSectionProps> = ({ isLoading }) => {
   const responseEditorValue = usePlaygroundStore((state) => state.responseEditorValue);
   const { t } = useTranslation();
 
@@ -28,8 +28,13 @@ export const QueryResponseSection: FC<ResponseSectionProps> = ({ isFetching }) =
         <div className="playground-section-heading">
           <h3 className="playground-section-title">{t('studio.response')}</h3>
         </div>
-        {isFetching && <LoaderSection />}
-        <CustomEditor options={{ readOnly: true }} language="json" value={responseEditorValue} />
+        {isLoading && <LoaderSection />}
+        <CustomEditor
+          className={classnames({ [styles.editorHidden]: isLoading })}
+          options={{ readOnly: true }}
+          language="json"
+          value={responseEditorValue}
+        />
       </section>
     </section>
   );

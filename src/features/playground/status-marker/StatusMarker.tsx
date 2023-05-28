@@ -13,7 +13,7 @@ export const StatusMarker: FC = () => {
   return (
     <div className={styles.statusMarker}>
       <span className={classnames(styles.statusPin, { [styles.errorPin]: !isSuccess })} />
-      <span>Status</span>
+      <span>Response status</span>
       <span className={classnames(styles.statusCode, { [styles.errorStatusCode]: !isSuccess })}>
         {statusCode}
       </span>
