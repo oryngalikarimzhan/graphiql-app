@@ -1,16 +1,17 @@
 import { FC, useEffect } from 'react';
-import { getIntrospectionQuery } from 'graphql';
 import { ErrorBoundary } from 'react-error-boundary';
+import { AxiosError } from 'axios';
+import { useMutation } from '@tanstack/react-query';
 
 import styles from './Playground.module.scss';
 import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
 import { ResponseSection } from './response-section/ResponseSection';
 import { QuerySection } from './query-section/QuerySection';
 import { SchemaSection } from './schema-section/SchemaSection';
-import { useLazyGetDataQuery } from 'store/api';
-import { getErrorData, getErrorStatus, getErrorMessage } from 'utils/helpers/errorQuery';
+import { getErrorData, getErrorMessage } from 'utils/helpers/errorQuery';
 import { ErrorFallback } from 'components/common/error-fallback/ErrorFallback';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
+import { fetchData, fetchSchema } from 'services/api';
 
 export const Playground: FC = () => {
   const [
@@ -33,17 +34,8 @@ export const Playground: FC = () => {
     state.setStatusCode,
   ]);
 
-  const [getData, { isFetching }] = useLazyGetDataQuery();
-  const [getSchema, { data: schema, isLoading, error }] = useLazyGetDataQuery();
-
-  useEffect(() => {
-    if (!schema && isSchemaOpen) {
-      getSchema({ query: getIntrospectionQuery() });
-    }
-  }, [getSchema, schema, isSchemaOpen]);
-
   const validateAndParse = (name: string, value: string) => {
-    if (!value) return value;
+    if (!value.trim()) return '';
 
     try {
       const result = JSON.parse(value);
@@ -56,39 +48,63 @@ export const Playground: FC = () => {
     }
   };
 
-  const graphqlApiHandler = async () => {
-    const variables = validateAndParse('Variables', variablesEditorValue);
-    const headers = validateAndParse('Headers', headersEditorValue);
+  const { mutate: getResponseData, isLoading: isFetching } = useMutation({
+    mutationKey: ['response'],
+    mutationFn: async () => {
+      const variables = validateAndParse('Variables', variablesEditorValue);
+      const headers = validateAndParse('Headers', headersEditorValue);
 
-    if (variables !== undefined && headers !== undefined) {
-      const data = await getData({
-        query: queryEditorValue,
-        variables: variables,
-        headers: headers,
-      });
-
-      if (data.error) {
-        setIsSuccess(false);
-        setStatusCode(getErrorStatus(data.error));
-        setResponseEditorValue(JSON.stringify(getErrorData(data.error), null, '\t'));
-      } else {
+      if (variables !== undefined && headers !== undefined) {
+        return fetchData({
+          body: {
+            query: queryEditorValue,
+            variables: variables,
+          },
+          headers: headers,
+        });
+      }
+      return null;
+    },
+    onSuccess: (data) => {
+      if (data) {
         setIsSuccess(true);
         setStatusCode('200');
-        setResponseEditorValue(JSON.stringify(data.data, null, '\t'));
+        setResponseEditorValue(JSON.stringify(data, null, '\t'));
       }
-    }
-  };
+    },
+    onError: (error: AxiosError) => {
+      setIsSuccess(false);
+      setStatusCode(`${error.response?.status || '500'}`);
+      setResponseEditorValue(JSON.stringify(getErrorData(error.response), null, '\t'));
+    },
+  });
 
-  const graphqlSchemaHandler = () => {
-    !isSchemaOpen && getSchema({ query: getIntrospectionQuery() });
+  const {
+    mutate: getSchemaData,
+    data: schema,
+    isLoading,
+    error,
+  } = useMutation({
+    mutationKey: ['schema'],
+    mutationFn: fetchSchema,
+  });
+
+  useEffect(() => {
+    if (!schema && isSchemaOpen) {
+      getSchemaData();
+    }
+  }, [getSchemaData, schema, isSchemaOpen]);
+
+  const onDocsButtonClick = () => {
+    !isSchemaOpen && getSchemaData();
     setIsSchemaOpen(!isSchemaOpen);
   };
 
   return (
     <div className={styles.playground}>
       <PlaygroundSideBar
-        graphqlSchemaHandler={graphqlSchemaHandler}
-        graphqlApiHandler={graphqlApiHandler}
+        onDocsButtonClick={onDocsButtonClick}
+        onExecutorButtonClick={getResponseData}
       />
 
       <article className={styles.playgroundContainer}>

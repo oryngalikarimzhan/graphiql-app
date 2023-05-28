@@ -19,9 +19,9 @@ const initialState: SchemaState = {
   previousType: '',
 };
 
-export const useSchemaStore = create(
+export const useSchemaStore = create<SchemaState & SchemaActions>()(
   devtools(
-    persist<SchemaState & SchemaActions>(
+    persist(
       (set) => ({
         ...initialState,
         setCurrentGraphqlType: (next) =>
@@ -43,6 +43,7 @@ export const useSchemaStore = create(
       }),
       {
         name: 'schema-store',
+        version: 1,
       }
     )
   )

@@ -23,6 +23,7 @@
       "components": ["components/*"],
       "features": ["features/*"],
       "pages": ["pages/*"],
+      "services": ["services/*"],
       "store": ["store/*"],
       "utils": ["utils/*"]
     }

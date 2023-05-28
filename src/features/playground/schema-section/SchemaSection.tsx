@@ -1,8 +1,6 @@
 import { FC, Suspense, lazy, useEffect } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { IntrospectionQuery } from 'graphql';
 import { useErrorBoundary } from 'react-error-boundary';
 
@@ -17,7 +15,7 @@ interface SchemaSectionProps {
     data: IntrospectionQuery;
   };
   isLoading: boolean;
-  error: FetchBaseQueryError | SerializedError | undefined;
+  error: unknown;
 }
 
 export const SchemaSection: FC<SchemaSectionProps> = ({ schema, isLoading, error }) => {

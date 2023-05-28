@@ -38,9 +38,9 @@ const initialState: PlaygroundState = {
   isSuccess: false,
 };
 
-export const usePlaygroundStore = create(
+export const usePlaygroundStore = create<PlaygroundState & PlaygroundActions>()(
   devtools(
-    persist<PlaygroundState & PlaygroundActions>(
+    persist(
       (set) => ({
         ...initialState,
         setQueryEditorValue: (value) => set(() => ({ queryEditorValue: value })),
@@ -56,6 +56,7 @@ export const usePlaygroundStore = create(
       }),
       {
         name: 'playground-store',
+        version: 1,
       }
     )
   )

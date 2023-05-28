@@ -1,1 +1,1 @@
-export type RegularObject = { [key: string]: string | number };
+export type RegularObject = { [key: string]: string | number } | Record<string, string>;

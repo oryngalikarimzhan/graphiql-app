@@ -8,26 +8,26 @@ import { ReactComponent as FilledDocsIcon } from 'assets/icons/filled-docs-icon.
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 
 interface PlaygroundSideBarProps {
-  graphqlApiHandler: () => void;
-  graphqlSchemaHandler: () => void;
+  onExecutorButtonClick: () => void;
+  onDocsButtonClick: () => void;
 }
 
 export const PlaygroundSideBar: FC<PlaygroundSideBarProps> = ({
-  graphqlSchemaHandler,
-  graphqlApiHandler,
+  onExecutorButtonClick,
+  onDocsButtonClick,
 }) => {
   const isSchemaOpen = usePlaygroundStore((state) => state.isSchemaOpen);
 
   return (
     <aside className={styles.sideBar}>
-      <SquareButton isActive={isSchemaOpen} onClick={graphqlSchemaHandler}>
+      <SquareButton isActive={isSchemaOpen} onClick={onDocsButtonClick}>
         {isSchemaOpen ? (
           <FilledDocsIcon height={22} width={18} />
         ) : (
           <DocsIcon height={22} width={18} />
         )}
       </SquareButton>
-      <SquareButton className={styles.executorButton} onClick={graphqlApiHandler}>
+      <SquareButton className={styles.executorButton} onClick={onExecutorButtonClick}>
         <ExecutorIcon />
       </SquareButton>
     </aside>

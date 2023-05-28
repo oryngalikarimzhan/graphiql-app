@@ -23,6 +23,7 @@ export default defineConfig({
       components: '/src/components/',
       features: '/src/features/',
       pages: '/src/pages/',
+      services: '/src/services/',
       store: '/src/store/',
       utils: '/src/utils/',
     },

@@ -1,9 +1,3 @@
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
-
-const isFetchBaseQueryError = (error: unknown): error is FetchBaseQueryError => {
-  return typeof error === 'object' && error != null && 'status' in error;
-};
-
 const isErrorWithMessage = (error: unknown): error is { message: string } => {
   return (
     typeof error === 'object' &&
@@ -28,13 +22,6 @@ const isErrorWithOriginalStatus = (error: unknown): error is { originalStatus: s
 export const getErrorMessage = (error: unknown): string => {
   if (!error) {
     return '';
-  }
-  if (isFetchBaseQueryError(error)) {
-    return 'error' in error
-      ? error.error
-      : isErrorWithMessage(error.data)
-      ? error.data.message
-      : 'unknown error';
   }
 
   if (isErrorWithMessage(error)) {
