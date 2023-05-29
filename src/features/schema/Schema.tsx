@@ -9,6 +9,7 @@ import {
   GraphQLFieldMap,
   GraphQLField,
 } from 'graphql';
+import { shallow } from 'zustand/shallow';
 
 import styles from './Schema.module.scss';
 import { ReactComponent as TypeIcon } from 'assets/icons/type-icon.svg';
@@ -27,10 +28,10 @@ interface SchemaProps {
 const Schema: FC<SchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
 
-  const [currentType, previousType] = useSchemaStore((state) => [
-    state.currentType,
-    state.previousType,
-  ]);
+  const [currentType, previousType] = useSchemaStore(
+    (state) => [state.currentType, state.previousType],
+    shallow
+  );
 
   const type = schema.getType(currentType);
 

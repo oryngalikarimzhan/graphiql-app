@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import classnames from 'classnames';
+import { shallow } from 'zustand/shallow';
 
 import styles from './StatusMarker.module.scss';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 
 export const StatusMarker: FC = () => {
-  const [isSuccess, statusCode] = usePlaygroundStore((state) => [
-    state.isSuccess,
-    state.statusCode,
-  ]);
+  const [isSuccess, statusCode] = usePlaygroundStore(
+    (state) => [state.isSuccess, state.statusCode],
+    shallow
+  );
 
   return (
     <div className={styles.statusMarker}>

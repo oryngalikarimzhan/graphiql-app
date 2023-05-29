@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
+import { shallow } from 'zustand/shallow';
 
 import './styles.scss';
 import { QueryBoundary } from 'components/common/query-boundary/QueryBoundary';
@@ -21,15 +22,18 @@ export const Playground: FC = () => {
     setResponseEditorValue,
     setIsSuccess,
     setStatusCode,
-  ] = usePlaygroundStore((state) => [
-    state.isSchemaOpen,
-    state.queryEditorValue,
-    state.variablesEditorValue,
-    state.headersEditorValue,
-    state.setResponseEditorValue,
-    state.setIsSuccess,
-    state.setStatusCode,
-  ]);
+  ] = usePlaygroundStore(
+    (state) => [
+      state.isSchemaOpen,
+      state.queryEditorValue,
+      state.variablesEditorValue,
+      state.headersEditorValue,
+      state.setResponseEditorValue,
+      state.setIsSuccess,
+      state.setStatusCode,
+    ],
+    shallow
+  );
 
   const { mutate: getResponseData, isLoading } = useMutation({
     mutationKey: ['response'],

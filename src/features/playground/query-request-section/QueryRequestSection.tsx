@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { shallow } from 'zustand/shallow';
 
 import styles from './QueryRequestSection.module.scss';
 import { CustomEditor } from 'components/common/custom-editor/CustomEditor';
@@ -48,8 +49,8 @@ const ParamsSection: FC = () => {
     setVariablesEditorValue,
     headersEditorValue,
     setHeadersEditorValue,
-  ] = usePlaygroundStore((state) => {
-    return [
+  ] = usePlaygroundStore(
+    (state) => [
       state.isParamsBoxOpen,
       state.setIsParamsBoxOpen,
       state.paramsBoxEditor,
@@ -58,8 +59,9 @@ const ParamsSection: FC = () => {
       state.setVariablesEditorValue,
       state.headersEditorValue,
       state.setHeadersEditorValue,
-    ];
-  });
+    ],
+    shallow
+  );
 
   const { t } = useTranslation();
 

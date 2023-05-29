@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { shallow } from 'zustand/shallow';
 
 import styles from './PlaygroundSideBar.module.scss';
 import { SquareButton } from 'components/common/buttons/square-button/SquareButton';
@@ -12,10 +13,10 @@ interface PlaygroundSideBarProps {
 }
 
 export const PlaygroundSideBar: FC<PlaygroundSideBarProps> = ({ onExecutorButtonClick }) => {
-  const [isSchemaOpen, setIsSchemaOpen] = usePlaygroundStore((state) => [
-    state.isSchemaOpen,
-    state.setIsSchemaOpen,
-  ]);
+  const [isSchemaOpen, setIsSchemaOpen] = usePlaygroundStore(
+    (state) => [state.isSchemaOpen, state.setIsSchemaOpen],
+    shallow
+  );
 
   return (
     <aside className={styles.sideBar}>
