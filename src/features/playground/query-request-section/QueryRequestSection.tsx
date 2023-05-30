@@ -74,7 +74,11 @@ const ParamsSection: FC = () => {
     isParamsBoxOpen && paramsBoxEditor === paramName;
 
   return (
-    <section className={classnames('editor-box', styles.paramsBox)}>
+    <section
+      className={classnames('editor-box', styles.paramsBox, {
+        [styles.paramsBoxOpen]: isParamsBoxOpen,
+      })}
+    >
       <div className="playground-section-heading">
         <h3
           onClick={() => showEditor('variables')}
