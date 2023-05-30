@@ -25,6 +25,8 @@ export const customOptions: editor.IStandaloneEditorConstructionOptions = {
   folding: false,
   renderLineHighlight: 'none',
   wordWrap: 'on',
+  // wrappingIndent: 'same',
+  wrappingStrategy: 'advanced',
 };
 
 export const customMobileOptions: editor.IStandaloneEditorConstructionOptions = {

@@ -7,15 +7,21 @@ import { GRAPHQL_API } from 'utils/constants/constants';
 import { validateStringAndParseToObject } from 'utils/helpers/validateStringAndParseToObject';
 import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
 
-type GraphqlResponseData = { body: RegularObject; headers?: RegularObject };
-
-type EditorValues = {
-  queryEditorValue: string;
-  variablesEditorValue: string;
-  headersEditorValue: string;
+type GraphqlRequestParams = {
+  body: {
+    query: string;
+    variables?: RegularObject;
+  };
+  headers?: RegularObject;
 };
 
-const fetchData = async ({ headers, body }: GraphqlResponseData) => {
+type RequestValues = {
+  queryValue: string;
+  variablesValue: string;
+  headersValue: string;
+};
+
+const fetchData = async ({ body, headers }: GraphqlRequestParams) => {
   const { data } = await axios.post(GRAPHQL_API, body, {
     headers: { 'Content-Type': 'application/json', ...headers },
   });
@@ -24,26 +30,26 @@ const fetchData = async ({ headers, body }: GraphqlResponseData) => {
 };
 
 export const fetchQueryResponse = async ({
-  queryEditorValue,
-  variablesEditorValue,
-  headersEditorValue,
-}: EditorValues) => {
-  const variables = validateStringAndParseToObject('Variables', variablesEditorValue);
-  const headers = validateStringAndParseToObject('Headers', headersEditorValue);
+  queryValue,
+  variablesValue,
+  headersValue,
+}: RequestValues) => {
+  const validatedVariables = validateStringAndParseToObject('Variables', variablesValue);
+  const validatedHeaders = validateStringAndParseToObject('Headers', headersValue);
 
-  if (!isErrorWithMessage(variables)) {
-    if (!isErrorWithMessage(headers)) {
+  if (!isErrorWithMessage(validatedVariables)) {
+    if (!isErrorWithMessage(validatedHeaders)) {
       return fetchData({
         body: {
-          query: queryEditorValue,
-          variables: variables,
+          query: queryValue,
+          variables: typeof validatedVariables === 'string' ? undefined : validatedVariables,
         },
-        headers: headers,
+        headers: typeof validatedHeaders === 'string' ? undefined : validatedHeaders,
       });
     }
-    return headers;
+    return validatedHeaders;
   }
-  return variables;
+  return validatedVariables;
 };
 
 const fetchSchema = async () => {

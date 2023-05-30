@@ -60,7 +60,11 @@ export const Playground: FC = () => {
     <div className="playground">
       <PlaygroundSideBar
         onExecutorButtonClick={() =>
-          getResponseData({ queryEditorValue, variablesEditorValue, headersEditorValue })
+          getResponseData({
+            queryValue: queryEditorValue,
+            variablesValue: variablesEditorValue,
+            headersValue: headersEditorValue,
+          })
         }
       />
 
