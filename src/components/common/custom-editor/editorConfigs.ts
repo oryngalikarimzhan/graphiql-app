@@ -17,6 +17,7 @@ export const customOptions: editor.IStandaloneEditorConstructionOptions = {
   },
   formatOnPaste: true,
   fontSize: 16,
+  lineNumbers: 'on',
   scrollbar: {
     verticalScrollbarSize: 0,
   },
@@ -24,4 +25,9 @@ export const customOptions: editor.IStandaloneEditorConstructionOptions = {
   folding: false,
   renderLineHighlight: 'none',
   wordWrap: 'on',
+};
+
+export const customMobileOptions: editor.IStandaloneEditorConstructionOptions = {
+  lineNumbers: 'off',
+  fontSize: 14,
 };

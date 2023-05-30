@@ -10,7 +10,7 @@ interface PlaygroundState {
   isParamsBoxOpen: boolean;
   paramsBoxEditor: 'variables' | 'headers';
   statusCode: string;
-  isSuccess: boolean;
+  isSuccess: boolean | undefined;
 }
 
 interface PlaygroundActions {
@@ -35,7 +35,7 @@ const initialState: PlaygroundState = {
   isParamsBoxOpen: false,
   paramsBoxEditor: 'variables',
   statusCode: '',
-  isSuccess: false,
+  isSuccess: undefined,
 };
 
 export const usePlaygroundStore = create<PlaygroundState & PlaygroundActions>()(

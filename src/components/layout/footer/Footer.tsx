@@ -5,9 +5,11 @@ import styles from './Footer.module.scss';
 import rssReactLogoImage from 'assets/img/rs-school-react.svg';
 import { ReactComponent as GithubIcon } from 'assets/icons/github-icon.svg';
 import { githubAuthor } from 'utils/constants/constants';
+import { useLocation } from 'react-router-dom';
 
 export const Footer: FC = () => {
-  return (
+  const { pathname } = useLocation();
+  return pathname !== '/main' ? (
     <footer className={styles.footer}>
       <div className={classnames('wrapper', styles.container)}>
         <div className={styles.courseLogos}>
@@ -38,5 +40,5 @@ export const Footer: FC = () => {
         </div>
       </div>
     </footer>
-  );
+  ) : null;
 };

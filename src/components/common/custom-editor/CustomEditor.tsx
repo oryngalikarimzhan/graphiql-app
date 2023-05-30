@@ -5,7 +5,7 @@ import { editor } from 'monaco-editor';
 import { OnChange } from '@monaco-editor/react';
 
 import styles from './CustomEditor.module.scss';
-import { customTheme, customOptions } from './editorConfigs';
+import { customTheme, customOptions, customMobileOptions } from './editorConfigs';
 import { CopyButton } from '../buttons/copy-button/CopyButton';
 import { SpinnerLoader } from '../spinner-loader/SpinnerLoader';
 
@@ -59,8 +59,8 @@ export const CustomEditor: FC<CustomEditorProps> = ({
           onChange={setValue}
           options={
             isMobile
-              ? { ...customOptions, lineNumbers: 'off', ...options }
-              : { ...customOptions, lineNumbers: 'on', ...options }
+              ? { ...customOptions, ...customMobileOptions, ...options }
+              : { ...customOptions, ...options }
           }
           loading={<SpinnerLoader />}
         />

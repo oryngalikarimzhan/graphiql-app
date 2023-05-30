@@ -46,3 +46,14 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+.field {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba($color-secondary, 0.5);
+  color: $color-main;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+}

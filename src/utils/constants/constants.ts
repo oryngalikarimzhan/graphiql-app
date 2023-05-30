@@ -5,7 +5,8 @@ export const githubAuthor: RegularObject = {
 };
 
 // export const GRAPHQL_API = 'https://rickandmortyapi.com/graphql';
-export const GRAPHQL_API = 'https://countries.trevorblades.com/';
+// export const GRAPHQL_API = 'https://countries.trevorblades.com/';
+export const GRAPHQL_API = 'https://graphqlpokemon.favware.tech/v7';
 
 export enum Languages {
   RU = 'ru',

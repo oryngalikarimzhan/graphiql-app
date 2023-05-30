@@ -9,17 +9,25 @@
   height: 12px;
   width: 12px;
   border-radius: 50%;
-  background-color: $color-positive;
-}
-
-.error-pin {
-  background-color: $color-negative;
+  background-color: $color-additional-2;
 }
 
 .status-code {
-  color: rgba($color-positive, 0.5);
+  color: rgba($color-additional-2, 0.5);
 }
 
-.error-status-code {
+.error {
+  background-color: $color-negative;
+}
+
+.success {
+  background-color: $color-positive;
+}
+
+.error-code {
   color: rgba($color-negative, 0.5);
+}
+
+.success-code {
+  color: rgba($color-positive, 0.5);
 }

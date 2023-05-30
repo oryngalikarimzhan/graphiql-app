@@ -13,10 +13,20 @@ export const StatusMarker: FC = () => {
 
   return (
     <div className={styles.statusMarker}>
-      <span className={classnames(styles.statusPin, { [styles.errorPin]: !isSuccess })} />
+      <span
+        className={classnames(styles.statusPin, {
+          [styles.error]: isSuccess !== undefined && !isSuccess,
+          [styles.success]: !!isSuccess,
+        })}
+      />
       <span>Response status</span>
-      <span className={classnames(styles.statusCode, { [styles.errorStatusCode]: !isSuccess })}>
-        {statusCode}
+      <span
+        className={classnames(styles.statusCode, {
+          [styles.errorCode]: isSuccess !== undefined && !isSuccess,
+          [styles.successCode]: !!isSuccess,
+        })}
+      >
+        {!!statusCode ? statusCode : `"not requested"`}
       </span>
     </div>
   );

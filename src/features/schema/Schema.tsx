@@ -8,6 +8,9 @@ import {
   GraphQLInputFieldMap,
   GraphQLFieldMap,
   GraphQLField,
+  GraphQLEnumType,
+  GraphQLInterfaceType,
+  GraphQLUnionType,
 } from 'graphql';
 import { shallow } from 'zustand/shallow';
 
@@ -15,6 +18,7 @@ import styles from './Schema.module.scss';
 import { ReactComponent as TypeIcon } from 'assets/icons/type-icon.svg';
 import { ReactComponent as ArgumentIcon } from 'assets/icons/argument-icon.svg';
 import { ReactComponent as FieldIcon } from 'assets/icons/field-icon.svg';
+import { ReactComponent as ValuesIcon } from 'assets/icons/values-icon.svg';
 import { GraphqlTypeParser } from './graphql-type-parser/GraphqlTypeParser';
 import { GraphqlArgumentsParser } from './graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlFieldParser } from './graphql-field-parser/GraphqlFieldParser';
@@ -60,10 +64,45 @@ const Schema: FC<SchemaProps> = ({ schemaData }) => {
     return <ObjectTypeSchema fields={fields} type={type} />;
   }
 
-  return <ScalarTypeSchema type={type as GraphQLScalarType} />;
+  if (type instanceof GraphQLEnumType) {
+    return <EnumTypeSchema type={type} />;
+  }
+
+  return <OtherTypesSchema type={type} />;
 };
 
-const ScalarTypeSchema: FC<{ type: GraphQLScalarType }> = ({ type }) => {
+const EnumTypeSchema: FC<{ type: GraphQLEnumType }> = ({ type }) => {
+  return (
+    <div className={styles.schema}>
+      <div className={styles.schemaHeading}>
+        <div className={styles.name}>{type.name}</div>
+        <PreviousButton />
+      </div>
+
+      <div className={styles.field}>{type.description}</div>
+
+      <div className={styles.title}>
+        <ValuesIcon height={16} width={16} />
+        <span>Values</span>
+      </div>
+
+      {type.getValues().map(({ name }) => (
+        <div key={name} className={styles.field}>
+          {name}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+type OtherTypes =
+  | GraphQLScalarType<unknown, unknown>
+  | GraphQLScalarType<unknown, unknown>
+  | GraphQLInterfaceType
+  | GraphQLUnionType
+  | undefined;
+
+const OtherTypesSchema: FC<{ type: OtherTypes }> = ({ type }) => {
   return (
     <div className={styles.schema}>
       <div className={styles.schemaHeading}>
@@ -77,7 +116,7 @@ const ScalarTypeSchema: FC<{ type: GraphQLScalarType }> = ({ type }) => {
           dangerouslySetInnerHTML={{
             __html: type?.description?.replace(/`([^`]+)`/g, '<code>$1</code>') || '',
           }}
-        ></div>
+        />
       </div>
     </div>
   );
