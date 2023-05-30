@@ -16,16 +16,35 @@
     background-color: $color-secondary;
     height: 40px;
     border-radius: 8px;
+    width: auto;
+    outline-offset: 1px;
     transition: outline 0.5s;
 
     &:hover {
-      outline: 1px solid $color-main;
+      outline: 1px solid $color-secondary;
+    }
+
+    &::before {
+      height: 30px;
+    }
+
+    &::after {
+      background-color: $color-secondary;
     }
   }
 
   @include mobile {
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  .sign-up {
+    width: auto;
+    height: 40px;
+    border-radius: 8px;
+    &::after {
+      background-color: $color-secondary;
+    }
   }
 }
 
@@ -37,6 +56,10 @@
 
   .inverted {
     background-color: $color-primary;
+
+    &::after {
+      background-color: $color-primary;
+    }
   }
 }
 

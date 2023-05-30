@@ -29,6 +29,13 @@ interface SchemaProps {
   schemaData: IntrospectionQuery;
 }
 
+type OtherTypes =
+  | GraphQLScalarType<unknown, unknown>
+  | GraphQLScalarType<unknown, unknown>
+  | GraphQLInterfaceType
+  | GraphQLUnionType
+  | undefined;
+
 const Schema: FC<SchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
 
@@ -94,13 +101,6 @@ const EnumTypeSchema: FC<{ type: GraphQLEnumType }> = ({ type }) => {
     </div>
   );
 };
-
-type OtherTypes =
-  | GraphQLScalarType<unknown, unknown>
-  | GraphQLScalarType<unknown, unknown>
-  | GraphQLInterfaceType
-  | GraphQLUnionType
-  | undefined;
 
 const OtherTypesSchema: FC<{ type: OtherTypes }> = ({ type }) => {
   return (

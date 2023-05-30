@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import classnames from 'classnames';
@@ -8,9 +7,10 @@ import classnames from 'classnames';
 import styles from './AuthControls.module.scss';
 import { auth } from '../firebaseConfig';
 import { RectangularButton } from 'components/common/buttons/rectangular-button/RectangularButton';
-import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { useSchemaStore } from 'store/useSchemaStore';
+import { useUserAuthStore } from '../userAuthStore';
+import { FancyButton } from '../../../components/common/buttons/fancy-button/FancyButton';
 
 interface AuthControlsProps {
   className?: string;
@@ -18,17 +18,12 @@ interface AuthControlsProps {
 
 export const AuthControls: FC<AuthControlsProps> = ({ className }) => {
   const { t } = useTranslation();
-  const [user, isLoading] = useAuthState(auth);
-  const resetPlaygroundStates = usePlaygroundStore((state) => state.resetPlaygroundStates);
-  const resetSchemaStates = useSchemaStore((state) => state.resetSchemaStates);
 
-  if (isLoading) {
-    return (
-      <RectangularButton className={className}>
-        <SpinnerLoader />
-      </RectangularButton>
-    );
-  }
+  const user = useUserAuthStore((state) => state.user);
+
+  const resetPlaygroundStates = usePlaygroundStore((state) => state.resetPlaygroundStates);
+
+  const resetSchemaStates = useSchemaStore((state) => state.resetSchemaStates);
 
   const onSignOut = () => {
     signOut(auth);
@@ -56,7 +51,7 @@ export const AuthControls: FC<AuthControlsProps> = ({ className }) => {
             <RectangularButton className={className}>{t('auth.login')}</RectangularButton>
           </Link>
           <Link to="/registration">
-            <RectangularButton className={className}>{t('auth.sign-up')}</RectangularButton>
+            <FancyButton className={className}>{t('auth.sign-up')}</FancyButton>
           </Link>
         </>
       )}

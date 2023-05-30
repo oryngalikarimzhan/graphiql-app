@@ -3,10 +3,12 @@ import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
 
 import styles from './Landing.module.scss';
-import { StartButton } from 'features/auth/start-button/StartButton';
+import { LinkButton } from 'components/common/buttons/link-button/LinkButton';
+import { useUserAuthStore } from 'features/auth/userAuthStore';
 
 const Landing: FC = () => {
   const { t } = useTranslation();
+  const user = useUserAuthStore((state) => state.user);
 
   return (
     <section className={styles.landing}>
@@ -19,7 +21,7 @@ const Landing: FC = () => {
             GRAPHiQL
           </h2>
 
-          <StartButton />
+          <LinkButton to={user ? '/main' : '/registration'}>{t('landing.start-button')}</LinkButton>
         </article>
 
         <article className={styles.article}>
