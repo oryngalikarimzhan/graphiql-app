@@ -6,8 +6,8 @@ import styles from './StatusMarker.module.scss';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 
 export const StatusMarker: FC = () => {
-  const [isSuccess, statusCode] = usePlaygroundStore(
-    (state) => [state.isSuccess, state.statusCode],
+  const [isSuccess, responseStatus] = usePlaygroundStore(
+    (state) => [state.isSuccess, state.responseStatus],
     shallow
   );
 
@@ -26,7 +26,7 @@ export const StatusMarker: FC = () => {
           [styles.successCode]: !!isSuccess,
         })}
       >
-        {!!statusCode ? statusCode : `"not requested"`}
+        {!!responseStatus ? responseStatus : `"not requested"`}
       </span>
     </div>
   );

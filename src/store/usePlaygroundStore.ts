@@ -9,7 +9,7 @@ interface PlaygroundState {
   isSchemaOpen: boolean;
   isParamsBoxOpen: boolean;
   paramsBoxEditor: 'variables' | 'headers';
-  statusCode: string;
+  responseStatus: string;
   isSuccess: boolean | undefined;
 }
 
@@ -21,7 +21,7 @@ interface PlaygroundActions {
   changeParamsBoxEditor: (editor: 'variables' | 'headers') => void;
   setIsSchemaOpen: (isOpen: boolean) => void;
   setIsParamsBoxOpen: (isOpen: boolean) => void;
-  setStatusCode: (status: string) => void;
+  setResponseStatus: (status: string) => void;
   setIsSuccess: (isSuccess: boolean) => void;
   resetPlaygroundStates: () => void;
 }
@@ -34,7 +34,7 @@ const initialState: PlaygroundState = {
   isSchemaOpen: false,
   isParamsBoxOpen: false,
   paramsBoxEditor: 'variables',
-  statusCode: '',
+  responseStatus: '',
   isSuccess: undefined,
 };
 
@@ -50,7 +50,7 @@ export const usePlaygroundStore = create<PlaygroundState & PlaygroundActions>()(
         changeParamsBoxEditor: (editor) => set(() => ({ paramsBoxEditor: editor })),
         setIsSchemaOpen: (isOpen) => set(() => ({ isSchemaOpen: isOpen })),
         setIsParamsBoxOpen: (isOpen) => set(() => ({ isParamsBoxOpen: isOpen })),
-        setStatusCode: (statusCode) => set(() => ({ statusCode: statusCode })),
+        setResponseStatus: (responseStatus) => set(() => ({ responseStatus: responseStatus })),
         setIsSuccess: (isSuccess) => set(() => ({ isSuccess: isSuccess })),
         resetPlaygroundStates: () => set(initialState),
       }),

@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
+import axios, { AxiosError } from 'axios';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { getIntrospectionQuery } from 'graphql';
-import { RegularObject } from 'utils/types/types';
+import { CustomError, RegularObject } from 'utils/types/types';
 import { GRAPHQL_API } from 'utils/constants/constants';
 import { validateStringAndParseToObject } from 'utils/helpers/validateStringAndParseToObject';
 import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
@@ -29,13 +29,9 @@ const fetchData = async ({ body, headers }: GraphqlRequestParams) => {
   return data;
 };
 
-export const fetchQueryResponse = async ({
-  queryValue,
-  variablesValue,
-  headersValue,
-}: RequestValues) => {
-  const validatedVariables = validateStringAndParseToObject('Variables', variablesValue);
-  const validatedHeaders = validateStringAndParseToObject('Headers', headersValue);
+const fetchQueryResponse = async ({ queryValue, variablesValue, headersValue }: RequestValues) => {
+  const validatedVariables = validateStringAndParseToObject('variables', variablesValue, false);
+  const validatedHeaders = validateStringAndParseToObject('request headers', headersValue);
 
   if (!isErrorWithMessage(validatedVariables)) {
     if (!isErrorWithMessage(validatedHeaders)) {
@@ -47,9 +43,9 @@ export const fetchQueryResponse = async ({
         headers: typeof validatedHeaders === 'string' ? undefined : validatedHeaders,
       });
     }
-    return validatedHeaders;
+    return new Promise((_, reject) => reject(validatedHeaders));
   }
-  return validatedVariables;
+  return new Promise((_, reject) => reject(validatedVariables));
 };
 
 const fetchSchema = async () => {
@@ -70,4 +66,18 @@ export const useSchemaQuery = () => {
     queryFn: fetchSchema,
     suspense: true,
   });
+};
+
+export const useGraphqlDataQuery = (
+  onSuccess: (data: unknown) => void,
+  onError: (error: AxiosError | CustomError) => void
+) => {
+  const { mutate, ...rest } = useMutation({
+    mutationKey: ['response'],
+    mutationFn: fetchQueryResponse,
+    onSuccess: onSuccess,
+    onError: onError,
+  });
+
+  return { getGraphqlData: mutate, ...rest };
 };

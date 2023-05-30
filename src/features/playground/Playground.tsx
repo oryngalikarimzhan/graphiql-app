@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { AxiosError } from 'axios';
-import { useMutation } from '@tanstack/react-query';
 import { shallow } from 'zustand/shallow';
 
 import './styles.scss';
@@ -9,9 +8,10 @@ import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
 import { QueryResponseSection } from './query-response-section/QueryResponseSection';
 import { QueryRequestSection } from './query-request-section/QueryRequestSection';
 import { SchemaSection } from './schema-section/SchemaSection';
-import { fetchQueryResponse } from 'services/api';
+import { useGraphqlDataQuery } from 'services/api';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
+import { CustomError } from '../../utils/types/types';
 
 export const Playground: FC = () => {
   const [
@@ -21,7 +21,7 @@ export const Playground: FC = () => {
     headersEditorValue,
     setResponseEditorValue,
     setIsSuccess,
-    setStatusCode,
+    setResponseStatus,
   ] = usePlaygroundStore(
     (state) => [
       state.isSchemaOpen,
@@ -30,37 +30,38 @@ export const Playground: FC = () => {
       state.headersEditorValue,
       state.setResponseEditorValue,
       state.setIsSuccess,
-      state.setStatusCode,
+      state.setResponseStatus,
     ],
     shallow
   );
 
-  const { mutate: getResponseData, isLoading } = useMutation({
-    mutationKey: ['response'],
-    mutationFn: fetchQueryResponse,
-    onSuccess: (data) => {
-      if (isErrorWithMessage(data)) {
-        setResponseEditorValue(data.message);
-        setStatusCode('Bad request');
-        setIsSuccess(false);
-      } else if (data) {
-        setIsSuccess(true);
-        setStatusCode('200');
-        setResponseEditorValue(JSON.stringify(data, null, '\t'));
-      }
-    },
-    onError: (error: AxiosError) => {
+  const onSuccess = (data: unknown) => {
+    if (data) {
+      setIsSuccess(true);
+      setResponseStatus('200');
+      setResponseEditorValue(JSON.stringify(data, null, '\t'));
+    }
+  };
+
+  const onError = (error: AxiosError | CustomError) => {
+    if (!(error instanceof AxiosError) && isErrorWithMessage(error)) {
+      setResponseEditorValue(error.message);
+      setResponseStatus('Bad request');
       setIsSuccess(false);
-      setStatusCode(`${error.response?.status}`);
+    } else {
+      setIsSuccess(false);
+      setResponseStatus(`${error.response?.status}`);
       setResponseEditorValue(JSON.stringify(error.response?.data || '', null, '\t'));
-    },
-  });
+    }
+  };
+
+  const { getGraphqlData, isLoading } = useGraphqlDataQuery(onSuccess, onError);
 
   return (
     <div className="playground">
       <PlaygroundSideBar
         onExecutorButtonClick={() =>
-          getResponseData({
+          getGraphqlData({
             queryValue: queryEditorValue,
             variablesValue: variablesEditorValue,
             headersValue: headersEditorValue,
