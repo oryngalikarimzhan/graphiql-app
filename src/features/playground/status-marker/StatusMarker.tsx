@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { shallow } from 'zustand/shallow';
 
 import styles from './StatusMarker.module.scss';
-import { usePlaygroundStore } from 'store/usePlaygroundStore';
+import { usePlaygroundStore } from 'features/playground/usePlaygroundStore';
 
 export const StatusMarker: FC = () => {
   const [isSuccess, responseStatus] = usePlaygroundStore(

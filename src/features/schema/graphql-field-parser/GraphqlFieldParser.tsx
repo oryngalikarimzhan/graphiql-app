@@ -4,7 +4,7 @@ import { GraphQLField, GraphQLInputField } from 'graphql';
 import styles from './GraphqlFieldParser.module.scss';
 import { GraphqlArgumentsParser } from '../graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlTypeParser } from '../graphql-type-parser/GraphqlTypeParser';
-import { useSchemaStore } from 'store/useSchemaStore';
+import { useSchemaStore } from 'features/schema/useSchemaStore';
 
 interface GraphqlFieldParserProps {
   field: GraphQLField<unknown, unknown> | GraphQLInputField;

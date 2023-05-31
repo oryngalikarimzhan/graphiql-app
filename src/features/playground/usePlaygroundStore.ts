@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { GRAPHQL_DEFAULT_API } from 'utils/constants/constants';
 
 interface PlaygroundState {
   queryEditorValue: string;
@@ -11,6 +12,7 @@ interface PlaygroundState {
   paramsBoxEditor: 'variables' | 'headers';
   responseStatus: string;
   isSuccess: boolean | undefined;
+  apiEndpoint: string;
 }
 
 interface PlaygroundActions {
@@ -23,6 +25,7 @@ interface PlaygroundActions {
   setIsParamsBoxOpen: (isOpen: boolean) => void;
   setResponseStatus: (status: string) => void;
   setIsSuccess: (isSuccess: boolean) => void;
+  setApiEndpoint: (endpoint: string) => void;
   resetPlaygroundStates: () => void;
 }
 
@@ -36,6 +39,7 @@ const initialState: PlaygroundState = {
   paramsBoxEditor: 'variables',
   responseStatus: '',
   isSuccess: undefined,
+  apiEndpoint: GRAPHQL_DEFAULT_API,
 };
 
 export const usePlaygroundStore = create<PlaygroundState & PlaygroundActions>()(
@@ -52,6 +56,7 @@ export const usePlaygroundStore = create<PlaygroundState & PlaygroundActions>()(
         setIsParamsBoxOpen: (isOpen) => set(() => ({ isParamsBoxOpen: isOpen })),
         setResponseStatus: (responseStatus) => set(() => ({ responseStatus: responseStatus })),
         setIsSuccess: (isSuccess) => set(() => ({ isSuccess: isSuccess })),
+        setApiEndpoint: (endpoint) => set(() => ({ apiEndpoint: endpoint })),
         resetPlaygroundStates: () => set(initialState),
       }),
       {

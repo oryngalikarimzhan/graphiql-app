@@ -3,11 +3,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { getIntrospectionQuery } from 'graphql';
 import { CustomError, RegularObject } from 'utils/types/types';
-import { GRAPHQL_API } from 'utils/constants/constants';
 import { validateStringAndParseToObject } from 'utils/helpers/validateStringAndParseToObject';
 import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
 
 type GraphqlRequestParams = {
+  endpoint: string;
   body: {
     query: string;
     variables?: RegularObject;
@@ -16,26 +16,33 @@ type GraphqlRequestParams = {
 };
 
 type RequestValues = {
+  endpoint: string;
   queryValue: string;
   variablesValue: string;
   headersValue: string;
 };
 
-const fetchData = async ({ body, headers }: GraphqlRequestParams) => {
-  const { data } = await axios.post(GRAPHQL_API, body, {
+const fetchData = async ({ endpoint, body, headers }: GraphqlRequestParams) => {
+  const { data } = await axios.post(endpoint, body, {
     headers: { 'Content-Type': 'application/json', ...headers },
   });
 
   return data;
 };
 
-const fetchQueryResponse = async ({ queryValue, variablesValue, headersValue }: RequestValues) => {
+const fetchQueryResponse = async ({
+  endpoint,
+  queryValue,
+  variablesValue,
+  headersValue,
+}: RequestValues) => {
   const validatedVariables = validateStringAndParseToObject('variables', variablesValue, false);
   const validatedHeaders = validateStringAndParseToObject('request headers', headersValue);
 
   if (!isErrorWithMessage(validatedVariables)) {
     if (!isErrorWithMessage(validatedHeaders)) {
       return fetchData({
+        endpoint: endpoint,
         body: {
           query: queryValue,
           variables: typeof validatedVariables === 'string' ? undefined : validatedVariables,
@@ -48,9 +55,9 @@ const fetchQueryResponse = async ({ queryValue, variablesValue, headersValue }: 
   return new Promise((_, reject) => reject(validatedVariables));
 };
 
-const fetchSchema = async () => {
+const fetchSchema = async (endpoint: string) => {
   const { data } = await axios.post(
-    GRAPHQL_API,
+    endpoint,
     { query: getIntrospectionQuery() },
     {
       headers: { 'Content-Type': 'application/json' },
@@ -60,10 +67,10 @@ const fetchSchema = async () => {
   return data;
 };
 
-export const useSchemaQuery = () => {
+export const useSchemaQuery = (endpoint: string) => {
   return useQuery({
-    queryKey: ['schema'],
-    queryFn: fetchSchema,
+    queryKey: ['schema', endpoint],
+    queryFn: () => fetchSchema(endpoint),
     suspense: true,
   });
 };

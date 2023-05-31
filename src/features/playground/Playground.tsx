@@ -9,7 +9,7 @@ import { QueryResponseSection } from './query-response-section/QueryResponseSect
 import { QueryRequestSection } from './query-request-section/QueryRequestSection';
 import { SchemaSection } from './schema-section/SchemaSection';
 import { useGraphqlDataQuery } from 'services/api';
-import { usePlaygroundStore } from 'store/usePlaygroundStore';
+import { usePlaygroundStore } from 'features/playground/usePlaygroundStore';
 import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
 import { CustomError } from 'utils/types/types';
 
@@ -22,6 +22,7 @@ export const Playground: FC = () => {
     setResponseEditorValue,
     setIsSuccess,
     setResponseStatus,
+    apiEndpoint,
   ] = usePlaygroundStore(
     (state) => [
       state.isSchemaOpen,
@@ -31,27 +32,25 @@ export const Playground: FC = () => {
       state.setResponseEditorValue,
       state.setIsSuccess,
       state.setResponseStatus,
+      state.apiEndpoint,
     ],
     shallow
   );
 
   const onSuccess = (data: unknown) => {
-    if (data) {
-      setIsSuccess(true);
-      setResponseStatus('200');
-      setResponseEditorValue(JSON.stringify(data, null, '\t'));
-    }
+    setIsSuccess(true);
+    setResponseStatus('200');
+    setResponseEditorValue(JSON.stringify(data, null, '\t'));
   };
 
   const onError = (error: AxiosError | CustomError) => {
+    setIsSuccess(false);
     if (!(error instanceof AxiosError) && isErrorWithMessage(error)) {
-      setResponseEditorValue(error.message);
       setResponseStatus('Bad request');
-      setIsSuccess(false);
+      setResponseEditorValue(error.message);
     } else {
-      setIsSuccess(false);
       setResponseStatus(`${error.response?.status}`);
-      setResponseEditorValue(JSON.stringify(error.response?.data || '', null, '\t'));
+      setResponseEditorValue(JSON.stringify(error.response?.data || error.message, null, '\t'));
     }
   };
 
@@ -62,6 +61,7 @@ export const Playground: FC = () => {
       <PlaygroundSideBar
         onExecutorButtonClick={() =>
           getGraphqlData({
+            endpoint: apiEndpoint,
             queryValue: queryEditorValue,
             variablesValue: variablesEditorValue,
             headersValue: headersEditorValue,

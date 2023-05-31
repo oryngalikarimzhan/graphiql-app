@@ -4,8 +4,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 
 import { auth } from './firebaseConfig';
-import { usePlaygroundStore } from 'store/usePlaygroundStore';
-import { useSchemaStore } from 'store/useSchemaStore';
+import { usePlaygroundStore } from 'features/playground/usePlaygroundStore';
+import { useSchemaStore } from 'features/schema/useSchemaStore';
 import { LoaderSection } from 'components/common/section-loader/LoaderSection';
 
 interface AuthContextType {

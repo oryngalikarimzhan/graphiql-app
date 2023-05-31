@@ -13,12 +13,23 @@
   }
 }
 
-.api-title {
-  display: block;
+.api-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.api-input {
+  flex: 1;
+  outline: none;
+  border: none;
+  font-size: 16px;
   padding: 10px;
-  justify-content: flex-start;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
-  user-select: all;
+}
+
+.api-button-active {
+  outline: 2px solid $color-main;
+  background-color: $color-secondary;
 }

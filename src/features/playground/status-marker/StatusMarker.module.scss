@@ -1,13 +1,13 @@
 .status-marker {
   display: flex;
   gap: 10px;
+  align-items: center;
+  font-size: 14px;
 }
 
 .status-pin {
-  position: relative;
-  top: 3px;
   height: 12px;
-  width: 12px;
+  min-width: 12px;
   border-radius: 50%;
   background-color: $color-additional-2;
 }

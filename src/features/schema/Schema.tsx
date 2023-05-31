@@ -23,7 +23,7 @@ import { GraphqlTypeParser } from './graphql-type-parser/GraphqlTypeParser';
 import { GraphqlArgumentsParser } from './graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlFieldParser } from './graphql-field-parser/GraphqlFieldParser';
 import { PreviousButton } from './previous-button/PreviousButton';
-import { useSchemaStore } from 'store/useSchemaStore';
+import { useSchemaStore } from 'features/schema/useSchemaStore';
 
 interface SchemaProps {
   schemaData: IntrospectionQuery;
