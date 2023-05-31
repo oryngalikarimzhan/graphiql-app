@@ -3,19 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 import { AuthForm } from 'features/auth/auth-form/AuthForm';
-import { AuthFormInputs } from 'features/auth/auth-form/interface';
 import { getErrorMessage } from 'utils/helpers/getErrorMessage';
 import { auth } from 'features/auth/firebaseConfig';
 
-const Registration: FC = () => {
+const SignUp: FC = () => {
   const { t } = useTranslation();
 
-  const [createUserWithEmailAndPassword, , isLoading, error] =
-    useCreateUserWithEmailAndPassword(auth);
-
-  const handleSignUp = ({ email, password }: AuthFormInputs) => {
-    createUserWithEmailAndPassword(email, password);
-  };
+  const [signUp, , isLoading, error] = useCreateUserWithEmailAndPassword(auth);
 
   const contentContext = useMemo(
     () => ({
@@ -30,11 +24,11 @@ const Registration: FC = () => {
   return (
     <AuthForm
       contentContext={contentContext}
-      handleClick={handleSignUp}
+      onSubmit={signUp}
       isLoading={isLoading}
       errorMessage={error && getErrorMessage(error)}
     />
   );
 };
 
-export default Registration;
+export default SignUp;

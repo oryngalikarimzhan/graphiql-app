@@ -7,10 +7,9 @@ import styles from './AuthForm.module.scss';
 import { SpinnerLoader } from 'components/common/spinner-loader/SpinnerLoader';
 import { Message } from 'components/common/message/Message';
 import { FormTextInputField } from './form-text-input-field/FormTextInputField';
-import { AuthFormInputs } from './interface';
 
 interface AuthFormProps {
-  handleClick: (user: AuthFormInputs) => void;
+  onSubmit: (email: string, password: string) => void;
   contentContext: {
     title: string;
     question: string;
@@ -21,8 +20,13 @@ interface AuthFormProps {
   isLoading?: boolean;
 }
 
+interface AuthFormValues {
+  email: string;
+  password: string;
+}
+
 export const AuthForm: FC<AuthFormProps> = ({
-  handleClick,
+  onSubmit,
   contentContext,
   errorMessage,
   isLoading,
@@ -32,27 +36,22 @@ export const AuthForm: FC<AuthFormProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthFormInputs>({
+  } = useForm<AuthFormValues>({
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<AuthFormInputs> = (data, e) => {
+  const submitHandler: SubmitHandler<AuthFormValues> = ({ email, password }, e) => {
     e?.preventDefault();
 
-    if (handleClick) {
-      handleClick({
-        email: data.email,
-        password: data.password,
-      });
-    }
+    onSubmit(email, password);
   };
 
   const { title, question, redirectLink, redirectLinkTitle } = contentContext;
 
   return (
-    <div className={styles.formContainer}>
+    <section className={styles.formContainer}>
       <h2 className={styles.formTitle}>{title}</h2>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form className={styles.form} onSubmit={handleSubmit(submitHandler)} noValidate>
         <FormTextInputField
           label={t('auth.form.email')}
           id="email"
@@ -101,6 +100,6 @@ export const AuthForm: FC<AuthFormProps> = ({
         <p>{question}</p>
         <Link to={redirectLink}>{redirectLinkTitle}</Link>
       </div>
-    </div>
+    </section>
   );
 };

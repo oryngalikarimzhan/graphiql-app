@@ -1,35 +1,20 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
 import classnames from 'classnames';
 
-import styles from './AuthControls.module.scss';
-import { auth } from '../firebaseConfig';
+import styles from './AuthControlButtons.module.scss';
 import { RectangularButton } from 'components/common/buttons/rectangular-button/RectangularButton';
-import { usePlaygroundStore } from 'store/usePlaygroundStore';
-import { useSchemaStore } from 'store/useSchemaStore';
-import { useUserAuthStore } from '../userAuthStore';
-import { FancyButton } from '../../../components/common/buttons/fancy-button/FancyButton';
+import { FancyButton } from 'components/common/buttons/fancy-button/FancyButton';
+import { useAuth } from '../AuthProvider';
 
-interface AuthControlsProps {
+interface AuthControlButtonsProps {
   className?: string;
 }
 
-export const AuthControls: FC<AuthControlsProps> = ({ className }) => {
+export const AuthControlButtons: FC<AuthControlButtonsProps> = ({ className }) => {
   const { t } = useTranslation();
-
-  const user = useUserAuthStore((state) => state.user);
-
-  const resetPlaygroundStates = usePlaygroundStore((state) => state.resetPlaygroundStates);
-
-  const resetSchemaStates = useSchemaStore((state) => state.resetSchemaStates);
-
-  const onSignOut = () => {
-    signOut(auth);
-    resetPlaygroundStates();
-    resetSchemaStates();
-  };
+  const { user, logOut } = useAuth();
 
   return (
     <>
@@ -41,7 +26,7 @@ export const AuthControls: FC<AuthControlsProps> = ({ className }) => {
           >
             {user.email}
           </RectangularButton>
-          <RectangularButton className={className} onClick={onSignOut}>
+          <RectangularButton className={className} onClick={logOut}>
             {t('auth.sign-out')}
           </RectangularButton>
         </>

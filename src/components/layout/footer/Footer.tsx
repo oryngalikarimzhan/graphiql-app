@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 export const Footer: FC = () => {
   const { pathname } = useLocation();
+
   return pathname !== '/main' ? (
     <footer className={styles.footer}>
       <div className={classnames('wrapper', styles.container)}>

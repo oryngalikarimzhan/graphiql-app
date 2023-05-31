@@ -3,18 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 import { AuthForm } from 'features/auth/auth-form/AuthForm';
-import { AuthFormInputs } from 'features/auth/auth-form/interface';
 import { getErrorMessage } from 'utils/helpers/getErrorMessage';
 import { auth } from 'features/auth/firebaseConfig';
 
-const Login: FC = () => {
+const SignIn: FC = () => {
   const { t } = useTranslation();
-
-  const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
-
-  const handleLogin = ({ email, password }: AuthFormInputs) => {
-    signInWithEmailAndPassword(email, password);
-  };
+  const [signIn, , isLoading, error] = useSignInWithEmailAndPassword(auth);
 
   const contentContext = useMemo(
     () => ({
@@ -29,11 +23,11 @@ const Login: FC = () => {
   return (
     <AuthForm
       contentContext={contentContext}
-      handleClick={handleLogin}
+      onSubmit={signIn}
       isLoading={isLoading}
       errorMessage={error && getErrorMessage(error)}
     />
   );
 };
 
-export default Login;
+export default SignIn;

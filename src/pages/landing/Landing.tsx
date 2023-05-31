@@ -1,14 +1,15 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
 
 import styles from './Landing.module.scss';
-import { LinkButton } from 'components/common/buttons/link-button/LinkButton';
-import { useUserAuthStore } from 'features/auth/userAuthStore';
+import { FancyButton } from 'components/common/buttons/fancy-button/FancyButton';
+import { useAuth } from '../../features/auth/AuthProvider';
 
 const Landing: FC = () => {
   const { t } = useTranslation();
-  const user = useUserAuthStore((state) => state.user);
+  const { user } = useAuth();
 
   return (
     <section className={styles.landing}>
@@ -21,7 +22,9 @@ const Landing: FC = () => {
             GRAPHiQL
           </h2>
 
-          <LinkButton to={user ? '/main' : '/registration'}>{t('landing.start-button')}</LinkButton>
+          <Link to={user ? '/main' : '/registration'}>
+            <FancyButton>{t('landing.start-button')}</FancyButton>
+          </Link>
         </article>
 
         <article className={styles.article}>

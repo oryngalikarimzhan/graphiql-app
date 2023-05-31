@@ -6,18 +6,18 @@ import { useTranslation } from 'react-i18next';
 import styles from './Navbar.module.scss';
 import { ReactComponent as HamburgerIcon } from 'assets/icons/hamburger-icon.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close-icon.svg';
-import { useUserAuthStore } from '../../../features/auth/userAuthStore';
+import { useAuth } from 'features/auth/AuthProvider';
 
 export const Navbar: FC = () => {
-  const user = useUserAuthStore((state) => state.user);
-  const [isNavBurgerOpen, setIsNavBurgerOpen] = useState(false);
+  const { user } = useAuth();
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as HTMLElement)) {
-        setIsNavBurgerOpen(false);
+        setIsBurgerMenuOpen(false);
       }
     };
 
@@ -36,16 +36,16 @@ export const Navbar: FC = () => {
       <HamburgerIcon
         height={25}
         width={25}
-        className={classNames(styles.burgerIcon, { [styles.burgerIconVisible]: !isNavBurgerOpen })}
-        onClick={() => setIsNavBurgerOpen(true)}
+        className={classNames(styles.burgerIcon, { [styles.burgerIconVisible]: !isBurgerMenuOpen })}
+        onClick={() => setIsBurgerMenuOpen(true)}
       />
       <CloseIcon
         height={25}
         width={25}
-        className={classNames(styles.burgerIcon, { [styles.burgerIconVisible]: isNavBurgerOpen })}
+        className={classNames(styles.burgerIcon, { [styles.burgerIconVisible]: isBurgerMenuOpen })}
       />
       <nav
-        className={classNames(styles.nav, { [styles.navActive]: isNavBurgerOpen })}
+        className={classNames(styles.nav, { [styles.navActive]: isBurgerMenuOpen })}
         ref={menuRef}
       >
         <NavLink className={defineActive} to={'/'}>

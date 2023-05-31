@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import styles from './Header.module.scss';
 import { LanguageSelector } from 'features/localization/language-selector/LanguageSelector';
-import { AuthControls } from 'features/auth/auth-controls/AuthControls';
+import { AuthControlButtons } from 'features/auth/auth-control-buttons/AuthControlButtons';
 import { Navbar } from 'components/common/navbar/Navbar';
 
 export const Header: FC = () => {
@@ -26,7 +26,9 @@ export const Header: FC = () => {
           <LanguageSelector
             className={classnames(styles.language, { [styles.inverted]: isSticky })}
           />
-          <AuthControls className={classnames(styles.auth, { [styles.inverted]: isSticky })} />
+          <AuthControlButtons
+            className={classnames(styles.auth, { [styles.inverted]: isSticky })}
+          />
         </div>
       </div>
     </header>

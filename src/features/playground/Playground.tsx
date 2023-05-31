@@ -58,7 +58,7 @@ export const Playground: FC = () => {
   const { getGraphqlData, isLoading } = useGraphqlDataQuery(onSuccess, onError);
 
   return (
-    <div className="playground">
+    <main className="playground">
       <PlaygroundSideBar
         onExecutorButtonClick={() =>
           getGraphqlData({
@@ -78,6 +78,6 @@ export const Playground: FC = () => {
         <QueryRequestSection />
         <QueryResponseSection isLoading={isLoading} />
       </article>
-    </div>
+    </main>
   );
 };
