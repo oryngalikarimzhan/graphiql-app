@@ -6,7 +6,7 @@ export const PrivateRoutes: FC = () => {
   const { user } = useAuth();
 
   if (!user) {
-    return <Navigate to={'/login'} />;
+    return <Navigate to={'/signin'} />;
   }
 
   return <Outlet />;

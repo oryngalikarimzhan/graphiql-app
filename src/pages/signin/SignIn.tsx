@@ -12,9 +12,9 @@ const SignIn: FC = () => {
 
   const contentContext = useMemo(
     () => ({
-      title: t('auth.login'),
+      title: t('auth.sign-in'),
       question: t('auth.form.no-account'),
-      redirectLink: '/registration',
+      redirectLink: '/signup',
       redirectLinkTitle: t('auth.sign-up'),
     }),
     [t]

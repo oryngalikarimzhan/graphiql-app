@@ -52,7 +52,7 @@ export const Navbar: FC = () => {
           {t('landing.page')}
         </NavLink>
         {user && (
-          <NavLink className={defineActive} to={'/main'}>
+          <NavLink className={defineActive} to={'/studio'}>
             {t('studio.page')}
           </NavLink>
         )}

@@ -6,7 +6,7 @@ import styles from './SchemaSection.module.scss';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { useSchemaQuery } from 'services/api';
 
-const SchemaLazy = lazy(() => import('../../schema/Schema'));
+const Schema = lazy(() => import('features/schema/Schema'));
 
 export const SchemaSection: FC = () => {
   const isSchemaOpen = usePlaygroundStore((state) => state.isSchemaOpen);
@@ -23,7 +23,7 @@ export const SchemaSection: FC = () => {
         <h3 className="playground-section-title">{t('studio.schema')}</h3>
       </div>
 
-      <SchemaLazy schemaData={schema.data} />
+      <Schema schemaData={schema.data} />
     </div>
   );
 };

@@ -32,10 +32,10 @@ export const AuthControlButtons: FC<AuthControlButtonsProps> = ({ className }) =
         </>
       ) : (
         <>
-          <Link to="/login">
-            <RectangularButton className={className}>{t('auth.login')}</RectangularButton>
+          <Link to="/signin">
+            <RectangularButton className={className}>{t('auth.sign-in')}</RectangularButton>
           </Link>
-          <Link to="/registration">
+          <Link to="/signup">
             <FancyButton className={className}>{t('auth.sign-up')}</FancyButton>
           </Link>
         </>

@@ -11,7 +11,7 @@ import { SchemaSection } from './schema-section/SchemaSection';
 import { useGraphqlDataQuery } from 'services/api';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
-import { CustomError } from '../../utils/types/types';
+import { CustomError } from 'utils/types/types';
 
 export const Playground: FC = () => {
   const [

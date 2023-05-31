@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import styles from './Landing.module.scss';
 import { FancyButton } from 'components/common/buttons/fancy-button/FancyButton';
-import { useAuth } from '../../features/auth/AuthProvider';
+import { useAuth } from 'features/auth/AuthProvider';
 
 const Landing: FC = () => {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ const Landing: FC = () => {
             GRAPHiQL
           </h2>
 
-          <Link to={user ? '/main' : '/registration'}>
+          <Link to={user ? '/studio' : '/signup'}>
             <FancyButton>{t('landing.start-button')}</FancyButton>
           </Link>
         </article>

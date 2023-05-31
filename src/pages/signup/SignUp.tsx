@@ -15,8 +15,8 @@ const SignUp: FC = () => {
     () => ({
       title: t('auth.sign-up'),
       question: t('auth.form.have-account'),
-      redirectLink: '/login',
-      redirectLinkTitle: t('auth.login'),
+      redirectLink: '/signin',
+      redirectLinkTitle: t('auth.sign-in'),
     }),
     [t]
   );

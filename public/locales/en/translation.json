@@ -33,7 +33,7 @@
   },
 
   "auth": {
-    "login": "Log in",
+    "sign-in": "Sign in",
     "sign-up": "Sign up",
     "sign-out": "Sign out",
     "user": "User",

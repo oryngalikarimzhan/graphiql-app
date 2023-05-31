@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 import { Playground } from 'features/playground/Playground';
 
-const Main: FC = () => {
+const Studio: FC = () => {
   return <Playground />;
 };
 
-export default Main;
+export default Studio;
