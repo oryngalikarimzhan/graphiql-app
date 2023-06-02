@@ -25,6 +25,7 @@ type RequestValues = {
 const fetchData = async ({ endpoint, body, headers }: GraphqlRequestParams) => {
   const { data } = await axios.post(endpoint, body, {
     headers: { 'Content-Type': 'application/json', ...headers },
+    timeout: 10000,
   });
 
   return data;
@@ -61,6 +62,7 @@ const fetchSchema = async (endpoint: string) => {
     { query: getIntrospectionQuery() },
     {
       headers: { 'Content-Type': 'application/json' },
+      timeout: 100000,
     }
   );
 

@@ -27,18 +27,10 @@ const Landing: FC = () => {
           </Link>
         </article>
 
-        <article className={styles.article}>
+        {/* <article className={styles.article}>
           <h3 className={styles.textUnderline}>{t('landing.project.name')}</h3>
           <p className={styles.infoContent}>{t('landing.project.description')}</p>
-        </article>
-        <article className={styles.article}>
-          <h3 className={styles.textUnderline}>{t('landing.project.name')}</h3>
-          <p className={styles.infoContent}>{t('landing.project.description')}</p>
-        </article>
-        <article className={styles.article}>
-          <h3 className={styles.textUnderline}>{t('landing.project.name')}</h3>
-          <p className={styles.infoContent}>{t('landing.project.description')}</p>
-        </article>
+        </article> */}
       </div>
     </section>
   );

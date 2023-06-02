@@ -12,7 +12,6 @@ import {
   GraphQLInterfaceType,
   GraphQLUnionType,
 } from 'graphql';
-import { shallow } from 'zustand/shallow';
 
 import styles from './Schema.module.scss';
 import { ReactComponent as TypeIcon } from 'assets/icons/type-icon.svg';
@@ -23,7 +22,7 @@ import { GraphqlTypeParser } from './graphql-type-parser/GraphqlTypeParser';
 import { GraphqlArgumentsParser } from './graphql-arguments-parser/GraphqlArgumentsParser';
 import { GraphqlFieldParser } from './graphql-field-parser/GraphqlFieldParser';
 import { PreviousButton } from './previous-button/PreviousButton';
-import { useSchemaStore } from 'features/schema/useSchemaStore';
+import { useSchemaStore } from 'store/useSchemaStore';
 
 interface SchemaProps {
   schemaData: IntrospectionQuery;
@@ -39,10 +38,10 @@ type OtherTypes =
 const Schema: FC<SchemaProps> = ({ schemaData }) => {
   const schema = useMemo(() => buildClientSchema(schemaData), [schemaData]);
 
-  const [currentType, previousType] = useSchemaStore(
-    (state) => [state.currentType, state.previousType],
-    shallow
-  );
+  const [currentType, previousType] = useSchemaStore((state) => [
+    state.currentType,
+    state.previousType,
+  ]);
 
   const type = schema.getType(currentType);
 

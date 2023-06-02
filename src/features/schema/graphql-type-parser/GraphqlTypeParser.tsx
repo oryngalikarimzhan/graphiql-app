@@ -4,7 +4,7 @@ import { GraphQLInputType, GraphQLOutputType } from 'graphql';
 import styles from './GraphqlTypeParser.module.scss';
 import { GraphqlListSign } from '../graphql-list-sign/GraphqlListSign';
 import { GraphqlNonNullSign } from '../graphql-non-null-sign/GraphqlNonNullSign';
-import { useSchemaStore } from 'features/schema/useSchemaStore';
+import { useSchemaStore } from 'store/useSchemaStore';
 
 interface GraphqlTypeParserProps {
   inputType: GraphQLInputType | GraphQLOutputType;

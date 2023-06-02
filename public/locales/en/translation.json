@@ -29,7 +29,10 @@
     "schema": "Schema",
     "response": "Response",
     "query": "Query",
-    "schema-error": "Failed to get schema"
+    "schema-error": "Failed to get schema",
+    "api": "Change an API endpoint",
+    "status": "Status",
+    "history": "History"
   },
 
   "auth": {

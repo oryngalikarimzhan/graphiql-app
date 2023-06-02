@@ -17,10 +17,11 @@
 }
 
 body {
+  position: relative;
   min-width: 320px;
   width: 100vw;
   overflow-x: hidden;
-  background: url("./assets//img/graph.svg") repeat, $color-primary;
+  background: url("./assets/img/graph.svg") repeat $color-primary;
   background-size: 50%;
   scroll-behavior: smooth;
 

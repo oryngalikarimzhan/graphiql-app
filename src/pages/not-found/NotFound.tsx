@@ -2,8 +2,6 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-// import './NotFound.module.scss';
-
 const NotFound: FC = () => {
   const { t } = useTranslation();
 

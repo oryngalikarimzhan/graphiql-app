@@ -9,11 +9,17 @@
   height: 12px;
   min-width: 12px;
   border-radius: 50%;
-  background-color: $color-additional-2;
+  background-color: rgba($color-additional-2, 0.5);
 }
 
 .status-code {
   color: rgba($color-additional-2, 0.5);
+}
+
+.status-title {
+  @include mobile {
+    display: none;
+  }
 }
 
 .error {

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { shallow } from 'zustand/shallow';
 
 interface SchemaState {
   currentType: string;
@@ -10,7 +11,7 @@ interface SchemaState {
 interface SchemaActions {
   setCurrentGraphqlType: (next: string) => void;
   setPreviousGraphqlType: () => void;
-  resetSchemaStates: () => void;
+  resetSchemaStoreState: () => void;
 }
 
 const initialState: SchemaState = {
@@ -19,7 +20,7 @@ const initialState: SchemaState = {
   previousType: '',
 };
 
-export const useSchemaStore = create<SchemaState & SchemaActions>()(
+export const schemaStore = create<SchemaState & SchemaActions>()(
   devtools(
     persist(
       (set) => ({
@@ -39,7 +40,7 @@ export const useSchemaStore = create<SchemaState & SchemaActions>()(
               previousType: history[history.length - 1] || '',
             };
           }),
-        resetSchemaStates: () => set(initialState),
+        resetSchemaStoreState: () => set(initialState),
       }),
       {
         name: 'schema-store',
@@ -48,3 +49,9 @@ export const useSchemaStore = create<SchemaState & SchemaActions>()(
     )
   )
 );
+
+export const useSchemaStore = (<U>(selector: (state: SchemaState & SchemaActions) => U) => {
+  return schemaStore(selector, shallow);
+}) as typeof schemaStore;
+
+Object.assign(useSchemaStore, schemaStore);

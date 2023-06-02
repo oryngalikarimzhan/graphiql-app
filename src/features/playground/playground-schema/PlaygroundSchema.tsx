@@ -1,33 +1,24 @@
 import { FC, lazy } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { shallow } from 'zustand/shallow';
 
-import styles from './SchemaSection.module.scss';
-import { usePlaygroundStore } from 'features/playground/usePlaygroundStore';
+import styles from './PlaygroundSchema.module.scss';
+import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { useSchemaQuery } from 'services/api';
-
 const Schema = lazy(() => import('features/schema/Schema'));
 
-export const SchemaSection: FC = () => {
-  const [isSchemaOpen, apiEndpoint] = usePlaygroundStore(
-    (state) => [state.isSchemaOpen, state.apiEndpoint],
-    shallow
-  );
+export const PlaygroundSchema: FC = () => {
+  const apiEndpoint = usePlaygroundStore((state) => state.apiEndpoint);
   const { t } = useTranslation();
   const { data: schema } = useSchemaQuery(apiEndpoint);
 
   return (
-    <div
-      className={classnames('playground-section', styles.schemaContainer, {
-        [styles.schemaContainerHidden]: !isSchemaOpen,
-      })}
-    >
+    <section className={classnames('box-container', styles.schemaContainer)}>
       <div className="playground-section-heading">
         <h3 className="playground-section-title">{t('studio.schema')}</h3>
       </div>
 
       <Schema schemaData={schema.data} />
-    </div>
+    </section>
   );
 };

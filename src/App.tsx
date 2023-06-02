@@ -13,8 +13,8 @@ import { PublicRoutes } from 'features/auth/PublicRoutes';
 const Studio = lazy(() => import('pages/studio/Studio'));
 const Landing = lazy(() => import('pages/landing/Landing'));
 const NotFound = lazy(() => import('pages/not-found/NotFound'));
-const SignIn = lazy(() => import('pages/signin/SignIn'));
-const SignUp = lazy(() => import('pages/signup/SignUp'));
+const SignIn = lazy(() => import('pages/sign-in/SignIn'));
+const SignUp = lazy(() => import('pages/sign-up/SignUp'));
 
 const queryClient = new QueryClient();
 

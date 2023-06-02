@@ -1,56 +1,56 @@
 import { FC } from 'react';
 import { AxiosError } from 'axios';
-import { shallow } from 'zustand/shallow';
+import classNames from 'classnames';
 
 import './styles.scss';
 import { QueryBoundary } from 'components/common/query-boundary/QueryBoundary';
 import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
-import { QueryResponseSection } from './query-response-section/QueryResponseSection';
-import { QueryRequestSection } from './query-request-section/QueryRequestSection';
-import { SchemaSection } from './schema-section/SchemaSection';
+import { PlaygroundSchema } from './playground-schema/PlaygroundSchema';
+import { PlaygroundQuery } from './playground-query/PlaygroundQuery';
+import { PlaygroundQueryParams } from './playground-query-params/PlaygroundQueryParams';
+import { PlaygroundApi } from './playground-api/PlaygroundApi';
+import { PlaygroundQueryResponse } from './playground-query-response/PlaygroundQueryResponse';
 import { useGraphqlDataQuery } from 'services/api';
-import { usePlaygroundStore } from 'features/playground/usePlaygroundStore';
-import { isErrorWithMessage } from 'utils/helpers/isErrorWithMessage';
+import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { CustomError } from 'utils/types/types';
+import { PlaygroundQueryHistory } from './playground-query-history/PlaygroundQueryHistory';
+import { useQueryHistoryStore } from 'store/useQueryHistoryStore';
 
 export const Playground: FC = () => {
   const [
-    isSchemaOpen,
     queryEditorValue,
     variablesEditorValue,
     headersEditorValue,
-    setResponseEditorValue,
-    setIsSuccess,
-    setResponseStatus,
     apiEndpoint,
-  ] = usePlaygroundStore(
-    (state) => [
-      state.isSchemaOpen,
-      state.queryEditorValue,
-      state.variablesEditorValue,
-      state.headersEditorValue,
-      state.setResponseEditorValue,
-      state.setIsSuccess,
-      state.setResponseStatus,
-      state.apiEndpoint,
-    ],
-    shallow
-  );
+    isSideSectionOpen,
+    currentOnSideSection,
+    updateResponse,
+  ] = usePlaygroundStore((state) => [
+    state.queryEditorValue,
+    state.variablesEditorValue,
+    state.headersEditorValue,
+    state.apiEndpoint,
+    state.isSideSectionOpen,
+    state.currentOnSideSection,
+    state.updateResponse,
+  ]);
+  const addToHistory = useQueryHistoryStore((state) => state.addToHistory);
 
   const onSuccess = (data: unknown) => {
-    setIsSuccess(true);
-    setResponseStatus('200');
-    setResponseEditorValue(JSON.stringify(data, null, '\t'));
+    const responseValue = JSON.stringify(data, null, '\t');
+    updateResponse(responseValue, '200', true);
+    addToHistory(queryEditorValue, variablesEditorValue, headersEditorValue, responseValue);
   };
 
   const onError = (error: AxiosError | CustomError) => {
-    setIsSuccess(false);
-    if (!(error instanceof AxiosError) && isErrorWithMessage(error)) {
-      setResponseStatus('Bad request');
-      setResponseEditorValue(error.message);
+    if (error instanceof AxiosError) {
+      updateResponse(
+        JSON.stringify(error.response?.data || error.message, null, '\t'),
+        `${error.response?.status || error.code}`,
+        false
+      );
     } else {
-      setResponseStatus(`${error.response?.status}`);
-      setResponseEditorValue(JSON.stringify(error.response?.data || error.message, null, '\t'));
+      updateResponse(error.message, 'Bad request', false);
     }
   };
 
@@ -70,13 +70,25 @@ export const Playground: FC = () => {
       />
 
       <article className="playground-container">
-        {isSchemaOpen && (
-          <QueryBoundary>
-            <SchemaSection />
-          </QueryBoundary>
-        )}
-        <QueryRequestSection />
-        <QueryResponseSection isLoading={isLoading} />
+        <section
+          className={classNames('playground-section', { 'section-hidden': !isSideSectionOpen })}
+        >
+          {currentOnSideSection === 'schema' ? (
+            <QueryBoundary>
+              <PlaygroundSchema />
+            </QueryBoundary>
+          ) : (
+            <PlaygroundQueryHistory />
+          )}
+        </section>
+        <section className="playground-section">
+          <PlaygroundQuery />
+          <PlaygroundQueryParams />
+        </section>
+        <section className="playground-section">
+          <PlaygroundApi />
+          <PlaygroundQueryResponse isLoading={isLoading} />
+        </section>
       </article>
     </main>
   );

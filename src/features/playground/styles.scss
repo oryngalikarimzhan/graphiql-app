@@ -53,7 +53,11 @@
   }
 }
 
-.editor-box {
+.section-hidden {
+  display: none;
+}
+
+.box-container {
   background-color: $color-primary;
   border-radius: 15px;
   overflow: hidden;

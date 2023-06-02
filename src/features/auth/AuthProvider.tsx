@@ -4,9 +4,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 
 import { auth } from './firebaseConfig';
-import { usePlaygroundStore } from 'features/playground/usePlaygroundStore';
-import { useSchemaStore } from 'features/schema/useSchemaStore';
 import { LoaderSection } from 'components/common/section-loader/LoaderSection';
+import { usePlaygroundStore } from '../../store/usePlaygroundStore';
+import { useSchemaStore } from '../../store/useSchemaStore';
+import { useQueryHistoryStore } from '../../store/useQueryHistoryStore';
 
 interface AuthContextType {
   user: User | null | undefined;
@@ -21,13 +22,17 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [user, isLoading] = useAuthState(auth);
   const navigate = useNavigate();
-  const resetPlaygroundStates = usePlaygroundStore((state) => state.resetPlaygroundStates);
-  const resetSchemaStates = useSchemaStore((state) => state.resetSchemaStates);
+  const resetPlaygroundStoreState = usePlaygroundStore((state) => state.resetPlaygroundStoreState);
+  const resetSchemaStoreState = useSchemaStore((state) => state.resetSchemaStoreState);
+  const resetQueryHistoryStoreStates = useQueryHistoryStore(
+    (state) => state.resetQueryHistoryStoreStates
+  );
 
   const logOut = async () => {
     await signOut(auth);
-    resetPlaygroundStates();
-    resetSchemaStates();
+    resetPlaygroundStoreState();
+    resetSchemaStoreState();
+    resetQueryHistoryStoreStates();
     navigate('/');
   };
 
