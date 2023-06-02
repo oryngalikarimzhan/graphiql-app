@@ -2,9 +2,9 @@ import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
-import { AuthForm } from 'features/auth/auth-form/AuthForm';
+import { AuthForm } from 'components/auth/auth-form/AuthForm';
 import { getErrorMessage } from 'utils/helpers/getErrorMessage';
-import { auth } from 'features/auth/firebaseConfig';
+import { auth } from 'components/auth/firebaseConfig';
 
 const SignIn: FC = () => {
   const { t } = useTranslation();

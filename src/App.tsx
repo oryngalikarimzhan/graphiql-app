@@ -6,9 +6,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorFallback } from 'components/common/error-fallback/ErrorFallback';
 import { LoaderSection } from 'components/common/section-loader/LoaderSection';
 import { Layout } from 'components/layout/Layout';
-import { PrivateRoutes } from 'features/auth/PrivateRoutes';
-import { AuthProvider } from 'features/auth/AuthProvider';
-import { PublicRoutes } from 'features/auth/PublicRoutes';
+import { PrivateRoutes } from 'components/auth/PrivateRoutes';
+import { AuthProvider } from 'components/auth/AuthProvider';
+import { PublicRoutes } from 'components/auth/PublicRoutes';
 
 const Studio = lazy(() => import('pages/playground/Playground'));
 const Landing = lazy(() => import('pages/landing/Landing'));

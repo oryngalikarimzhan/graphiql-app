@@ -2,8 +2,8 @@ import { useEffect, useState, FC } from 'react';
 import classnames from 'classnames';
 
 import styles from './Header.module.scss';
-import { LanguageSelector } from 'features/localization/language-selector/LanguageSelector';
-import { AuthControlButtons } from 'features/auth/auth-control-buttons/AuthControlButtons';
+import { LanguageSelector } from 'components/localization/language-selector/LanguageSelector';
+import { AuthControlButtons } from 'components/auth/auth-control-buttons/AuthControlButtons';
 import { Navbar } from 'components/common/navbar/Navbar';
 
 export const Header: FC = () => {

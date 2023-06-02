@@ -1,16 +1,22 @@
 import { RegularObject } from 'utils/types/types';
 
-export const githubAuthor: RegularObject = {
+const githubAuthor: RegularObject = {
   oryngalikarimzhan: 'https://github.com/oryngalikarimzhan',
 };
 
-export const GRAPHQL_DEFAULT_API = 'https://rickandmortyapi.com/graphql';
-// export const GRAPHQL_API = 'https://countries.trevorblades.com/';
-// export const GRAPHQL_API = 'https://graphqlpokemon.favware.tech/v7';
+const GRAPHQL_DEFAULT_API = {
+  // api: 'https://countries.trevorblades.com/';
+  // api:'https://graphqlpokemon.favware.tech/v7';
+  api: 'https://rickandmortyapi.com/graphql',
+  query: `query ($id: ID!) { \n\tcharacter(id: $id) { \n\t\tid \n\t\tname \n\t\tstatus \n\t\tspecies \n\t\ttype \n\t\tgender \n\t\torigin { \n\t\t\tid \n\t\t\tname \n\t\t} \n\t\tlocation { \n\t\t\tid \n\t\t\tname \n\t\t} \n\t\timage \n\t\tepisode { \n\t\t\tid \n\t\t\tname \n\t\t\tcreated \n\t\t} \n\t\tcreated \n\t\t} \n}`,
+  variables: `{ \n\t"id": 1 \n}`,
+};
 
-export enum Languages {
+enum Languages {
   RU = 'ru',
   EN = 'en',
 }
 
-export const LOCALIZATION_COOKIE_KEY = 'i18next';
+const LOCALIZATION_COOKIE_KEY = 'i18next';
+
+export { githubAuthor, GRAPHQL_DEFAULT_API, Languages, LOCALIZATION_COOKIE_KEY };

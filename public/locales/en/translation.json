@@ -15,10 +15,24 @@
       "name": "Project: GraphiQL.",
       "description": "GraphiQL is an interactive GraphQL development environment in the browser. It allows you to form queries and explore the GraphQL schema. We used public API \"Rick and Morty\""
     },
-    "developer-card": {
-      "oryngali": {
-        "description": "Web Developer. Creative director in this project. Also a Jedi, Avenger, Jinchuuriki, Ascetic, Stoic, Perfectionist ..."
-      }
+    "about": {
+      "title": "What is GraphiQL Playground?",
+      "description-1": "An interactive web-based IDE for exploring and testing GraphQL APIs",
+      "description-2": "Provides a user-friendly interface for querying, modifying, and testing GraphQL endpoints",
+      "description-3": "Ideal for developers and API consumers to interact with GraphQL APIs efficiently"
+    },
+    "features": {
+      "title": "Features",
+      "description-1": "Interactive Querying: Compose and execute GraphQL queries in real-time",
+      "description-2": "Documentation Explorer: Browse and understand the API schema with integrated documentation",
+      "description-3": "Query Variables: Define and pass variables to query for dynamic results",
+      "description-4": "Response Preview: View and inspect the response data in a structured format",
+      "description-5": "Queries History: View the history of requests and responses and restore or delete them",
+      "description-6": "API Replacement : Change the endpoint with another endpoint"
+    },
+    "developer": {
+      "name": "oryngali",
+      "description": "Web Developer. Creative director in this project. Also a Jedi, Avenger, Jinchuuriki, Ascetic, Stoic, Perfectionist ..."
     }
   },
 

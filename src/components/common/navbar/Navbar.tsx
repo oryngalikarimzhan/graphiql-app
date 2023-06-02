@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './Navbar.module.scss';
 import { ReactComponent as HamburgerIcon } from 'assets/icons/hamburger-icon.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/close-icon.svg';
-import { useAuth } from 'features/auth/AuthProvider';
+import { useAuth } from 'components/auth/AuthProvider';
 
 export const Navbar: FC = () => {
   const { user } = useAuth();

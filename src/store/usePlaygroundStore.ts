@@ -38,13 +38,13 @@ interface PlaygroundActions {
 }
 
 const initialState: PlaygroundState = {
-  queryEditorValue: '',
-  variablesEditorValue: '',
+  queryEditorValue: GRAPHQL_DEFAULT_API.query,
+  variablesEditorValue: GRAPHQL_DEFAULT_API.variables,
   headersEditorValue: '',
   responseEditorValue: '',
   isParamsBoxOpen: false,
   currentOnParamsBox: 'variables',
-  apiEndpoint: GRAPHQL_DEFAULT_API,
+  apiEndpoint: GRAPHQL_DEFAULT_API.api,
   isSideSectionOpen: false,
   currentOnSideSection: 'history',
   responseStatus: '',

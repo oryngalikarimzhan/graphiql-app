@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './PlaygroundSchema.module.scss';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
 import { useSchemaQuery } from 'services/api';
-const Schema = lazy(() => import('features/schema/Schema'));
+const Schema = lazy(() => import('components/schema/Schema'));
 
 export const PlaygroundSchema: FC = () => {
   const apiEndpoint = usePlaygroundStore((state) => state.apiEndpoint);

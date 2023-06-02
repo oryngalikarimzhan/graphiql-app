@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import styles from './Landing.module.scss';
 import { FancyButton } from 'components/common/buttons/fancy-button/FancyButton';
-import { useAuth } from 'features/auth/AuthProvider';
+import { useAuth } from 'components/auth/AuthProvider';
 
 const Landing: FC = () => {
   const { t } = useTranslation();
@@ -27,10 +27,10 @@ const Landing: FC = () => {
           </Link>
         </article>
 
-        {/* <article className={styles.article}>
+        <article className={styles.article}>
           <h3 className={styles.textUnderline}>{t('landing.project.name')}</h3>
           <p className={styles.infoContent}>{t('landing.project.description')}</p>
-        </article> */}
+        </article>
       </div>
     </section>
   );

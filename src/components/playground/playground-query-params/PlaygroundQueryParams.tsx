@@ -42,7 +42,7 @@ export const PlaygroundQueryParams: FC = () => {
         <h3
           onClick={() => changeCurrentOnParamsBox('variables')}
           className={classnames('playground-section-title', styles.paramsTitle, {
-            [styles.paramsActiveTitle]: currentOnParamsBox === 'variables',
+            [styles.paramsActiveTitle]: isParamsBoxOpen && currentOnParamsBox === 'variables',
           })}
         >
           {t('playground.query-var')}
@@ -50,7 +50,7 @@ export const PlaygroundQueryParams: FC = () => {
         <h3
           onClick={() => changeCurrentOnParamsBox('headers')}
           className={classnames('playground-section-title', styles.paramsTitle, {
-            [styles.paramsActiveTitle]: currentOnParamsBox === 'headers',
+            [styles.paramsActiveTitle]: isParamsBoxOpen && currentOnParamsBox === 'headers',
           })}
         >
           {t('playground.http-head')}
