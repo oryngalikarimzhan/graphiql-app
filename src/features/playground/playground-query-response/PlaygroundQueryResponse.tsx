@@ -19,7 +19,7 @@ export const PlaygroundQueryResponse: FC<QueryResponseProps> = ({ isLoading }) =
   return (
     <section className={classnames('box-container', styles.responseBox)}>
       <div className={classnames('playground-section-heading', styles.responseHeading)}>
-        <h3 className="playground-section-title">{t('studio.response')}</h3>
+        <h3 className="playground-section-title">{t('playground.response')}</h3>
         <StatusMarker />
       </div>
       {isLoading && <LoaderSection />}

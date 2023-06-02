@@ -52,8 +52,8 @@ export const Navbar: FC = () => {
           {t('landing.page')}
         </NavLink>
         {user && (
-          <NavLink className={defineActive} to={'/studio'}>
-            {t('studio.page')}
+          <NavLink className={defineActive} to={'/playground'}>
+            {t('playground.page')}
           </NavLink>
         )}
       </nav>

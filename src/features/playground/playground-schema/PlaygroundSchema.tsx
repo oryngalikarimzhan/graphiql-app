@@ -15,7 +15,7 @@ export const PlaygroundSchema: FC = () => {
   return (
     <section className={classnames('box-container', styles.schemaContainer)}>
       <div className="playground-section-heading">
-        <h3 className="playground-section-title">{t('studio.schema')}</h3>
+        <h3 className="playground-section-title">{t('playground.schema')}</h3>
       </div>
 
       <Schema schemaData={schema.data} />

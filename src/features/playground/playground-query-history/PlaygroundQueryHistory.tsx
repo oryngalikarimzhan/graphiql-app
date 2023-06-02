@@ -19,7 +19,7 @@ export const PlaygroundQueryHistory: FC = () => {
   return (
     <section className={classnames('box-container', styles.historyBox)}>
       <div className="playground-section-heading">
-        <h3 className="playground-section-title">{t('studio.history')}</h3>
+        <h3 className="playground-section-title">{t('playground.history')}</h3>
       </div>
       <div className={styles.historyContainer}>
         {queryHistory.map(({ id, query, variables, headers, response }) => (

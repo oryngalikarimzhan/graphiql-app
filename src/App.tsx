@@ -10,7 +10,7 @@ import { PrivateRoutes } from 'features/auth/PrivateRoutes';
 import { AuthProvider } from 'features/auth/AuthProvider';
 import { PublicRoutes } from 'features/auth/PublicRoutes';
 
-const Studio = lazy(() => import('pages/studio/Studio'));
+const Studio = lazy(() => import('pages/playground/Playground'));
 const Landing = lazy(() => import('pages/landing/Landing'));
 const NotFound = lazy(() => import('pages/not-found/NotFound'));
 const SignIn = lazy(() => import('pages/sign-in/SignIn'));
@@ -24,7 +24,7 @@ const AppRoutes: FC = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Landing />} />
         <Route element={<PrivateRoutes />}>
-          <Route index path="/studio" element={<Studio />} />
+          <Route index path="/playground" element={<Studio />} />
         </Route>
         <Route element={<PublicRoutes />}>
           <Route path="/signin" element={<SignIn />} />

@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom';
 export const Footer: FC = () => {
   const { pathname } = useLocation();
 
-  return pathname !== '/studio' ? (
+  return pathname !== '/playground' ? (
     <footer className={styles.footer}>
       <div className={classnames('wrapper', styles.container)}>
         <div className={styles.courseLogos}>

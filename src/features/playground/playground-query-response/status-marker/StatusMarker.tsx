@@ -22,7 +22,7 @@ export const StatusMarker: FC = () => {
       >
         {responseStatus}
       </span>
-      <span className={styles.statusTitle}>{t('studio.status')}</span>
+      <span className={styles.statusTitle}>{t('playground.status')}</span>
       <span
         className={classnames(styles.statusPin, {
           [styles.error]: isSuccessResponse !== undefined && !isSuccessResponse,

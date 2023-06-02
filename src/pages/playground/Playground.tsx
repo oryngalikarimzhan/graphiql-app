@@ -4,16 +4,16 @@ import classNames from 'classnames';
 
 import './styles.scss';
 import { QueryBoundary } from 'components/common/query-boundary/QueryBoundary';
-import { PlaygroundSideBar } from './playground-side-bar/PlaygroundSideBar';
-import { PlaygroundSchema } from './playground-schema/PlaygroundSchema';
-import { PlaygroundQuery } from './playground-query/PlaygroundQuery';
-import { PlaygroundQueryParams } from './playground-query-params/PlaygroundQueryParams';
-import { PlaygroundApi } from './playground-api/PlaygroundApi';
-import { PlaygroundQueryResponse } from './playground-query-response/PlaygroundQueryResponse';
+import { PlaygroundSideBar } from 'features/playground/playground-side-bar/PlaygroundSideBar';
+import { PlaygroundSchema } from 'features/playground/playground-schema/PlaygroundSchema';
+import { PlaygroundQuery } from 'features/playground/playground-query/PlaygroundQuery';
+import { PlaygroundQueryParams } from 'features/playground/playground-query-params/PlaygroundQueryParams';
+import { PlaygroundApi } from 'features/playground/playground-api/PlaygroundApi';
+import { PlaygroundQueryResponse } from 'features/playground/playground-query-response/PlaygroundQueryResponse';
+import { PlaygroundQueryHistory } from 'features/playground/playground-query-history/PlaygroundQueryHistory';
+import { CustomError } from 'utils/types/types';
 import { useGraphqlDataQuery } from 'services/api';
 import { usePlaygroundStore } from 'store/usePlaygroundStore';
-import { CustomError } from 'utils/types/types';
-import { PlaygroundQueryHistory } from './playground-query-history/PlaygroundQueryHistory';
 import { useQueryHistoryStore } from 'store/useQueryHistoryStore';
 
 export const Playground: FC = () => {
@@ -93,3 +93,5 @@ export const Playground: FC = () => {
     </main>
   );
 };
+
+export default Playground;

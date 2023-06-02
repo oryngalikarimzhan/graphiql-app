@@ -45,7 +45,7 @@ export const PlaygroundQueryParams: FC = () => {
             [styles.paramsActiveTitle]: currentOnParamsBox === 'variables',
           })}
         >
-          {t('studio.query-var')}
+          {t('playground.query-var')}
         </h3>
         <h3
           onClick={() => changeCurrentOnParamsBox('headers')}
@@ -53,7 +53,7 @@ export const PlaygroundQueryParams: FC = () => {
             [styles.paramsActiveTitle]: currentOnParamsBox === 'headers',
           })}
         >
-          {t('studio.http-head')}
+          {t('playground.http-head')}
         </h3>
         <SquareButton className={styles.arrowButton} onClick={() => toggleIsParamsBoxOpen()}>
           {isParamsBoxOpen ? (

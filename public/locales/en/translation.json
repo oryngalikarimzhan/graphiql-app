@@ -22,8 +22,8 @@
     }
   },
 
-  "studio": {
-    "page": "Studio",
+  "playground": {
+    "page": "Playground",
     "query-var": "Variables",
     "http-head": "Headers",
     "schema": "Schema",

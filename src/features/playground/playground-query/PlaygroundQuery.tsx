@@ -16,7 +16,7 @@ export const PlaygroundQuery: FC = () => {
   return (
     <section className={classnames('box-container', styles.queryBox)}>
       <div className="playground-section-heading">
-        <h3 className="playground-section-title">{t('studio.query')}</h3>
+        <h3 className="playground-section-title">{t('playground.query')}</h3>
       </div>
       <CustomEditor
         language="graphql"

@@ -34,7 +34,7 @@ export const PlaygroundApi: FC = () => {
           disabled={isDisabled}
         />
         <SquareButton
-          title={t('studio.api') || 'Change API'}
+          title={t('playground.api') || 'Change API'}
           onClick={() => {
             if (!isDisabled) {
               setApiEndpoint(apiRef.current?.value || '');

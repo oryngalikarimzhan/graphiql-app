@@ -6,7 +6,7 @@ export const PublicRoutes: FC = () => {
   const { user } = useAuth();
 
   if (user) {
-    return <Navigate to={'/studio'} />;
+    return <Navigate to={'/playground'} />;
   }
 
   return <Outlet />;

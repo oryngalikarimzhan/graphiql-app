@@ -22,8 +22,8 @@
     }
   },
 
-  "studio": {
-    "page": "Студия",
+  "playground": {
+    "page": "Плейграуд",
     "query-var": "Переменные",
     "http-head": "Заголовки",
     "schema": "Схема",

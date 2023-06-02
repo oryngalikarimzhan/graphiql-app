@@ -22,7 +22,7 @@ const Landing: FC = () => {
             GRAPHiQL
           </h2>
 
-          <Link to={user ? '/studio' : '/signup'}>
+          <Link to={user ? '/playground' : '/signup'}>
             <FancyButton>{t('landing.start-button')}</FancyButton>
           </Link>
         </article>
