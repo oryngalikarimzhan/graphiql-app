@@ -16,8 +16,8 @@
     "noEmit": true,
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
     "jsx": "react-jsx",
+    "baseUrl": "./src",
     "paths": {
       "assets": ["assets/*"],
       "components": ["components/*"],
@@ -28,7 +28,7 @@
       "utils": ["utils/*"]
     }
   },
-  "include": [".eslintrc.cjs", "./src/**/*", "vite.config.ts", "TODO"],
+  "include": ["src", "vite.config.ts"],
   "exclude": ["node_modules", "src/**/*.{spec,test}.{ts,tsx}"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

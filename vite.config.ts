@@ -3,10 +3,12 @@
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import autoprefixer from 'autoprefixer';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(), tsconfigPaths()],
   css: {
     modules: {
       localsConvention: 'camelCase',
@@ -16,16 +18,8 @@ export default defineConfig({
         additionalData: `@import "./src/styles/global";`,
       },
     },
-  },
-  resolve: {
-    alias: {
-      assets: '/src/assets/',
-      components: '/src/components/',
-      features: '/src/features/',
-      pages: '/src/pages/',
-      services: '/src/services/',
-      store: '/src/store/',
-      utils: '/src/utils/',
+    postcss: {
+      plugins: [autoprefixer],
     },
   },
 });

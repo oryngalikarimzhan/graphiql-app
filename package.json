@@ -13,12 +13,12 @@
     "deploy": "gh-pages -d dist",
     "prepare": "[ -d .husky ] || (husky install && npx husky add .husky/pre-commit \"npx lint-staged\")"
   },
+  "browserslist": [
+    "cover 99.5%"
+  ],
   "dependencies": {
     "@monaco-editor/react": "^4.5.1",
     "@tanstack/react-query": "^4.29.11",
-    "@tanstack/react-query-devtools": "^4.29.11",
-    "@types/js-cookie": "^3.0.3",
-    "@types/react-copy-to-clipboard": "^5.0.4",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "firebase": "^9.21.0",
@@ -38,16 +38,19 @@
     "react-i18next": "^12.2.2",
     "react-router-dom": "^6.9.0",
     "react-spinners": "^0.13.8",
-    "vite-plugin-svgr": "^3.2.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.29.9",
+    "@tanstack/react-query-devtools": "^4.29.11",
+    "@types/js-cookie": "^3.0.3",
     "@types/react": "^18.0.27",
+    "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "@vitejs/plugin-react": "^3.1.0",
+    "autoprefixer": "^10.4.14",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-import-resolver-typescript": "^3.5.3",
@@ -61,7 +64,9 @@
     "prettier": "^2.8.4",
     "sass": "^1.59.3",
     "typescript": "^5.0.3",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "vite-plugin-svgr": "^3.2.0",
+    "vite-tsconfig-paths": "^4.2.0"
   },
   "lint-staged": {
     "src/**/*.tsx": [
